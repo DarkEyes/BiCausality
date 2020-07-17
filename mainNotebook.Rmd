@@ -67,11 +67,60 @@ VecAlignment<-function(mat)
 n<-500
 d<-4
 mat<-matrix(nrow=n,ncol=d)
+
 for(i in seq(n))
 {
-  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.2)
 }
+mat[,1]<-mat[,2] | mat[,3]
 
 D<-VecAlignment(mat)
+```
+
+#CondProb
+
+```{r}
+z<-numeric(d)-1
+y<-numeric(d)-1
+#z[2:3]<-1
+y[1]<-1
+CondProb<-function(D,y,z)
+{
+  p<-0
+  filter<-z != -1
+  if(sum(filter) == 0)
+    nD<-D
+  else
+  {
+    nD<-list()
+    for(i in seq(length(D)) )
+    {
+      flag<-sum(D[[i]]$name[filter] == z[filter])
+      if(flag == sum(filter))
+      {
+        nD[[names(D)[i] ]] <- D[[i]]
+      }
+    }
+  }
+  filterY<- y!= -1
+  count<-0
+  countTotal<-0
+  for(i in seq(length(nD)) )
+  {
+    flag<-sum(nD[[i]]$name[filterY] == y[filterY])
+    countTotal<-countTotal+nD[[i]]$count
+    if(flag == sum(filterY))
+    {
+      count<-count+nD[[i]]$count
+    }
+  }
+  
+  return(count/countTotal)
+}
+CondProb(D,y,z)
+```
+#independent func
+```{r}
+
 ```
 
