@@ -64,7 +64,7 @@ VecAlignment<-function(mat)
   return(newMat)
 }
 
-n<-5000
+n<-500
 d<-10
 mat<-matrix(nrow=n,ncol=d)
 
@@ -163,3 +163,57 @@ z<-numeric(d)-1
 z[c(4,5)] = 1
 indpFunc(D,1,3,z=z)
 ```
+Indp Bootstrap
+```{r}
+bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
+{
+  if(is.null(z))
+    z<-numeric(d)-1
+  #z[2]<- -1
+  
+  n<-dim(mat)[1]
+  bDx<-matrix(0,nboot,n)
+  bIndpDist<-numeric(nboot)
+  for(k in seq(nboot))
+  {
+    bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
+    nMat<-mat[bDx[k,],]
+    D<-VecAlignment(nMat)
+    bIndpDist[k]<-indpFunc(D,i,j,z=z)
+  }
+  testRes<-wilcox.test(x=bIndpDist, mu = ths, alternative = "greater")
+  confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))
+  bmean <- mean(bIndpDist)
+  return(list(testRes=testRes,confInv=confInv,bmean=bmean))
+}
+i=2
+j=1
+print(sprintf("i%d,j%d",i,j))
+bIndpTest(mat,i,j)
+i=2
+j=4
+print(sprintf("i%d,j%d",i,j))
+bIndpTest(mat,i,j)
+i=2
+j=3
+print(sprintf("i%d,j%d",i,j))
+bIndpTest(mat,i,j)
+i=4
+j=1
+print(sprintf("i%d,j%d",i,j))
+bIndpTest(mat,i,j)
+i=4
+j=1
+z<-numeric(d)-1
+z[2]<-1
+print(sprintf("i%d,j%d",i,j))
+bIndpTest(mat,i,j,z=z)
+
+i=2
+j=3
+z<-numeric(d)-1
+z[1]<-1
+print(sprintf("i%d,j%d",i,j))
+bIndpTest(mat,i,j,z=z)
+```
+
