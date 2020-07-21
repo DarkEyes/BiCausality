@@ -118,18 +118,19 @@ D<-VecAlignment(mat)
 # }
 z<-numeric(d)-1
 y<-numeric(d)-1
-i=1
-j=4
+i=5
+j=1
 D<-VecAlignment(mat)
-y[c(i,j)]<-c(0,0)
-a1<-CondProb(D,y,z)$condP+0.001
-y[c(i,j)]<-c(1,1)
-b1<-CondProb(D,y,z)$condP+0.001
-y[c(i,j)]<-c(1,0)
-c1<-CondProb(D,y,z)$condP+0.001
-y[c(i,j)]<-c(0,1)
-d1<-CondProb(D,y,z)$condP+0.001
-a1*b1/(c1*d1)
+y[j]<-c(1)
+z[i]<-c(1)
+a1<-CondProb(D,y=y,z=z)$condP
+b1<-CondProb(D,y=z,z=y)$condP
+
+a1-b1
+
+bIndpTest(mat,i,j)
+causalDirTest(mat,i=i,j=j,vi=1,ths=0.25)
+
 ```
 
 
@@ -272,8 +273,8 @@ z[5]<- -1
 oddDiffFunc(D,i,j,z=z)
 ```
 ```{r}
-i=1
-j=4
+i=2
+j=1
 z<-numeric(d)-1
 z[2]<- -1
 print(sprintf("i%d,j%d",i,j))
