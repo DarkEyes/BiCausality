@@ -38,7 +38,7 @@ supp(X=cbind(x,y),values=c(1,1) )
 #Sorting
 ```{r}
 
-vec2bin<-function(x)
+bin2dec<-function(x)
 {
   newx<-0
   d<-length(x)
@@ -55,11 +55,11 @@ VecAlignment<-function(mat)
   d<-dim(mat)[1]
   for(i in seq(d))
   {
-    newMat[[sprintf("%d",vec2bin(mat[i,]))]]$name<-mat[i,]
-    if(is.null(newMat[[sprintf("%d",vec2bin(mat[i,]))]]$count)==TRUE )
-      newMat[[sprintf("%d",vec2bin(mat[i,]))]]$count<-1
+    newMat[[sprintf("%d",bin2dec(mat[i,]))]]$name<-mat[i,]
+    if(is.null(newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count)==TRUE )
+      newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count<-1
     else
-      newMat[[sprintf("%d",vec2bin(mat[i,]))]]$count<-newMat[[sprintf("%d",vec2bin(mat[i,]))]]$count+1
+      newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count<-newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count+1
   }
   return(newMat)
 }
@@ -81,44 +81,55 @@ D<-VecAlignment(mat)
 #CondProb
 
 ```{r}
+#z[c(1,2)]<-1
+#y[c(1,2)]<-c(1,0)
+# CondProb<-function(D,y,z)
+# {
+#   p<-0
+#   filter<-z != -1
+#   if(sum(filter) == 0)
+#     nD<-D
+#   else
+#   {
+#     nD<-list()
+#     for(i in seq(length(D)) )
+#     {
+#       flag<-sum(D[[i]]$name[filter] == z[filter])
+#       if(flag == sum(filter))
+#       {
+#         nD[[names(D)[i] ]] <- D[[i]]
+#       }
+#     }
+#   }
+#   filterY<- y!= -1
+#   count<-0
+#   countTotal<-0
+#   for(i in seq(length(nD)) )
+#   {
+#     flag<-sum(nD[[i]]$name[filterY] == y[filterY])
+#     countTotal<-countTotal+nD[[i]]$count
+#     if(flag == sum(filterY))
+#     {
+#       count<-count+nD[[i]]$count
+#     }
+#   }
+#   
+#   return(list("condP"=count/countTotal, nD=nD,countTotal=countTotal,count=count ))
+# }
 z<-numeric(d)-1
 y<-numeric(d)-1
-z[c(1,2)]<-1
-y[2]<--1
-CondProb<-function(D,y,z)
-{
-  p<-0
-  filter<-z != -1
-  if(sum(filter) == 0)
-    nD<-D
-  else
-  {
-    nD<-list()
-    for(i in seq(length(D)) )
-    {
-      flag<-sum(D[[i]]$name[filter] == z[filter])
-      if(flag == sum(filter))
-      {
-        nD[[names(D)[i] ]] <- D[[i]]
-      }
-    }
-  }
-  filterY<- y!= -1
-  count<-0
-  countTotal<-0
-  for(i in seq(length(nD)) )
-  {
-    flag<-sum(nD[[i]]$name[filterY] == y[filterY])
-    countTotal<-countTotal+nD[[i]]$count
-    if(flag == sum(filterY))
-    {
-      count<-count+nD[[i]]$count
-    }
-  }
-  
-  return(list("condP"=count/countTotal, nD=nD,countTotal=countTotal,count=count ))
-}
-A<-CondProb(D,y,z)
+i=1
+j=4
+D<-VecAlignment(mat)
+y[c(i,j)]<-c(0,0)
+a1<-CondProb(D,y,z)$condP+0.001
+y[c(i,j)]<-c(1,1)
+b1<-CondProb(D,y,z)$condP+0.001
+y[c(i,j)]<-c(1,0)
+c1<-CondProb(D,y,z)$condP+0.001
+y[c(i,j)]<-c(0,1)
+d1<-CondProb(D,y,z)$condP+0.001
+a1*b1/(c1*d1)
 ```
 
 
@@ -186,6 +197,23 @@ bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
   bmean <- mean(bIndpDist)
   return(list(testRes=testRes,confInv=confInv,bmean=bmean))
 }
+```
+# run
+```{r}
+library(BiCausality)
+
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+}
+mat[,1]<-mat[,2] | mat[,3]
+mat[,4] <- !mat[,2] | mat[,5]
+
+
 i=2
 j=1
 print(sprintf("i%d,j%d",i,j))
@@ -212,8 +240,43 @@ bIndpTest(mat,i,j,z=z)
 i=2
 j=3
 z<-numeric(d)-1
-z[1]<-1
+z[1]<-0
 print(sprintf("i%d,j%d",i,j))
 bIndpTest(mat,i,j,z=z)
+```
+#oddRatio
+```{r}
+library(BiCausality)
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+}
+mat[,1]<-mat[,2] | mat[,3]
+mat[,4] <- !mat[,2] | mat[,5]
+
+z<-numeric(d)-1
+y<-numeric(d)-1
+i=5
+j=4
+D<-VecAlignment(mat)
+oddRatioFunc(D,i,j)
+
+i=2
+j=5
+z<-numeric(d)-1
+z[5]<- -1
+oddDiffFunc(D,i,j,z=z)
+```
+```{r}
+i=1
+j=4
+z<-numeric(d)-1
+z[2]<- -1
+print(sprintf("i%d,j%d",i,j))
+assocSignTest(mat,i,j,z=z)
 ```
 
