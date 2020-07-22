@@ -12,7 +12,7 @@ causalDirTest(
   vj = 1,
   z = c(),
   alpha = 0.05,
-  ths = 0.2,
+  ths = 0.25,
   nboot = 100,
   slack = 0.001
 )

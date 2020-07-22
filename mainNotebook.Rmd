@@ -118,8 +118,8 @@ D<-VecAlignment(mat)
 # }
 z<-numeric(d)-1
 y<-numeric(d)-1
-i=5
-j=1
+i=1
+j=2
 D<-VecAlignment(mat)
 y[j]<-c(1)
 z[i]<-c(1)
@@ -128,7 +128,7 @@ b1<-CondProb(D,y=z,z=y)$condP
 
 a1-b1
 
-bIndpTest(mat,i,j)
+A<-bIndpTest(mat,i,j)
 causalDirTest(mat,i=i,j=j,vi=1,ths=0.25)
 
 ```
@@ -172,8 +172,10 @@ indpFunc<-function(D,i,j,z=c())
   return(indMagitude)
 }
 z<-numeric(d)-1
-z[c(4,5)] = 1
-indpFunc(D,1,3,z=z)
+z[c(4)] = 0
+indpFunc(D,1,2,z=z)
+z[c(4)] = 1
+indpFunc(D,1,2,z=z)
 ```
 Indp Bootstrap
 ```{r}
@@ -281,3 +283,182 @@ print(sprintf("i%d,j%d",i,j))
 assocSignTest(mat,i,j,z=z)
 ```
 
+```{r}
+
+bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
+{
+  n<-dim(mat)[1]
+  d<-dim(mat)[2]
+  nMatboot<-list()
+  Dboot<-list()
+  bDx<-matrix(0,nboot,n)
+  # == Create the bootstrapping sequence of D
+  for(k in seq(nboot))
+  {
+    bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
+    nMatboot[[k]]<-mat[bDx[k,],]
+    Dboot[[k]]<-VecAlignment(nMatboot[[k]])
+  }
+  #Check dependency of all pairwises
+  E0<-matrix(0,nrow=d,ncol=d) # save mean
+  depInfo<-list()
+  
+  for(i in seq(d-1))
+    for(j in seq(i+1,d))
+    {
+      str<-sprintf("%d,%d",i,j)
+      print(str)
+      bIndpDist<-numeric(nboot)
+      for(k in seq(nboot))
+      {
+        D<-Dboot[[k]]
+        bIndpDist[k]<-indpFunc(D,i,j)
+      }
+      testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
+      confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))
+      bmean <- mean(bIndpDist)
+
+      #check whether i is dependent with j
+      if(testRes$p.value<=alpha)
+      {
+        E0[i,j]<-1
+        E0[j,i]<-1
+        depInfo[[str]]$bmean<-bmean
+        depInfo[[str]]$confInv<-confInv
+        depInfo[[str]]$testRes<-testRes
+        depInfo[[str]]$indices<-c(i,j)
+      }
+    }
+  return(list(E0=E0,depInfo=depInfo,Dboot=Dboot) )
+}
+library(BiCausality)
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+}
+mat[,1]<-mat[,2] | mat[,3]
+mat[,4] <- !mat[,2] | mat[,5]
+
+res<-bSCMDepndentGraphFunc(mat)
+```
+#Confounding factor checking
+```{r}
+bSCMdeConfoundingGraphFunc<-function(dat,IndpThs=0.05,alpha=0.05)
+{
+  E0<-dat$E0
+  d<-dim(E0)[1]
+  E1<-matrix(0,d,d)
+  E2<-matrix(0,d,d)
+  nboot<-length(dat$Dboot)
+  for(info in dat$depInfo)
+  {
+    i<-info$indices[1]
+    j<-info$indices[2]
+    # i and j have another dependent var
+    if(E0[i,j]==1 && sum(E0[i,])>1 && sum(E0[j,])>1)
+    {
+      z<- 1:d
+      z<-z[E0[i,] & E0[j,]]
+      flag=0
+      if(length(z)>0)
+        for(z0 in z)
+        {
+          print(sprintf("%d,%d | %d",i,j,z0))
+          bIndpDist<-numeric(nboot)
+          z1<-numeric(d)-1
+          z1[z0]<-1
+          z2<-numeric(d)-1
+          z2[z0]<-0
+          for(b in seq(nboot) )
+          {
+            nD<-dat$Dboot[[b]]
+            bIndpDist[b]<- max(c(indpFunc(nD,i,j,z1), indpFunc(nD,i,j,z2) ) )
+          }
+          testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
+          print(sprintf("pval:%f",testRes$p.value))
+          #check whether i is dependent with j given z0
+          if(testRes$p.value>alpha)
+          {
+            flag=1
+            E2[i,j]<-z0
+            break
+          }
+        }
+       if(flag==0)
+       {
+         E1[i,j]<-1
+         E1[j,i]<-1
+       }
+
+    }
+    else
+    {
+      E1[i,j]<-1
+      E1[j,i]<-1
+    }
+  }
+  return(list(E1=E1,E2=E2))
+}
+res2<-bSCMdeConfoundingGraphFunc(res)
+```
+
+#RUnning main
+
+```{r}
+library(BiCausality)
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+}
+mat[,1]<-mat[,2] | mat[,3]
+mat[,4] <- !mat[,2] | mat[,5]
+
+res<-bSCMDepndentGraphFunc(mat)
+res2<-bSCMdeConfoundingGraphFunc(res)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+s
