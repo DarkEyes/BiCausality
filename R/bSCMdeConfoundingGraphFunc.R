@@ -24,7 +24,7 @@ bSCMdeConfoundingGraphFunc<-function(dat,IndpThs=0.05,alpha=0.05)
       if(length(z)>0)
         for(z0 in z)
         {
-          print(sprintf("%d,%d | %d",i,j,z0))
+          #print(sprintf("%d,%d | %d",i,j,z0))
           bIndpDist<-numeric(nboot)
           z1<-numeric(d)-1
           z1[z0]<-1
@@ -36,7 +36,7 @@ bSCMdeConfoundingGraphFunc<-function(dat,IndpThs=0.05,alpha=0.05)
             bIndpDist[b]<- max(c(indpFunc(nD,i,j,z1), indpFunc(nD,i,j,z2) ) )
           }
           testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
-          print(sprintf("pval:%f",testRes$p.value))
+          #print(sprintf("pval:%f",testRes$p.value))
           #check whether i is dependent with j given z0
           if(testRes$p.value>alpha)
           {

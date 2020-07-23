@@ -26,7 +26,7 @@ bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
     for(j in seq(i+1,d))
     {
       str<-sprintf("%d,%d",i,j)
-      print(str)
+      #print(str)
       bIndpDist<-numeric(nboot)
       for(k in seq(nboot))
       {
