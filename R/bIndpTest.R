@@ -6,6 +6,7 @@
 #'
 bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
 {
+  d<-dim(mat)[2]
   if(is.null(z))
     z<-numeric(d)-1
   #z[2]<- -1
@@ -18,7 +19,7 @@ bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
     bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
     nMat<-mat[bDx[k,],]
     D<-VecAlignment(nMat)
-    bIndpDist[k]<-indpFunc(D,i,j,z=z)
+    bIndpDist[k]<-indpFunc(D,i,j,d=d,z=z)
   }
   testRes<-wilcox.test(x=bIndpDist, mu = ths, alternative = "greater")
   confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))

@@ -4,7 +4,7 @@
 \alias{indpFunc}
 \title{indpFunc function}
 \usage{
-indpFunc(D, i, j, z = c())
+indpFunc(D, i, j, d, z = c())
 }
 \description{
 indpFunc function

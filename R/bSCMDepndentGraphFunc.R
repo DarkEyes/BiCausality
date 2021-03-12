@@ -31,7 +31,7 @@ bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
       for(k in seq(nboot))
       {
         D<-Dboot[[k]]
-        bIndpDist[k]<-indpFunc(D,i,j)
+        bIndpDist[k]<-indpFunc(D,i,j,d=d,z=c())
       }
       testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
       confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))

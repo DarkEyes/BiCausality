@@ -4,7 +4,7 @@
 #'
 #'@export
 #'
-indpFunc<-function(D,i,j,z=c())
+indpFunc<-function(D,i,j,d,z=c())
 {
   if(is.null(z))
     z<-numeric(d)-1
