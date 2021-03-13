@@ -2,10 +2,12 @@
 % Please edit documentation in R/CondProb.R
 \name{CondProb}
 \alias{CondProb}
-\title{CondProb function}
+\title{CondProb function
+serve as a confidence function in data mining conf(y|z)}
 \usage{
 CondProb(D, y, z)
 }
 \description{
 CondProb function
+serve as a confidence function in data mining conf(y|z)
 }

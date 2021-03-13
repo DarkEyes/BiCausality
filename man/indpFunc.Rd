@@ -2,10 +2,12 @@
 % Please edit documentation in R/indpFunc.R
 \name{indpFunc}
 \alias{indpFunc}
-\title{indpFunc function}
+\title{indpFunc function
+|p(i,j) -p(i)*p(j)| should be zero if i and j are independent}
 \usage{
 indpFunc(D, i, j, d, z = c())
 }
 \description{
 indpFunc function
+|p(i,j) -p(i)*p(j)| should be zero if i and j are independent
 }
