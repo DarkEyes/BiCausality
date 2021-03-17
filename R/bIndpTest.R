@@ -4,7 +4,7 @@
 #'
 #'@export
 #'
-bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
+bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100,pflag=FALSE)
 {
   d<-dim(mat)[2]
   if(is.null(z))
@@ -16,6 +16,8 @@ bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
   bIndpDist<-numeric(nboot)
   for(k in seq(nboot))
   {
+    if(pflag==TRUE)
+      print(sprintf("bIndpTest-boot#%d",k))
     bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
     nMat<-mat[bDx[k,],]
     D<-VecAlignment(nMat)

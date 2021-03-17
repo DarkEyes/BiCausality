@@ -4,7 +4,7 @@
 #'
 #'@export
 #'
-bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
+bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05,pflag=FALSE)
 {
   n<-dim(mat)[1]
   d<-dim(mat)[2]
@@ -14,6 +14,8 @@ bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
   # == Create the bootstrapping sequence of D
   for(k in seq(nboot))
   {
+    if(pflag==TRUE)
+      print(sprintf("bIndpTest-boot#%d",k))
     bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
     nMatboot[[k]]<-mat[bDx[k,],]
     Dboot[[k]]<-VecAlignment(nMatboot[[k]])

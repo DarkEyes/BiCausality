@@ -1,0 +1,33 @@
+---
+title: "EXP Notebook"
+output: html_notebook
+---
+
+Experiment notebook
+```{r}
+library(devtools)
+devtools::document()
+```
+
+load
+```{r}
+load("TPMAPdata61.rdata")
+```
+cleansing
+```{r}
+mat40<-as.data.frame(DataTProv40$P)
+for(i in seq(31))
+{
+ mode(mat40[,i])= "numeric"
+  mat40[is.na(mat40[,i]), i] = 0
+  print(sprintf("%d",i )  )
+  print(unique(mat40[,i]))
+}
+mat40<-as.matrix(mat40)
+```
+mining
+```{r}
+library(BiCausality)
+res<-bSCMDepndentGraphFunc(mat = mat40, pflag=TRUE)
+```
+

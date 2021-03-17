@@ -4,7 +4,16 @@
 \alias{bIndpTest}
 \title{bIndpTest function}
 \usage{
-bIndpTest(mat, i, j, z = c(), alpha = 0.05, ths = 0.05, nboot = 100)
+bIndpTest(
+  mat,
+  i,
+  j,
+  z = c(),
+  alpha = 0.05,
+  ths = 0.05,
+  nboot = 100,
+  pflag = FALSE
+)
 }
 \description{
 bIndpTest function

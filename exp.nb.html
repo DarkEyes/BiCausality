@@ -11,7 +11,7 @@
 
 
 
-<title>R Notebook</title>
+<title>EXP Notebook</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1756,586 +1756,131 @@ summary {
 
 
 
-<h1 class="title toc-ignore">R Notebook</h1>
+<h1 class="title toc-ignore">EXP Notebook</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<p>t</p>
+<p>Experiment notebook</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VwcDwtZnVuY3Rpb24oWCx2YWx1ZXMpXG57XG4gIGNvdW50PC0wXG4gIG48LTBcbiAgZmxhZz0wXG4gIGlmKGlzLm51bGwoZGltKFgpWzFdKSlcbiAge1xuICAgIG48LWxlbmd0aChYKVxuICAgIGZsYWc9MVxuICB9XG4gIGVsc2VcbiAgICBuPC1kaW0oWClbMV1cbiAgZm9yKGkgaW4gc2VxKG4pKVxuICB7XG4gICAgaWYoZmxhZz09MSlcbiAgICAgIHJvdzwtWFtpXVxuICAgIGVsc2VcbiAgICAgIHJvdzwtWFtpLF1cbiAgICBpZihzdW0ocm93PT12YWx1ZXMpID09IGxlbmd0aCh2YWx1ZXMpKVxuICAgICAgY291bnQ9Y291bnQrMVxuICB9XG4gIHJldHVybihjb3VudC9uKVxufVxueCA8LSByYmlub20obj0xMCwgc2l6ZT0xLCBwcm9iPTAuMilcbm55PC1yYmlub20obj0xMCwgc2l6ZT0xLCBwcm9iPTAuMDUpXG55IDwtIHggfCAgbnlcbnN1cHAoWD1jYmluZCh4LHkpLHZhbHVlcz1jKDEsMSkgKVxuXG5gYGAifQ== -->
-<pre class="r"><code>supp&lt;-function(X,values)
-{
-  count&lt;-0
-  n&lt;-0
-  flag=0
-  if(is.null(dim(X)[1]))
-  {
-    n&lt;-length(X)
-    flag=1
-  }
-  else
-    n&lt;-dim(X)[1]
-  for(i in seq(n))
-  {
-    if(flag==1)
-      row&lt;-X[i]
-    else
-      row&lt;-X[i,]
-    if(sum(row==values) == length(values))
-      count=count+1
-  }
-  return(count/n)
-}
-x &lt;- rbinom(n=10, size=1, prob=0.2)
-ny&lt;-rbinom(n=10, size=1, prob=0.05)
-y &lt;- x |  ny
-supp(X=cbind(x,y),values=c(1,1) )
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkZXZ0b29scylcbmRldnRvb2xzOjpkb2N1bWVudCgpXG5gYGAifQ== -->
+<pre class="r"><code>library(devtools)
+devtools::document()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVXBkYXRpbmcgQmlDYXVzYWxpdHkgZG9jdW1lbnRhdGlvblxuIn0= -->
+<pre><code>Updating BiCausality documentation</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>load</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9hZChcIlRQTUFQZGF0YTYxLnJkYXRhXCIpXG5gYGAifQ== -->
+<pre class="r"><code>load(&quot;TPMAPdata61.rdata&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Sorting</p>
+<p>cleansing</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iaW4yZGVjPC1mdW5jdGlvbih4KVxue1xuICBuZXd4PC0wXG4gIGQ8LWxlbmd0aCh4KVxuICBmb3IoaSBpbiBzZXEoZCkpXG4gIHtcbiAgICBuZXd4IDwtIG5ld3greFtpXSoyXihkLWkpXG4gIH1cbiAgcmV0dXJuKG5ld3gpXG59XG5WZWNBbGlnbm1lbnQ8LWZ1bmN0aW9uKG1hdClcbntcbiAgIyBtYXQgbXVzdCBoYXZlIHRoZSBkaW1lbnNpb24gbiBieSBkIHdoZXJlIG4gYW5kIGQgbXVzdCBiZSBncmVhdGVyIHRoYW4gMS5cbiAgbmV3TWF0PC1saXN0KClcbiAgZDwtZGltKG1hdClbMV1cbiAgZm9yKGkgaW4gc2VxKGQpKVxuICB7XG4gICAgbmV3TWF0W1tzcHJpbnRmKFwiJWRcIixiaW4yZGVjKG1hdFtpLF0pKV1dJG5hbWU8LW1hdFtpLF1cbiAgICBpZihpcy5udWxsKG5ld01hdFtbc3ByaW50ZihcIiVkXCIsYmluMmRlYyhtYXRbaSxdKSldXSRjb3VudCk9PVRSVUUgKVxuICAgICAgbmV3TWF0W1tzcHJpbnRmKFwiJWRcIixiaW4yZGVjKG1hdFtpLF0pKV1dJGNvdW50PC0xXG4gICAgZWxzZVxuICAgICAgbmV3TWF0W1tzcHJpbnRmKFwiJWRcIixiaW4yZGVjKG1hdFtpLF0pKV1dJGNvdW50PC1uZXdNYXRbW3NwcmludGYoXCIlZFwiLGJpbjJkZWMobWF0W2ksXSkpXV0kY291bnQrMVxuICB9XG4gIHJldHVybihuZXdNYXQpXG59XG5cbm48LTUwMFxuZDwtMTBcbm1hdDwtbWF0cml4KG5yb3c9bixuY29sPWQpXG5cbmZvcihpIGluIHNlcShuKSlcbntcbiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KVxufVxubWF0WywxXTwtbWF0WywyXSB8IG1hdFssM11cbm1hdFssNF0gPC0gbWF0WywyXSB8IG1hdFssNV1cblxuRDwtVmVjQWxpZ25tZW50KG1hdClcbmBgYCJ9 -->
-<pre class="r"><code>
-bin2dec&lt;-function(x)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUClcbmZvcihpIGluIHNlcSgzMSkpXG57XG4gbW9kZShtYXQ0MFssaV0pPSBcIm51bWVyaWNcIlxuICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDBcbiAgcHJpbnQoc3ByaW50ZihcIiVkXCIsaSApICApXG4gIHByaW50KHVuaXF1ZShtYXQ0MFssaV0pKVxufVxuYGBgIn0= -->
+<pre class="r"><code>mat40&lt;-as.data.frame(DataTProv40$P)
+for(i in seq(31))
 {
-  newx&lt;-0
-  d&lt;-length(x)
-  for(i in seq(d))
-  {
-    newx &lt;- newx+x[i]*2^(d-i)
-  }
-  return(newx)
-}
-VecAlignment&lt;-function(mat)
-{
-  # mat must have the dimension n by d where n and d must be greater than 1.
-  newMat&lt;-list()
-  d&lt;-dim(mat)[1]
-  for(i in seq(d))
-  {
-    newMat[[sprintf(&quot;%d&quot;,bin2dec(mat[i,]))]]$name&lt;-mat[i,]
-    if(is.null(newMat[[sprintf(&quot;%d&quot;,bin2dec(mat[i,]))]]$count)==TRUE )
-      newMat[[sprintf(&quot;%d&quot;,bin2dec(mat[i,]))]]$count&lt;-1
-    else
-      newMat[[sprintf(&quot;%d&quot;,bin2dec(mat[i,]))]]$count&lt;-newMat[[sprintf(&quot;%d&quot;,bin2dec(mat[i,]))]]$count+1
-  }
-  return(newMat)
-}
-
-n&lt;-500
-d&lt;-10
-mat&lt;-matrix(nrow=n,ncol=d)
-
-for(i in seq(n))
-{
-  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
-}
-mat[,1]&lt;-mat[,2] | mat[,3]
-mat[,4] &lt;- mat[,2] | mat[,5]
-
-D&lt;-VecAlignment(mat)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#CondProb</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5Db25kUHJvYjwtZnVuY3Rpb24oRCx5LHopICMgc2VydmUgYXMgYSBjb25maWRlbmNlIGZ1bmN0aW9uIGluIGRhdGEgbWluaW5nIGNvbmYoeXx6KVxue1xuICBwPC0wXG4gIGZpbHRlcjwteiAhPSAtMVxuICBpZihzdW0oZmlsdGVyKSA9PSAwKSAjIGdvIGZ1bGwgRCB3aXRob3V0IGNvbmRpdGlvbmFsIHZhcmlhYmxlc1xuICAgIG5EPC1EXG4gIGVsc2UgIyBLZWVwIG9ubHkgYmluYXJ5IHRoYXQgYXJlIG1hdGNoIHdpdGggdGhlIGdpdmVuIHouXG4gIHtcbiAgICBuRDwtbGlzdCgpXG4gICAgZm9yKGkgaW4gc2VxKGxlbmd0aChEKSkgKSAjRm9yIGVhY2ggdW5pcXVlIGJpbmFyeSBEW1tpXV1cbiAgICB7XG4gICAgICBmbGFnPC1zdW0oRFtbaV1dJG5hbWVbZmlsdGVyXSA9PSB6W2ZpbHRlcl0pICMgY2hlY2sgd2hldGhlciBEW1tpXV0gYml0cyBpbiB6J3MgcG9zaXRpb25zIGFyZSB0aGUgc2FtZSBhcyB6J3NcbiAgICAgIGlmKGZsYWcgPT0gc3VtKGZpbHRlcikpICMgaWYgc28sIGFkZCB0aGUgRFtbaV1dIGludG8gbkRcbiAgICAgIHtcbiAgICAgICAgbkRbW25hbWVzKEQpW2ldIF1dIDwtIERbW2ldXVxuICAgICAgfVxuICAgIH1cbiAgfVxuICBmaWx0ZXJZPC0geSE9IC0xXG4gIGNvdW50PC0wXG4gIGNvdW50VG90YWw8LTBcbiAgZm9yKGkgaW4gc2VxKGxlbmd0aChuRCkpICkgI0ZvciBlYWNoIHVuaXF1ZSBiaW5hcnkgbkRbW2ldXSBpbiBuRFxuICB7XG4gICAgZmxhZzwtc3VtKG5EW1tpXV0kbmFtZVtmaWx0ZXJZXSA9PSB5W2ZpbHRlclldKSBcbiAgICBjb3VudFRvdGFsPC1jb3VudFRvdGFsK25EW1tpXV0kY291bnRcbiAgICBpZihmbGFnID09IHN1bShmaWx0ZXJZKSkgIyAgY2hlY2sgd2hldGhlciBuRFtbaV1dIGJpdHMgaW4geScgcG9zaXRpb25zIGFyZSB0aGUgc2FtZSBhcyB5J3MgXG4gICAge1xuICAgICAgY291bnQ8LWNvdW50K25EW1tpXV0kY291bnRcbiAgICB9XG4gIH1cblxuICByZXR1cm4obGlzdChcImNvbmRQXCI9Y291bnQvY291bnRUb3RhbCwgbkQ9bkQsY291bnRUb3RhbD1jb3VudFRvdGFsLGNvdW50PWNvdW50ICkpXG59XG56PC1udW1lcmljKGQpLTFcbnk8LW51bWVyaWMoZCktMVxuXG4jIG1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdXG5pPTFcbmo9MlxuRDwtVmVjQWxpZ25tZW50KG1hdClcbnlbal08LWMoMSlcbnpbaV08LWMoMSlcbmExPC1Db25kUHJvYihELHk9eSx6PXopJGNvbmRQICMgMnwxIHl8elxuYjE8LUNvbmRQcm9iKEQseT16LHo9eSkkY29uZFAgIyAxfDIgXG5cbmExLWIxXG5cbiNBPC1iSW5kcFRlc3QobWF0LGksailcbiNjYXVzYWxEaXJUZXN0KG1hdCxpPWksaj1qLHZpPTEsdGhzPTAuMjUpXG5cbmBgYCJ9 -->
-<pre class="r"><code>
-CondProb&lt;-function(D,y,z) # serve as a confidence function in data mining conf(y|z)
-{
-  p&lt;-0
-  filter&lt;-z != -1
-  if(sum(filter) == 0) # go full D without conditional variables
-    nD&lt;-D
-  else # Keep only binary that are match with the given z.
-  {
-    nD&lt;-list()
-    for(i in seq(length(D)) ) #For each unique binary D[[i]]
-    {
-      flag&lt;-sum(D[[i]]$name[filter] == z[filter]) # check whether D[[i]] bits in z&#39;s positions are the same as z&#39;s
-      if(flag == sum(filter)) # if so, add the D[[i]] into nD
-      {
-        nD[[names(D)[i] ]] &lt;- D[[i]]
-      }
-    }
-  }
-  filterY&lt;- y!= -1
-  count&lt;-0
-  countTotal&lt;-0
-  for(i in seq(length(nD)) ) #For each unique binary nD[[i]] in nD
-  {
-    flag&lt;-sum(nD[[i]]$name[filterY] == y[filterY]) 
-    countTotal&lt;-countTotal+nD[[i]]$count
-    if(flag == sum(filterY)) #  check whether nD[[i]] bits in y&#39; positions are the same as y&#39;s 
-    {
-      count&lt;-count+nD[[i]]$count
-    }
-  }
-
-  return(list(&quot;condP&quot;=count/countTotal, nD=nD,countTotal=countTotal,count=count ))
-}
-z&lt;-numeric(d)-1
-y&lt;-numeric(d)-1
-
-# mat[,1]&lt;-mat[,2] | mat[,3]
-i=1
-j=2
-D&lt;-VecAlignment(mat)
-y[j]&lt;-c(1)
-z[i]&lt;-c(1)
-a1&lt;-CondProb(D,y=y,z=z)$condP # 2|1 y|z
-b1&lt;-CondProb(D,y=z,z=y)$condP # 1|2 
-
-a1-b1
-
-#A&lt;-bIndpTest(mat,i,j)
-#causalDirTest(mat,i=i,j=j,vi=1,ths=0.25)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#independent func</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1RPRE8gYWRkIGdpdmVuIHpcbmluZHBGdW5jPC1mdW5jdGlvbihELGksaix6PWMoKSlcbntcbiAgaWYoaXMubnVsbCh6KSlcbiAgICB6PC1udW1lcmljKGQpLTFcbiAgXG4gIHJlczwtQ29uZFByb2IoRCx5PW51bWVyaWMoZCktMSx6PXopXG4gIEQ8LXJlcyRuRFxuICBuPC1yZXMkY291bnRUb3RhbFxuICBMPC1sZW5ndGgoRClcbiAgXG4gIGluZE1hZ2l0dWRlPC0wXG4gIFxuICB6MTwtbnVtZXJpYyhkKS0xXG5cbiAgZm9yKGkxIGluIGMoMCwxKSApXG4gICAgZm9yKGoxIGluIGMoMCwxKSlcbiAgICB7XG4gICAgICAgIHkxPC1udW1lcmljKGQpIC0xXG4gICAgICAgIHkxW2MoaSxqKV0gPC0gYyhpMSxqMSlcbiAgICAgICAgeTI8LW51bWVyaWMoZCkgLTFcbiAgICAgICAgeTJbYyhpKV0gPC0gaTFcbiAgICAgICAgeTM8LW51bWVyaWMoZCkgLTFcbiAgICAgICAgeTNbYyhqKV0gPC0gajFcbiAgICAgICAgXG4gICAgICAgIHJlczI8LUNvbmRQcm9iKEQseTEsejEpXG4gICAgICAgIG4yPC1yZXMyJGNvdW50XG4gICAgICAgIGNvbmRQYWlyPC1yZXMyJGNvbmRQXG4gICAgICAgIGNvbmRpPC1Db25kUHJvYihELHkyLHoxKSRjb25kUFxuICAgICAgICBjb25kajwtQ29uZFByb2IoRCx5Myx6MSkkY29uZFBcbiAgICAgICAgaW5kTWFnaXR1ZGU8LWluZE1hZ2l0dWRlKyAoYWJzKGNvbmRQYWlyIC0gY29uZGkqY29uZGopKihuMi9uKSApXG4gICAgfVxuICBcbiAgcmV0dXJuKGluZE1hZ2l0dWRlKVxufVxuejwtbnVtZXJpYyhkKS0xXG56W2MoNCldID0gMFxuaW5kcEZ1bmMoRCwxLDIsej16KVxueltjKDQpXSA9IDFcbmluZHBGdW5jKEQsMSwyLHo9eilcbmBgYCJ9 -->
-<pre class="r"><code>#TODO add given z
-indpFunc&lt;-function(D,i,j,z=c())
-{
-  if(is.null(z))
-    z&lt;-numeric(d)-1
-  
-  res&lt;-CondProb(D,y=numeric(d)-1,z=z)
-  D&lt;-res$nD
-  n&lt;-res$countTotal
-  L&lt;-length(D)
-  
-  indMagitude&lt;-0
-  
-  z1&lt;-numeric(d)-1
-
-  for(i1 in c(0,1) )
-    for(j1 in c(0,1))
-    {
-        y1&lt;-numeric(d) -1
-        y1[c(i,j)] &lt;- c(i1,j1)
-        y2&lt;-numeric(d) -1
-        y2[c(i)] &lt;- i1
-        y3&lt;-numeric(d) -1
-        y3[c(j)] &lt;- j1
-        
-        res2&lt;-CondProb(D,y1,z1)
-        n2&lt;-res2$count
-        condPair&lt;-res2$condP
-        condi&lt;-CondProb(D,y2,z1)$condP
-        condj&lt;-CondProb(D,y3,z1)$condP
-        indMagitude&lt;-indMagitude+ (abs(condPair - condi*condj)*(n2/n) )
-    }
-  
-  return(indMagitude)
-}
-z&lt;-numeric(d)-1
-z[c(4)] = 0
-indpFunc(D,1,2,z=z)
-z[c(4)] = 1
-indpFunc(D,1,2,z=z)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Indp Bootstrap</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYkluZHBUZXN0PC1mdW5jdGlvbihtYXQsaSxqLHo9YygpLGFscGhhPTAuMDUsdGhzID0gMC4wNSxuYm9vdD0xMDApXG57XG4gIGlmKGlzLm51bGwoeikpXG4gICAgejwtbnVtZXJpYyhkKS0xXG4gICN6WzJdPC0gLTFcbiAgXG4gIG48LWRpbShtYXQpWzFdXG4gIGJEeDwtbWF0cml4KDAsbmJvb3QsbilcbiAgYkluZHBEaXN0PC1udW1lcmljKG5ib290KVxuICBmb3IoayBpbiBzZXEobmJvb3QpKVxuICB7XG4gICAgYkR4W2ssXTwtc2FtcGxlKDE6bixsZW5ndGgoMTpuKSxyZXBsYWNlID0gVFJVRSlcbiAgICBuTWF0PC1tYXRbYkR4W2ssXSxdXG4gICAgRDwtVmVjQWxpZ25tZW50KG5NYXQpXG4gICAgYkluZHBEaXN0W2tdPC1pbmRwRnVuYyhELGksaix6PXopXG4gIH1cbiAgdGVzdFJlczwtd2lsY294LnRlc3QoeD1iSW5kcERpc3QsIG11ID0gdGhzLCBhbHRlcm5hdGl2ZSA9IFwiZ3JlYXRlclwiKVxuICBjb25mSW52PC1xdWFudGlsZShiSW5kcERpc3QsIGMoMCthbHBoYS8yLCAxLWFscGhhLzIpKVxuICBibWVhbiA8LSBtZWFuKGJJbmRwRGlzdClcbiAgcmV0dXJuKGxpc3QodGVzdFJlcz10ZXN0UmVzLGNvbmZJbnY9Y29uZkludixibWVhbj1ibWVhbikpXG59XG5gYGAifQ== -->
-<pre class="r"><code>bIndpTest&lt;-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100)
-{
-  if(is.null(z))
-    z&lt;-numeric(d)-1
-  #z[2]&lt;- -1
-  
-  n&lt;-dim(mat)[1]
-  bDx&lt;-matrix(0,nboot,n)
-  bIndpDist&lt;-numeric(nboot)
-  for(k in seq(nboot))
-  {
-    bDx[k,]&lt;-sample(1:n,length(1:n),replace = TRUE)
-    nMat&lt;-mat[bDx[k,],]
-    D&lt;-VecAlignment(nMat)
-    bIndpDist[k]&lt;-indpFunc(D,i,j,z=z)
-  }
-  testRes&lt;-wilcox.test(x=bIndpDist, mu = ths, alternative = &quot;greater&quot;)
-  confInv&lt;-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))
-  bmean &lt;- mean(bIndpDist)
-  return(list(testRes=testRes,confInv=confInv,bmean=bmean))
+ mode(mat40[,i])= &quot;numeric&quot;
+  mat40[is.na(mat40[,i]), i] = 0
+  print(sprintf(&quot;%d&quot;,i )  )
+  print(unique(mat40[,i]))
 }</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMVwiXG5bMV0gMCAxXG5bMV0gXCIyXCJcblsxXSAwIDFcblsxXSBcIjNcIlxuWzFdIDAgMVxuWzFdIFwiNFwiXG5bMV0gMCAxXG5bMV0gXCI1XCJcblsxXSAwIDFcblsxXSBcIjZcIlxuWzFdIDAgMVxuWzFdIFwiN1wiXG5bMV0gMCAxXG5bMV0gXCI4XCJcblsxXSAwIDFcblsxXSBcIjlcIlxuWzFdIDAgMVxuWzFdIFwiMTBcIlxuWzFdIDAgMVxuWzFdIFwiMTFcIlxuWzFdIDAgMVxuWzFdIFwiMTJcIlxuWzFdIDAgMVxuWzFdIFwiMTNcIlxuWzFdIDAgMVxuWzFdIFwiMTRcIlxuWzFdIDAgMVxuWzFdIFwiMTVcIlxuWzFdIDAgMVxuWzFdIFwiMTZcIlxuWzFdIDAgMVxuWzFdIFwiMTdcIlxuWzFdIDAgMVxuWzFdIFwiMThcIlxuWzFdIDBcblsxXSBcIjE5XCJcblsxXSAwIDFcblsxXSBcIjIwXCJcblsxXSAwIDFcblsxXSBcIjIxXCJcblsxXSAwIDFcbiJ9 -->
+<pre><code>[1] &quot;1&quot;
+[1] 0 1
+[1] &quot;2&quot;
+[1] 0 1
+[1] &quot;3&quot;
+[1] 0 1
+[1] &quot;4&quot;
+[1] 0 1
+[1] &quot;5&quot;
+[1] 0 1
+[1] &quot;6&quot;
+[1] 0 1
+[1] &quot;7&quot;
+[1] 0 1
+[1] &quot;8&quot;
+[1] 0 1
+[1] &quot;9&quot;
+[1] 0 1
+[1] &quot;10&quot;
+[1] 0 1
+[1] &quot;11&quot;
+[1] 0 1
+[1] &quot;12&quot;
+[1] 0 1
+[1] &quot;13&quot;
+[1] 0 1
+[1] &quot;14&quot;
+[1] 0 1
+[1] &quot;15&quot;
+[1] 0 1
+[1] &quot;16&quot;
+[1] 0 1
+[1] &quot;17&quot;
+[1] 0 1
+[1] &quot;18&quot;
+[1] 0
+[1] &quot;19&quot;
+[1] 0 1
+[1] &quot;20&quot;
+[1] 0 1
+[1] &quot;21&quot;
+[1] 0 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbiJ9 -->
+<pre><code>NAs introduced by coercion</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMjJcIlxuWzFdIDAgMVxuWzFdIFwiMjNcIlxuWzFdIDAgMVxuWzFdIFwiMjRcIlxuWzFdIDAgMVxuWzFdIFwiMjVcIlxuWzFdIDAgMVxuWzFdIFwiMjZcIlxuWzFdIDAgMVxuWzFdIFwiMjdcIlxuWzFdIDAgMVxuWzFdIFwiMjhcIlxuWzFdIDAgMVxuWzFdIFwiMjlcIlxuWzFdIDAgMVxuWzFdIFwiMzBcIlxuWzFdIDAgMVxuWzFdIFwiMzFcIlxuWzFdIDAgMVxuIn0= -->
+<pre><code>[1] &quot;22&quot;
+[1] 0 1
+[1] &quot;23&quot;
+[1] 0 1
+[1] &quot;24&quot;
+[1] 0 1
+[1] &quot;25&quot;
+[1] 0 1
+[1] &quot;26&quot;
+[1] 0 1
+[1] &quot;27&quot;
+[1] 0 1
+[1] &quot;28&quot;
+[1] 0 1
+[1] &quot;29&quot;
+[1] 0 1
+[1] &quot;30&quot;
+[1] 0 1
+[1] &quot;31&quot;
+[1] 0 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF0NDA8LWFzLm1hdHJpeChtYXQ0MClcbmBgYCJ9 -->
+<pre class="r"><code>mat40&lt;-as.matrix(mat40)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="run" class="section level1">
-<h1>run</h1>
+<p>mining</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcblxubjwtNTAwXG5kPC0xMFxubWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZClcblxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBtYXRbaSxdIDwtIHJiaW5vbShuPWQsIHNpemU9MSwgcHJvYj0wLjUpXG59XG5tYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXVxubWF0Wyw0XSA8LSAhbWF0WywyXSB8IG1hdFssNV1cblxuXG5pPTJcbmo9MVxucHJpbnQoc3ByaW50ZihcImklZCxqJWRcIixpLGopKVxuYkluZHBUZXN0KG1hdCxpLGopXG5pPTJcbmo9NFxucHJpbnQoc3ByaW50ZihcImklZCxqJWRcIixpLGopKVxuYkluZHBUZXN0KG1hdCxpLGopXG5pPTJcbmo9M1xucHJpbnQoc3ByaW50ZihcImklZCxqJWRcIixpLGopKVxuYkluZHBUZXN0KG1hdCxpLGopXG5pPTRcbmo9MVxucHJpbnQoc3ByaW50ZihcImklZCxqJWRcIixpLGopKVxuYkluZHBUZXN0KG1hdCxpLGopXG5pPTRcbmo9MVxuejwtbnVtZXJpYyhkKS0xXG56WzJdPC0xXG5wcmludChzcHJpbnRmKFwiaSVkLGolZFwiLGksaikpXG5iSW5kcFRlc3QobWF0LGksaix6PXopXG5cbmk9Mlxuaj0zXG56PC1udW1lcmljKGQpLTFcbnpbMV08LTBcbnByaW50KHNwcmludGYoXCJpJWQsaiVkXCIsaSxqKSlcbmJJbmRwVGVzdChtYXQsaSxqLHo9eilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbnJlczwtYlNDTURlcG5kZW50R3JhcGhGdW5jKG1hdCA9IG1hdDQwLCBwZmxhZz1GQUxTRSlcbmBgYCJ9 -->
 <pre class="r"><code>library(BiCausality)
-
-n&lt;-500
-d&lt;-10
-mat&lt;-matrix(nrow=n,ncol=d)
-
-for(i in seq(n))
-{
-  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
-}
-mat[,1]&lt;-mat[,2] | mat[,3]
-mat[,4] &lt;- !mat[,2] | mat[,5]
-
-
-i=2
-j=1
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-bIndpTest(mat,i,j)
-i=2
-j=4
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-bIndpTest(mat,i,j)
-i=2
-j=3
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-bIndpTest(mat,i,j)
-i=4
-j=1
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-bIndpTest(mat,i,j)
-i=4
-j=1
-z&lt;-numeric(d)-1
-z[2]&lt;-1
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-bIndpTest(mat,i,j,z=z)
-
-i=2
-j=3
-z&lt;-numeric(d)-1
-z[1]&lt;-0
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-bIndpTest(mat,i,j,z=z)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#oddRatio</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbm48LTUwMFxuZDwtMTBcbm1hdDwtbWF0cml4KG5yb3c9bixuY29sPWQpXG5cbmZvcihpIGluIHNlcShuKSlcbntcbiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KVxufVxubWF0WywxXTwtbWF0WywyXSB8IG1hdFssM11cbm1hdFssNF0gPC0gIW1hdFssMl0gfCBtYXRbLDVdXG5cbno8LW51bWVyaWMoZCktMVxueTwtbnVtZXJpYyhkKS0xXG5pPTVcbmo9NFxuRDwtVmVjQWxpZ25tZW50KG1hdClcbm9kZFJhdGlvRnVuYyhELGksailcblxuaT00XG5qPTVcbno8LW51bWVyaWMoZCktMVxuels1XTwtIC0xXG5vZGREaWZmRnVuYyhELGksaix6PXopXG5gYGAifQ== -->
-<pre class="r"><code>library(BiCausality)
-n&lt;-500
-d&lt;-10
-mat&lt;-matrix(nrow=n,ncol=d)
-
-for(i in seq(n))
-{
-  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
-}
-mat[,1]&lt;-mat[,2] | mat[,3]
-mat[,4] &lt;- !mat[,2] | mat[,5]
-
-z&lt;-numeric(d)-1
-y&lt;-numeric(d)-1
-i=5
-j=4
-D&lt;-VecAlignment(mat)
-oddRatioFunc(D,i,j)
-
-i=4
-j=5
-z&lt;-numeric(d)-1
-z[5]&lt;- -1
-oddDiffFunc(D,i,j,z=z)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaT0yXG5qPTFcbno8LW51bWVyaWMoZCktMVxuelsyXTwtIC0xXG5wcmludChzcHJpbnRmKFwiaSVkLGolZFwiLGksaikpXG5hc3NvY1NpZ25UZXN0KG1hdCxpLGosej16KVxuYGBgIn0= -->
-<pre class="r"><code>i=2
-j=1
-z&lt;-numeric(d)-1
-z[2]&lt;- -1
-print(sprintf(&quot;i%d,j%d&quot;,i,j))
-assocSignTest(mat,i,j,z=z)</code></pre>
+res&lt;-bSCMDepndentGraphFunc(mat = mat40, pflag=FALSE)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iU0NNRGVwbmRlbnRHcmFwaEZ1bmM8LWZ1bmN0aW9uKG1hdCxuYm9vdD0xMDAsYWxwaGE9MC4wNSxJbmRwVGhzPTAuMDUpXG57XG4gIG48LWRpbShtYXQpWzFdXG4gIGQ8LWRpbShtYXQpWzJdXG4gIG5NYXRib290PC1saXN0KClcbiAgRGJvb3Q8LWxpc3QoKVxuICBiRHg8LW1hdHJpeCgwLG5ib290LG4pXG4gICMgPT0gQ3JlYXRlIHRoZSBib290c3RyYXBwaW5nIHNlcXVlbmNlIG9mIERcbiAgZm9yKGsgaW4gc2VxKG5ib290KSlcbiAge1xuICAgIGJEeFtrLF08LXNhbXBsZSgxOm4sbGVuZ3RoKDE6bikscmVwbGFjZSA9IFRSVUUpXG4gICAgbk1hdGJvb3RbW2tdXTwtbWF0W2JEeFtrLF0sXVxuICAgIERib290W1trXV08LVZlY0FsaWdubWVudChuTWF0Ym9vdFtba11dKVxuICB9XG4gICNDaGVjayBkZXBlbmRlbmN5IG9mIGFsbCBwYWlyd2lzZXNcbiAgRTA8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpICMgc2F2ZSBtZWFuXG4gIGRlcEluZm88LWxpc3QoKVxuICBcbiAgZm9yKGkgaW4gc2VxKGQtMSkpXG4gICAgZm9yKGogaW4gc2VxKGkrMSxkKSlcbiAgICB7XG4gICAgICBzdHI8LXNwcmludGYoXCIlZCwlZFwiLGksailcbiAgICAgIHByaW50KHN0cilcbiAgICAgIGJJbmRwRGlzdDwtbnVtZXJpYyhuYm9vdClcbiAgICAgIGZvcihrIGluIHNlcShuYm9vdCkpXG4gICAgICB7XG4gICAgICAgIEQ8LURib290W1trXV1cbiAgICAgICAgYkluZHBEaXN0W2tdPC1pbmRwRnVuYyhELGksailcbiAgICAgIH1cbiAgICAgIHRlc3RSZXM8LXdpbGNveC50ZXN0KHg9YkluZHBEaXN0LCBtdSA9IEluZHBUaHMsIGFsdGVybmF0aXZlID0gXCJncmVhdGVyXCIpXG4gICAgICBjb25mSW52PC1xdWFudGlsZShiSW5kcERpc3QsIGMoMCthbHBoYS8yLCAxLWFscGhhLzIpKVxuICAgICAgYm1lYW4gPC0gbWVhbihiSW5kcERpc3QpXG5cbiAgICAgICNjaGVjayB3aGV0aGVyIGkgaXMgZGVwZW5kZW50IHdpdGggalxuICAgICAgaWYodGVzdFJlcyRwLnZhbHVlPD1hbHBoYSlcbiAgICAgIHtcbiAgICAgICAgRTBbaSxqXTwtMVxuICAgICAgICBFMFtqLGldPC0xXG4gICAgICAgIGRlcEluZm9bW3N0cl1dJGJtZWFuPC1ibWVhblxuICAgICAgICBkZXBJbmZvW1tzdHJdXSRjb25mSW52PC1jb25mSW52XG4gICAgICAgIGRlcEluZm9bW3N0cl1dJHRlc3RSZXM8LXRlc3RSZXNcbiAgICAgICAgZGVwSW5mb1tbc3RyXV0kaW5kaWNlczwtYyhpLGopXG4gICAgICB9XG4gICAgfVxuICByZXR1cm4obGlzdChFMD1FMCxkZXBJbmZvPWRlcEluZm8sRGJvb3Q9RGJvb3QpIClcbn1cbmxpYnJhcnkoQmlDYXVzYWxpdHkpXG5uPC01MDBcbmQ8LTEwXG5tYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKVxuXG5mb3IoaSBpbiBzZXEobikpXG57XG4gIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuNSlcbn1cbm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdXG5tYXRbLDRdIDwtICFtYXRbLDJdIHwgbWF0Wyw1XVxuXG5yZXM8LWJTQ01EZXBuZGVudEdyYXBoRnVuYyhtYXQpXG5gYGAifQ== -->
-<pre class="r"><code>
-bSCMDepndentGraphFunc&lt;-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
-{
-  n&lt;-dim(mat)[1]
-  d&lt;-dim(mat)[2]
-  nMatboot&lt;-list()
-  Dboot&lt;-list()
-  bDx&lt;-matrix(0,nboot,n)
-  # == Create the bootstrapping sequence of D
-  for(k in seq(nboot))
-  {
-    bDx[k,]&lt;-sample(1:n,length(1:n),replace = TRUE)
-    nMatboot[[k]]&lt;-mat[bDx[k,],]
-    Dboot[[k]]&lt;-VecAlignment(nMatboot[[k]])
-  }
-  #Check dependency of all pairwises
-  E0&lt;-matrix(0,nrow=d,ncol=d) # save mean
-  depInfo&lt;-list()
-  
-  for(i in seq(d-1))
-    for(j in seq(i+1,d))
-    {
-      str&lt;-sprintf(&quot;%d,%d&quot;,i,j)
-      print(str)
-      bIndpDist&lt;-numeric(nboot)
-      for(k in seq(nboot))
-      {
-        D&lt;-Dboot[[k]]
-        bIndpDist[k]&lt;-indpFunc(D,i,j)
-      }
-      testRes&lt;-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = &quot;greater&quot;)
-      confInv&lt;-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))
-      bmean &lt;- mean(bIndpDist)
 
-      #check whether i is dependent with j
-      if(testRes$p.value&lt;=alpha)
-      {
-        E0[i,j]&lt;-1
-        E0[j,i]&lt;-1
-        depInfo[[str]]$bmean&lt;-bmean
-        depInfo[[str]]$confInv&lt;-confInv
-        depInfo[[str]]$testRes&lt;-testRes
-        depInfo[[str]]$indices&lt;-c(i,j)
-      }
-    }
-  return(list(E0=E0,depInfo=depInfo,Dboot=Dboot) )
-}
-library(BiCausality)
-n&lt;-500
-d&lt;-10
-mat&lt;-matrix(nrow=n,ncol=d)
-
-for(i in seq(n))
-{
-  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
-}
-mat[,1]&lt;-mat[,2] | mat[,3]
-mat[,4] &lt;- !mat[,2] | mat[,5]
-
-res&lt;-bSCMDepndentGraphFunc(mat)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Confounding factor checking</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmM8LWZ1bmN0aW9uKGRhdCxJbmRwVGhzPTAuMDUsYWxwaGE9MC4wNSlcbntcbiAgRTA8LWRhdCRFMFxuICBkPC1kaW0oRTApWzFdXG4gIEUxPC1tYXRyaXgoMCxkLGQpXG4gIEUyPC1tYXRyaXgoMCxkLGQpXG4gIG5ib290PC1sZW5ndGgoZGF0JERib290KVxuICBmb3IoaW5mbyBpbiBkYXQkZGVwSW5mbylcbiAge1xuICAgIGk8LWluZm8kaW5kaWNlc1sxXVxuICAgIGo8LWluZm8kaW5kaWNlc1syXVxuICAgICMgaSBhbmQgaiBoYXZlIGFub3RoZXIgZGVwZW5kZW50IHZhclxuICAgIGlmKEUwW2ksal09PTEgJiYgc3VtKEUwW2ksXSk+MSAmJiBzdW0oRTBbaixdKT4xKVxuICAgIHtcbiAgICAgIHo8LSAxOmRcbiAgICAgIHo8LXpbRTBbaSxdICYgRTBbaixdXVxuICAgICAgZmxhZz0wXG4gICAgICBpZihsZW5ndGgoeik+MClcbiAgICAgICAgZm9yKHowIGluIHopXG4gICAgICAgIHtcbiAgICAgICAgICBwcmludChzcHJpbnRmKFwiJWQsJWQgfCAlZFwiLGksaix6MCkpXG4gICAgICAgICAgYkluZHBEaXN0PC1udW1lcmljKG5ib290KVxuICAgICAgICAgIHoxPC1udW1lcmljKGQpLTFcbiAgICAgICAgICB6MVt6MF08LTFcbiAgICAgICAgICB6MjwtbnVtZXJpYyhkKS0xXG4gICAgICAgICAgejJbejBdPC0wXG4gICAgICAgICAgZm9yKGIgaW4gc2VxKG5ib290KSApXG4gICAgICAgICAge1xuICAgICAgICAgICAgbkQ8LWRhdCREYm9vdFtbYl1dXG4gICAgICAgICAgICBiSW5kcERpc3RbYl08LSBtYXgoYyhpbmRwRnVuYyhuRCxpLGosejEpLCBpbmRwRnVuYyhuRCxpLGosejIpICkgKVxuICAgICAgICAgIH1cbiAgICAgICAgICB0ZXN0UmVzPC13aWxjb3gudGVzdCh4PWJJbmRwRGlzdCwgbXUgPSBJbmRwVGhzLCBhbHRlcm5hdGl2ZSA9IFwiZ3JlYXRlclwiKVxuICAgICAgICAgIHByaW50KHNwcmludGYoXCJwdmFsOiVmXCIsdGVzdFJlcyRwLnZhbHVlKSlcbiAgICAgICAgICAjY2hlY2sgd2hldGhlciBpIGlzIGRlcGVuZGVudCB3aXRoIGogZ2l2ZW4gejBcbiAgICAgICAgICBpZih0ZXN0UmVzJHAudmFsdWU+YWxwaGEpXG4gICAgICAgICAge1xuICAgICAgICAgICAgZmxhZz0xXG4gICAgICAgICAgICBFMltpLGpdPC16MFxuICAgICAgICAgICAgYnJlYWtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICBpZihmbGFnPT0wKVxuICAgICAgIHtcbiAgICAgICAgIEUxW2ksal08LTFcbiAgICAgICAgIEUxW2osaV08LTFcbiAgICAgICB9XG5cbiAgICB9XG4gICAgZWxzZVxuICAgIHtcbiAgICAgIEUxW2ksal08LTFcbiAgICAgIEUxW2osaV08LTFcbiAgICB9XG4gIH1cbiAgcmV0dXJuKGxpc3QoRTE9RTEsRTI9RTIpKVxufVxucmVzMjwtYlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmMocmVzKVxuYGBgIn0= -->
-<pre class="r"><code>bSCMdeConfoundingGraphFunc&lt;-function(dat,IndpThs=0.05,alpha=0.05)
-{
-  E0&lt;-dat$E0
-  d&lt;-dim(E0)[1]
-  E1&lt;-matrix(0,d,d)
-  E2&lt;-matrix(0,d,d)
-  nboot&lt;-length(dat$Dboot)
-  for(info in dat$depInfo)
-  {
-    i&lt;-info$indices[1]
-    j&lt;-info$indices[2]
-    # i and j have another dependent var
-    if(E0[i,j]==1 &amp;&amp; sum(E0[i,])&gt;1 &amp;&amp; sum(E0[j,])&gt;1)
-    {
-      z&lt;- 1:d
-      z&lt;-z[E0[i,] &amp; E0[j,]]
-      flag=0
-      if(length(z)&gt;0)
-        for(z0 in z)
-        {
-          print(sprintf(&quot;%d,%d | %d&quot;,i,j,z0))
-          bIndpDist&lt;-numeric(nboot)
-          z1&lt;-numeric(d)-1
-          z1[z0]&lt;-1
-          z2&lt;-numeric(d)-1
-          z2[z0]&lt;-0
-          for(b in seq(nboot) )
-          {
-            nD&lt;-dat$Dboot[[b]]
-            bIndpDist[b]&lt;- max(c(indpFunc(nD,i,j,z1), indpFunc(nD,i,j,z2) ) )
-          }
-          testRes&lt;-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = &quot;greater&quot;)
-          print(sprintf(&quot;pval:%f&quot;,testRes$p.value))
-          #check whether i is dependent with j given z0
-          if(testRes$p.value&gt;alpha)
-          {
-            flag=1
-            E2[i,j]&lt;-z0
-            break
-          }
-        }
-       if(flag==0)
-       {
-         E1[i,j]&lt;-1
-         E1[j,i]&lt;-1
-       }
-
-    }
-    else
-    {
-      E1[i,j]&lt;-1
-      E1[j,i]&lt;-1
-    }
-  }
-  return(list(E1=E1,E2=E2))
-}
-res2&lt;-bSCMdeConfoundingGraphFunc(res)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Causal direction</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYlNDTUNhdXNhbEdyYXBoRnVuYzwtZnVuY3Rpb24oRTEsRGJvb3QsYWxwaGE9MC4wNSxTaWduVGhzPTAuMDUsQ2F1c2FsVGhzID0gMC4yNSxzbGFjaz0wLjAwMSlcbntcbiAgZDwtZGltKEUxKVsxXVxuICBFaGF0PC1tYXRyaXgoMCxkLGQpXG4gIG5ib290PSBsZW5ndGgoRGJvb3QpXG4gIGJTaWduRGlzdDwtbnVtZXJpYyhuYm9vdClcbiAgaW54TGlzdDwtYygpXG4gIFxuICBjYXVzYWxJbmZvPC1saXN0KClcbiAgXG4gIGZvcihpIGluIHNlcSgxLGQtMSkpXG4gICAgZm9yKGogaW4gc2VxKGkrMSxkKSlcbiAgICB7XG4gICAgICBpZihFMVtpLGpdPT0xKVxuICAgICAgICBpbnhMaXN0PC1yYmluZChpbnhMaXN0LCBjKGksaikpXG4gICAgfVxuICBcbiAgc2lnbkZsYWc8LW51bWVyaWMoZGltKGlueExpc3QpWzFdKS0xXG4gICMgPT0gQ3JlYXRlIHRoZSBib290c3RyYXBwaW5nIHNlcXVlbmNlIG9mIGJTaWduRGlzdFxuICBcbiAgZm9yKCBpdHIgaW4gc2VxKGRpbShpbnhMaXN0KVsxXSkgKVxuICB7XG4gICAgaW54PC1pbnhMaXN0W2l0cixdXG4gICAgaT1pbnhbMV1cbiAgICBqPWlueFsyXVxuICAgIHN0cjwtc3ByaW50ZihcIiVkLCVkXCIsaSxqKVxuICAgIHByaW50KHN0cilcbiAgICBmb3IoayBpbiBzZXEobmJvb3QpKVxuICAgIHtcbiAgICAgIGJTaWduRGlzdFtrXTwtb2RkRGlmZkZ1bmMoRD1EYm9vdFtba11dLGk9aW54WzFdLGo9aW54WzJdLHNsYWNrPXNsYWNrKVxuICAgIH1cbiAgICB0ZXN0UmVzMTwtd2lsY294LnRlc3QoeD1hYnMoYlNpZ25EaXN0KSwgbXUgPSBTaWduVGhzLCBhbHRlcm5hdGl2ZSA9IFwiZ3JlYXRlclwiKVxuICAgIGlmKHRlc3RSZXMxJHAudmFsdWU8PWFscGhhKVxuICAgIHtcbiAgICAgIGlmKG1lYW4oYlNpZ25EaXN0KSA+MClcbiAgICAgICAgc2lnbkZsYWdbaXRyXTwtMVxuICAgICAgZWxzZVxuICAgICAgICBzaWduRmxhZ1tpdHJdPC0wXG4gICAgfVxuICAgIFxuICAgIGlmKHNpZ25GbGFnW2l0cl0gIT0gLTEpe1xuICAgICM9PT09PT09PT1UT0RPIGRpciBpbmZlcmVuY2VcbiAgICAgIGJDYXVzYWxEaXJEaXN0PC1udW1lcmljKG5ib290KVxuICAgICAgZm9yKGsgaW4gc2VxKG5ib290KSlcbiAgICAgIHtcbiAgICAgICAgRDwtRGJvb3RbW2tdXVxuICAgIFxuICAgICAgICB6MTwtbnVtZXJpYyhkKS0xXG4gICAgICAgIHkxPC1udW1lcmljKGQpLTFcbiAgICAgICAgeTFbal08LTFcbiAgICAgICAgejFbaV08LShzaWduRmxhZ1tpdHJdKVxuICAgICAgICBhMTwtQ29uZFByb2IoRCx5PXkxLHo9ejEpJGNvbmRQXG4gICAgICAgIGIxPC1Db25kUHJvYihELHk9ejEsej15MSkkY29uZFBcbiAgICAgICAgYkNhdXNhbERpckRpc3Rba108LWExLWIxXG4gICAgICB9XG4gICAgICB0ZXN0UmVzMjwtd2lsY294LnRlc3QoeD1hYnMoYkNhdXNhbERpckRpc3QpLCBtdSA9IENhdXNhbFRocywgYWx0ZXJuYXRpdmUgPSBcImdyZWF0ZXJcIilcbiAgICAgIGJtZWFuIDwtIG1lYW4oIChiQ2F1c2FsRGlyRGlzdCkgKVxuICAgICAgZGlyRmxhZz0xXG4gICAgICBpZih0ZXN0UmVzMiRwLnZhbHVlPD1hbHBoYSlcbiAgICAgIHtcbiAgICAgICAgaWYoYm1lYW4gPjApICMgaSAtPiBqXG4gICAgICAgIHtcbiAgICAgICAgICBFaGF0W2ksal08LTFcbiAgICAgICAgICB4MTwtaVxuICAgICAgICAgIHkxPC1qXG4gICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICBlbHNlICNqIC0+IGlcbiAgICAgICAge1xuICAgICAgICAgIEVoYXRbaixpXTwtMVxuICAgICAgICAgIHgxPC1qXG4gICAgICAgICAgeTE8LWlcbiAgICAgICAgICBzdHI8LXNwcmludGYoXCIlZCwlZFwiLGosaSlcbiAgICAgICAgICBkaXJGbGFnPS0xXG4gICAgICAgIH1cbiAgICAgICAgY2F1c2FsSW5mb1tbc3RyXV0kQ0RpckNvbmZJbnY8LWFicyhxdWFudGlsZShkaXJGbGFnKmJDYXVzYWxEaXJEaXN0LCBjKDArYWxwaGEvMiwgMS1hbHBoYS8yKSkgKVxuICAgICAgICBjYXVzYWxJbmZvW1tzdHJdXSRDRGlybWVhbjwtYWJzKGJtZWFuKVxuICAgICAgICBjYXVzYWxJbmZvW1tzdHJdXSR0ZXN0UmVzMjwtdGVzdFJlczJcbiAgICAgICAgY2F1c2FsSW5mb1tbc3RyXV0kdGVzdFJlczE8LXRlc3RSZXMxXG4gICAgICAgIGNhdXNhbEluZm9bW3N0cl1dJHNpZ248LXNpZ25GbGFnW2l0cl1cbiAgICAgICAgY2F1c2FsSW5mb1tbc3RyXV0kU2lnbkNvbmZJbnY8LXF1YW50aWxlKGJTaWduRGlzdCwgYygwK2FscGhhLzIsIDEtYWxwaGEvMikpXG4gICAgICAgIGNhdXNhbEluZm9bW3N0cl1dJFNpZ25tZWFuPC1tZWFuKGJTaWduRGlzdClcbiAgICAgIH1cbiAgICB9XG4gIH1cbiAgcmV0dXJuKGxpc3QoRWhhdD1FaGF0LGNhdXNhbEluZm89Y2F1c2FsSW5mbykgKVxufVxucmVzMzwtYlNDTUNhdXNhbEdyYXBoRnVuYyhyZXMyJEUxLHJlcyREYm9vdClcbmBgYCJ9 -->
-<pre class="r"><code>bSCMCausalGraphFunc&lt;-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,slack=0.001)
-{
-  d&lt;-dim(E1)[1]
-  Ehat&lt;-matrix(0,d,d)
-  nboot= length(Dboot)
-  bSignDist&lt;-numeric(nboot)
-  inxList&lt;-c()
-  
-  causalInfo&lt;-list()
-  
-  for(i in seq(1,d-1))
-    for(j in seq(i+1,d))
-    {
-      if(E1[i,j]==1)
-        inxList&lt;-rbind(inxList, c(i,j))
-    }
-  
-  signFlag&lt;-numeric(dim(inxList)[1])-1
-  # == Create the bootstrapping sequence of bSignDist
-  
-  for( itr in seq(dim(inxList)[1]) )
-  {
-    inx&lt;-inxList[itr,]
-    i=inx[1]
-    j=inx[2]
-    str&lt;-sprintf(&quot;%d,%d&quot;,i,j)
-    print(str)
-    for(k in seq(nboot))
-    {
-      bSignDist[k]&lt;-oddDiffFunc(D=Dboot[[k]],i=inx[1],j=inx[2],slack=slack)
-    }
-    testRes1&lt;-wilcox.test(x=abs(bSignDist), mu = SignThs, alternative = &quot;greater&quot;)
-    if(testRes1$p.value&lt;=alpha)
-    {
-      if(mean(bSignDist) &gt;0)
-        signFlag[itr]&lt;-1
-      else
-        signFlag[itr]&lt;-0
-    }
-    
-    if(signFlag[itr] != -1){
-    #=========TODO dir inference
-      bCausalDirDist&lt;-numeric(nboot)
-      for(k in seq(nboot))
-      {
-        D&lt;-Dboot[[k]]
-    
-        z1&lt;-numeric(d)-1
-        y1&lt;-numeric(d)-1
-        y1[j]&lt;-1
-        z1[i]&lt;-(signFlag[itr])
-        a1&lt;-CondProb(D,y=y1,z=z1)$condP
-        b1&lt;-CondProb(D,y=z1,z=y1)$condP
-        bCausalDirDist[k]&lt;-a1-b1
-      }
-      testRes2&lt;-wilcox.test(x=abs(bCausalDirDist), mu = CausalThs, alternative = &quot;greater&quot;)
-      bmean &lt;- mean( (bCausalDirDist) )
-      dirFlag=1
-      if(testRes2$p.value&lt;=alpha)
-      {
-        if(bmean &gt;0) # i -&gt; j
-        {
-          Ehat[i,j]&lt;-1
-          x1&lt;-i
-          y1&lt;-j
-         
-        }
-        else #j -&gt; i
-        {
-          Ehat[j,i]&lt;-1
-          x1&lt;-j
-          y1&lt;-i
-          str&lt;-sprintf(&quot;%d,%d&quot;,j,i)
-          dirFlag=-1
-        }
-        causalInfo[[str]]$CDirConfInv&lt;-abs(quantile(dirFlag*bCausalDirDist, c(0+alpha/2, 1-alpha/2)) )
-        causalInfo[[str]]$CDirmean&lt;-abs(bmean)
-        causalInfo[[str]]$testRes2&lt;-testRes2
-        causalInfo[[str]]$testRes1&lt;-testRes1
-        causalInfo[[str]]$sign&lt;-signFlag[itr]
-        causalInfo[[str]]$SignConfInv&lt;-quantile(bSignDist, c(0+alpha/2, 1-alpha/2))
-        causalInfo[[str]]$Signmean&lt;-mean(bSignDist)
-      }
-    }
-  }
-  return(list(Ehat=Ehat,causalInfo=causalInfo) )
-}
-res3&lt;-bSCMCausalGraphFunc(res2$E1,res$Dboot)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Running main</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbm48LTUwMFxuZDwtMTBcbm1hdDwtbWF0cml4KG5yb3c9bixuY29sPWQpXG5cbmZvcihpIGluIHNlcShuKSlcbntcbiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KVxufVxuI21hdFssM108LSBtYXRbLDNdIHwgbWF0Wyw2XVxubWF0WywxXTwtbWF0WywyXSB8IG1hdFssM10gXG5tYXRbLDRdIDwtICFtYXRbLDJdIHwgbWF0Wyw1XSBcbiNtYXRbLDddIDwtICFtYXRbLDhdIGNhbm5vdCBoYXZlIGV4YWN0IHBhaXJzIHRvIGNvbXB1dGUgd2hldGhlciBpIC0+IGpcbm1hdFssOV08LSBtYXRbLDhdIHwgIW1hdFssN11cblxubGFzdFJlczwtQ2F1c2FsR3JhcGhJbmZlck1haW5GdW5jKG1hdClcbmBgYCJ9 -->
-<pre class="r"><code>library(BiCausality)
-n&lt;-500
-d&lt;-10
-mat&lt;-matrix(nrow=n,ncol=d)
-
-for(i in seq(n))
-{
-  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
-}
-#mat[,3]&lt;- mat[,3] | mat[,6]
-mat[,1]&lt;-mat[,2] | mat[,3] 
-mat[,4] &lt;- !mat[,2] | mat[,5] 
-#mat[,7] &lt;- !mat[,8] cannot have exact pairs to compute whether i -&gt; j
-mat[,9]&lt;- mat[,8] | !mat[,7]
-
-lastRes&lt;-CausalGraphInferMainFunc(mat)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIz09PT09PT09IE1lZ25pdHVkZSBpbmZlcmVuY2VcbkVoYXQ8LWxhc3RSZXMkQ2F1c2FsR1JlcyRFaGF0XG5EYm9vdDwtbGFzdFJlcyRkZXBSZXMkRGJvb3QgIyBEYm9vdFtbI2J0aF1dW1tcIjEwMTFcIl1dJGNvdW50XG5uPC1kaW0oRWhhdClbMV1cbmZvcihpIGluIHNlcShuKSlcbiAgZm9yKGogaW4gc2VxKG4pKVxuICB7XG4gICAgaWYoRWhhdFtpLGpdPT0xKVxuICAgIHtcbiAgICAgICM9PT09PT09IGRldGVjdCBwYXJlbnRzIG9mIGlcbiAgICB9XG4gIH1cbmBgYCJ9 -->
-<pre class="r"><code>#======== Megnitude inference
-Ehat&lt;-lastRes$CausalGRes$Ehat
-Dboot&lt;-lastRes$depRes$Dboot # Dboot[[#bth]][[&quot;1011&quot;]]$count
-n&lt;-dim(Ehat)[1]
-for(i in seq(n))
-  for(j in seq(n))
-  {
-    if(Ehat[i,j]==1)
-    {
-      #======= detect parents of i
-    }
-  }</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-</div>
-
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKdAoKYGBge3J9CnN1cHA8LWZ1bmN0aW9uKFgsdmFsdWVzKQp7CiAgY291bnQ8LTAKICBuPC0wCiAgZmxhZz0wCiAgaWYoaXMubnVsbChkaW0oWClbMV0pKQogIHsKICAgIG48LWxlbmd0aChYKQogICAgZmxhZz0xCiAgfQogIGVsc2UKICAgIG48LWRpbShYKVsxXQogIGZvcihpIGluIHNlcShuKSkKICB7CiAgICBpZihmbGFnPT0xKQogICAgICByb3c8LVhbaV0KICAgIGVsc2UKICAgICAgcm93PC1YW2ksXQogICAgaWYoc3VtKHJvdz09dmFsdWVzKSA9PSBsZW5ndGgodmFsdWVzKSkKICAgICAgY291bnQ9Y291bnQrMQogIH0KICByZXR1cm4oY291bnQvbikKfQp4IDwtIHJiaW5vbShuPTEwLCBzaXplPTEsIHByb2I9MC4yKQpueTwtcmJpbm9tKG49MTAsIHNpemU9MSwgcHJvYj0wLjA1KQp5IDwtIHggfCAgbnkKc3VwcChYPWNiaW5kKHgseSksdmFsdWVzPWMoMSwxKSApCgpgYGAKI1NvcnRpbmcKYGBge3J9CgpiaW4yZGVjPC1mdW5jdGlvbih4KQp7CiAgbmV3eDwtMAogIGQ8LWxlbmd0aCh4KQogIGZvcihpIGluIHNlcShkKSkKICB7CiAgICBuZXd4IDwtIG5ld3greFtpXSoyXihkLWkpCiAgfQogIHJldHVybihuZXd4KQp9ClZlY0FsaWdubWVudDwtZnVuY3Rpb24obWF0KQp7CiAgIyBtYXQgbXVzdCBoYXZlIHRoZSBkaW1lbnNpb24gbiBieSBkIHdoZXJlIG4gYW5kIGQgbXVzdCBiZSBncmVhdGVyIHRoYW4gMS4KICBuZXdNYXQ8LWxpc3QoKQogIGQ8LWRpbShtYXQpWzFdCiAgZm9yKGkgaW4gc2VxKGQpKQogIHsKICAgIG5ld01hdFtbc3ByaW50ZigiJWQiLGJpbjJkZWMobWF0W2ksXSkpXV0kbmFtZTwtbWF0W2ksXQogICAgaWYoaXMubnVsbChuZXdNYXRbW3NwcmludGYoIiVkIixiaW4yZGVjKG1hdFtpLF0pKV1dJGNvdW50KT09VFJVRSApCiAgICAgIG5ld01hdFtbc3ByaW50ZigiJWQiLGJpbjJkZWMobWF0W2ksXSkpXV0kY291bnQ8LTEKICAgIGVsc2UKICAgICAgbmV3TWF0W1tzcHJpbnRmKCIlZCIsYmluMmRlYyhtYXRbaSxdKSldXSRjb3VudDwtbmV3TWF0W1tzcHJpbnRmKCIlZCIsYmluMmRlYyhtYXRbaSxdKSldXSRjb3VudCsxCiAgfQogIHJldHVybihuZXdNYXQpCn0KCm48LTUwMApkPC0xMAptYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKQoKZm9yKGkgaW4gc2VxKG4pKQp7CiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KQp9Cm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdCm1hdFssNF0gPC0gbWF0WywyXSB8IG1hdFssNV0KCkQ8LVZlY0FsaWdubWVudChtYXQpCmBgYAoKI0NvbmRQcm9iCgpgYGB7cn0KCkNvbmRQcm9iPC1mdW5jdGlvbihELHkseikgIyBzZXJ2ZSBhcyBhIGNvbmZpZGVuY2UgZnVuY3Rpb24gaW4gZGF0YSBtaW5pbmcgY29uZih5fHopCnsKICBwPC0wCiAgZmlsdGVyPC16ICE9IC0xCiAgaWYoc3VtKGZpbHRlcikgPT0gMCkgIyBnbyBmdWxsIEQgd2l0aG91dCBjb25kaXRpb25hbCB2YXJpYWJsZXMKICAgIG5EPC1ECiAgZWxzZSAjIEtlZXAgb25seSBiaW5hcnkgdGhhdCBhcmUgbWF0Y2ggd2l0aCB0aGUgZ2l2ZW4gei4KICB7CiAgICBuRDwtbGlzdCgpCiAgICBmb3IoaSBpbiBzZXEobGVuZ3RoKEQpKSApICNGb3IgZWFjaCB1bmlxdWUgYmluYXJ5IERbW2ldXQogICAgewogICAgICBmbGFnPC1zdW0oRFtbaV1dJG5hbWVbZmlsdGVyXSA9PSB6W2ZpbHRlcl0pICMgY2hlY2sgd2hldGhlciBEW1tpXV0gYml0cyBpbiB6J3MgcG9zaXRpb25zIGFyZSB0aGUgc2FtZSBhcyB6J3MKICAgICAgaWYoZmxhZyA9PSBzdW0oZmlsdGVyKSkgIyBpZiBzbywgYWRkIHRoZSBEW1tpXV0gaW50byBuRAogICAgICB7CiAgICAgICAgbkRbW25hbWVzKEQpW2ldIF1dIDwtIERbW2ldXQogICAgICB9CiAgICB9CiAgfQogIGZpbHRlclk8LSB5IT0gLTEKICBjb3VudDwtMAogIGNvdW50VG90YWw8LTAKICBmb3IoaSBpbiBzZXEobGVuZ3RoKG5EKSkgKSAjRm9yIGVhY2ggdW5pcXVlIGJpbmFyeSBuRFtbaV1dIGluIG5ECiAgewogICAgZmxhZzwtc3VtKG5EW1tpXV0kbmFtZVtmaWx0ZXJZXSA9PSB5W2ZpbHRlclldKSAKICAgIGNvdW50VG90YWw8LWNvdW50VG90YWwrbkRbW2ldXSRjb3VudAogICAgaWYoZmxhZyA9PSBzdW0oZmlsdGVyWSkpICMgIGNoZWNrIHdoZXRoZXIgbkRbW2ldXSBiaXRzIGluIHknIHBvc2l0aW9ucyBhcmUgdGhlIHNhbWUgYXMgeSdzIAogICAgewogICAgICBjb3VudDwtY291bnQrbkRbW2ldXSRjb3VudAogICAgfQogIH0KCiAgcmV0dXJuKGxpc3QoImNvbmRQIj1jb3VudC9jb3VudFRvdGFsLCBuRD1uRCxjb3VudFRvdGFsPWNvdW50VG90YWwsY291bnQ9Y291bnQgKSkKfQp6PC1udW1lcmljKGQpLTEKeTwtbnVtZXJpYyhkKS0xCgojIG1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdCmk9MQpqPTIKRDwtVmVjQWxpZ25tZW50KG1hdCkKeVtqXTwtYygxKQp6W2ldPC1jKDEpCmExPC1Db25kUHJvYihELHk9eSx6PXopJGNvbmRQICMgMnwxIHl8egpiMTwtQ29uZFByb2IoRCx5PXosej15KSRjb25kUCAjIDF8MiAKCmExLWIxCgojQTwtYkluZHBUZXN0KG1hdCxpLGopCiNjYXVzYWxEaXJUZXN0KG1hdCxpPWksaj1qLHZpPTEsdGhzPTAuMjUpCgpgYGAKCgojaW5kZXBlbmRlbnQgZnVuYwpgYGB7cn0KI1RPRE8gYWRkIGdpdmVuIHoKaW5kcEZ1bmM8LWZ1bmN0aW9uKEQsaSxqLHo9YygpKQp7CiAgaWYoaXMubnVsbCh6KSkKICAgIHo8LW51bWVyaWMoZCktMQogIAogIHJlczwtQ29uZFByb2IoRCx5PW51bWVyaWMoZCktMSx6PXopCiAgRDwtcmVzJG5ECiAgbjwtcmVzJGNvdW50VG90YWwKICBMPC1sZW5ndGgoRCkKICAKICBpbmRNYWdpdHVkZTwtMAogIAogIHoxPC1udW1lcmljKGQpLTEKCiAgZm9yKGkxIGluIGMoMCwxKSApCiAgICBmb3IoajEgaW4gYygwLDEpKQogICAgewogICAgICAgIHkxPC1udW1lcmljKGQpIC0xCiAgICAgICAgeTFbYyhpLGopXSA8LSBjKGkxLGoxKQogICAgICAgIHkyPC1udW1lcmljKGQpIC0xCiAgICAgICAgeTJbYyhpKV0gPC0gaTEKICAgICAgICB5MzwtbnVtZXJpYyhkKSAtMQogICAgICAgIHkzW2MoaildIDwtIGoxCiAgICAgICAgCiAgICAgICAgcmVzMjwtQ29uZFByb2IoRCx5MSx6MSkKICAgICAgICBuMjwtcmVzMiRjb3VudAogICAgICAgIGNvbmRQYWlyPC1yZXMyJGNvbmRQCiAgICAgICAgY29uZGk8LUNvbmRQcm9iKEQseTIsejEpJGNvbmRQCiAgICAgICAgY29uZGo8LUNvbmRQcm9iKEQseTMsejEpJGNvbmRQCiAgICAgICAgaW5kTWFnaXR1ZGU8LWluZE1hZ2l0dWRlKyAoYWJzKGNvbmRQYWlyIC0gY29uZGkqY29uZGopKihuMi9uKSApCiAgICB9CiAgCiAgcmV0dXJuKGluZE1hZ2l0dWRlKQp9Cno8LW51bWVyaWMoZCktMQp6W2MoNCldID0gMAppbmRwRnVuYyhELDEsMix6PXopCnpbYyg0KV0gPSAxCmluZHBGdW5jKEQsMSwyLHo9eikKYGBgCkluZHAgQm9vdHN0cmFwCmBgYHtyfQpiSW5kcFRlc3Q8LWZ1bmN0aW9uKG1hdCxpLGosej1jKCksYWxwaGE9MC4wNSx0aHMgPSAwLjA1LG5ib290PTEwMCkKewogIGlmKGlzLm51bGwoeikpCiAgICB6PC1udW1lcmljKGQpLTEKICAjelsyXTwtIC0xCiAgCiAgbjwtZGltKG1hdClbMV0KICBiRHg8LW1hdHJpeCgwLG5ib290LG4pCiAgYkluZHBEaXN0PC1udW1lcmljKG5ib290KQogIGZvcihrIGluIHNlcShuYm9vdCkpCiAgewogICAgYkR4W2ssXTwtc2FtcGxlKDE6bixsZW5ndGgoMTpuKSxyZXBsYWNlID0gVFJVRSkKICAgIG5NYXQ8LW1hdFtiRHhbayxdLF0KICAgIEQ8LVZlY0FsaWdubWVudChuTWF0KQogICAgYkluZHBEaXN0W2tdPC1pbmRwRnVuYyhELGksaix6PXopCiAgfQogIHRlc3RSZXM8LXdpbGNveC50ZXN0KHg9YkluZHBEaXN0LCBtdSA9IHRocywgYWx0ZXJuYXRpdmUgPSAiZ3JlYXRlciIpCiAgY29uZkludjwtcXVhbnRpbGUoYkluZHBEaXN0LCBjKDArYWxwaGEvMiwgMS1hbHBoYS8yKSkKICBibWVhbiA8LSBtZWFuKGJJbmRwRGlzdCkKICByZXR1cm4obGlzdCh0ZXN0UmVzPXRlc3RSZXMsY29uZkludj1jb25mSW52LGJtZWFuPWJtZWFuKSkKfQpgYGAKIyBydW4KYGBge3J9CmxpYnJhcnkoQmlDYXVzYWxpdHkpCgpuPC01MDAKZDwtMTAKbWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZCkKCmZvcihpIGluIHNlcShuKSkKewogIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuNSkKfQptYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXQptYXRbLDRdIDwtICFtYXRbLDJdIHwgbWF0Wyw1XQoKCmk9MgpqPTEKcHJpbnQoc3ByaW50ZigiaSVkLGolZCIsaSxqKSkKYkluZHBUZXN0KG1hdCxpLGopCmk9MgpqPTQKcHJpbnQoc3ByaW50ZigiaSVkLGolZCIsaSxqKSkKYkluZHBUZXN0KG1hdCxpLGopCmk9MgpqPTMKcHJpbnQoc3ByaW50ZigiaSVkLGolZCIsaSxqKSkKYkluZHBUZXN0KG1hdCxpLGopCmk9NApqPTEKcHJpbnQoc3ByaW50ZigiaSVkLGolZCIsaSxqKSkKYkluZHBUZXN0KG1hdCxpLGopCmk9NApqPTEKejwtbnVtZXJpYyhkKS0xCnpbMl08LTEKcHJpbnQoc3ByaW50ZigiaSVkLGolZCIsaSxqKSkKYkluZHBUZXN0KG1hdCxpLGosej16KQoKaT0yCmo9Mwp6PC1udW1lcmljKGQpLTEKelsxXTwtMApwcmludChzcHJpbnRmKCJpJWQsaiVkIixpLGopKQpiSW5kcFRlc3QobWF0LGksaix6PXopCmBgYAojb2RkUmF0aW8KYGBge3J9CmxpYnJhcnkoQmlDYXVzYWxpdHkpCm48LTUwMApkPC0xMAptYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKQoKZm9yKGkgaW4gc2VxKG4pKQp7CiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KQp9Cm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdCm1hdFssNF0gPC0gIW1hdFssMl0gfCBtYXRbLDVdCgp6PC1udW1lcmljKGQpLTEKeTwtbnVtZXJpYyhkKS0xCmk9NQpqPTQKRDwtVmVjQWxpZ25tZW50KG1hdCkKb2RkUmF0aW9GdW5jKEQsaSxqKQoKaT00Cmo9NQp6PC1udW1lcmljKGQpLTEKels1XTwtIC0xCm9kZERpZmZGdW5jKEQsaSxqLHo9eikKYGBgCmBgYHtyfQppPTIKaj0xCno8LW51bWVyaWMoZCktMQp6WzJdPC0gLTEKcHJpbnQoc3ByaW50ZigiaSVkLGolZCIsaSxqKSkKYXNzb2NTaWduVGVzdChtYXQsaSxqLHo9eikKYGBgCgpgYGB7cn0KCmJTQ01EZXBuZGVudEdyYXBoRnVuYzwtZnVuY3Rpb24obWF0LG5ib290PTEwMCxhbHBoYT0wLjA1LEluZHBUaHM9MC4wNSkKewogIG48LWRpbShtYXQpWzFdCiAgZDwtZGltKG1hdClbMl0KICBuTWF0Ym9vdDwtbGlzdCgpCiAgRGJvb3Q8LWxpc3QoKQogIGJEeDwtbWF0cml4KDAsbmJvb3QsbikKICAjID09IENyZWF0ZSB0aGUgYm9vdHN0cmFwcGluZyBzZXF1ZW5jZSBvZiBECiAgZm9yKGsgaW4gc2VxKG5ib290KSkKICB7CiAgICBiRHhbayxdPC1zYW1wbGUoMTpuLGxlbmd0aCgxOm4pLHJlcGxhY2UgPSBUUlVFKQogICAgbk1hdGJvb3RbW2tdXTwtbWF0W2JEeFtrLF0sXQogICAgRGJvb3RbW2tdXTwtVmVjQWxpZ25tZW50KG5NYXRib290W1trXV0pCiAgfQogICNDaGVjayBkZXBlbmRlbmN5IG9mIGFsbCBwYWlyd2lzZXMKICBFMDwtbWF0cml4KDAsbnJvdz1kLG5jb2w9ZCkgIyBzYXZlIG1lYW4KICBkZXBJbmZvPC1saXN0KCkKICAKICBmb3IoaSBpbiBzZXEoZC0xKSkKICAgIGZvcihqIGluIHNlcShpKzEsZCkpCiAgICB7CiAgICAgIHN0cjwtc3ByaW50ZigiJWQsJWQiLGksaikKICAgICAgcHJpbnQoc3RyKQogICAgICBiSW5kcERpc3Q8LW51bWVyaWMobmJvb3QpCiAgICAgIGZvcihrIGluIHNlcShuYm9vdCkpCiAgICAgIHsKICAgICAgICBEPC1EYm9vdFtba11dCiAgICAgICAgYkluZHBEaXN0W2tdPC1pbmRwRnVuYyhELGksaikKICAgICAgfQogICAgICB0ZXN0UmVzPC13aWxjb3gudGVzdCh4PWJJbmRwRGlzdCwgbXUgPSBJbmRwVGhzLCBhbHRlcm5hdGl2ZSA9ICJncmVhdGVyIikKICAgICAgY29uZkludjwtcXVhbnRpbGUoYkluZHBEaXN0LCBjKDArYWxwaGEvMiwgMS1hbHBoYS8yKSkKICAgICAgYm1lYW4gPC0gbWVhbihiSW5kcERpc3QpCgogICAgICAjY2hlY2sgd2hldGhlciBpIGlzIGRlcGVuZGVudCB3aXRoIGoKICAgICAgaWYodGVzdFJlcyRwLnZhbHVlPD1hbHBoYSkKICAgICAgewogICAgICAgIEUwW2ksal08LTEKICAgICAgICBFMFtqLGldPC0xCiAgICAgICAgZGVwSW5mb1tbc3RyXV0kYm1lYW48LWJtZWFuCiAgICAgICAgZGVwSW5mb1tbc3RyXV0kY29uZkludjwtY29uZkludgogICAgICAgIGRlcEluZm9bW3N0cl1dJHRlc3RSZXM8LXRlc3RSZXMKICAgICAgICBkZXBJbmZvW1tzdHJdXSRpbmRpY2VzPC1jKGksaikKICAgICAgfQogICAgfQogIHJldHVybihsaXN0KEUwPUUwLGRlcEluZm89ZGVwSW5mbyxEYm9vdD1EYm9vdCkgKQp9CmxpYnJhcnkoQmlDYXVzYWxpdHkpCm48LTUwMApkPC0xMAptYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKQoKZm9yKGkgaW4gc2VxKG4pKQp7CiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KQp9Cm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdCm1hdFssNF0gPC0gIW1hdFssMl0gfCBtYXRbLDVdCgpyZXM8LWJTQ01EZXBuZGVudEdyYXBoRnVuYyhtYXQpCmBgYAojQ29uZm91bmRpbmcgZmFjdG9yIGNoZWNraW5nCmBgYHtyfQpiU0NNZGVDb25mb3VuZGluZ0dyYXBoRnVuYzwtZnVuY3Rpb24oZGF0LEluZHBUaHM9MC4wNSxhbHBoYT0wLjA1KQp7CiAgRTA8LWRhdCRFMAogIGQ8LWRpbShFMClbMV0KICBFMTwtbWF0cml4KDAsZCxkKQogIEUyPC1tYXRyaXgoMCxkLGQpCiAgbmJvb3Q8LWxlbmd0aChkYXQkRGJvb3QpCiAgZm9yKGluZm8gaW4gZGF0JGRlcEluZm8pCiAgewogICAgaTwtaW5mbyRpbmRpY2VzWzFdCiAgICBqPC1pbmZvJGluZGljZXNbMl0KICAgICMgaSBhbmQgaiBoYXZlIGFub3RoZXIgZGVwZW5kZW50IHZhcgogICAgaWYoRTBbaSxqXT09MSAmJiBzdW0oRTBbaSxdKT4xICYmIHN1bShFMFtqLF0pPjEpCiAgICB7CiAgICAgIHo8LSAxOmQKICAgICAgejwteltFMFtpLF0gJiBFMFtqLF1dCiAgICAgIGZsYWc9MAogICAgICBpZihsZW5ndGgoeik+MCkKICAgICAgICBmb3IoejAgaW4geikKICAgICAgICB7CiAgICAgICAgICBwcmludChzcHJpbnRmKCIlZCwlZCB8ICVkIixpLGosejApKQogICAgICAgICAgYkluZHBEaXN0PC1udW1lcmljKG5ib290KQogICAgICAgICAgejE8LW51bWVyaWMoZCktMQogICAgICAgICAgejFbejBdPC0xCiAgICAgICAgICB6MjwtbnVtZXJpYyhkKS0xCiAgICAgICAgICB6Mlt6MF08LTAKICAgICAgICAgIGZvcihiIGluIHNlcShuYm9vdCkgKQogICAgICAgICAgewogICAgICAgICAgICBuRDwtZGF0JERib290W1tiXV0KICAgICAgICAgICAgYkluZHBEaXN0W2JdPC0gbWF4KGMoaW5kcEZ1bmMobkQsaSxqLHoxKSwgaW5kcEZ1bmMobkQsaSxqLHoyKSApICkKICAgICAgICAgIH0KICAgICAgICAgIHRlc3RSZXM8LXdpbGNveC50ZXN0KHg9YkluZHBEaXN0LCBtdSA9IEluZHBUaHMsIGFsdGVybmF0aXZlID0gImdyZWF0ZXIiKQogICAgICAgICAgcHJpbnQoc3ByaW50ZigicHZhbDolZiIsdGVzdFJlcyRwLnZhbHVlKSkKICAgICAgICAgICNjaGVjayB3aGV0aGVyIGkgaXMgZGVwZW5kZW50IHdpdGggaiBnaXZlbiB6MAogICAgICAgICAgaWYodGVzdFJlcyRwLnZhbHVlPmFscGhhKQogICAgICAgICAgewogICAgICAgICAgICBmbGFnPTEKICAgICAgICAgICAgRTJbaSxqXTwtejAKICAgICAgICAgICAgYnJlYWsKICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICBpZihmbGFnPT0wKQogICAgICAgewogICAgICAgICBFMVtpLGpdPC0xCiAgICAgICAgIEUxW2osaV08LTEKICAgICAgIH0KCiAgICB9CiAgICBlbHNlCiAgICB7CiAgICAgIEUxW2ksal08LTEKICAgICAgRTFbaixpXTwtMQogICAgfQogIH0KICByZXR1cm4obGlzdChFMT1FMSxFMj1FMikpCn0KcmVzMjwtYlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmMocmVzKQpgYGAKI0NhdXNhbCBkaXJlY3Rpb24KYGBge3J9CmJTQ01DYXVzYWxHcmFwaEZ1bmM8LWZ1bmN0aW9uKEUxLERib290LGFscGhhPTAuMDUsU2lnblRocz0wLjA1LENhdXNhbFRocyA9IDAuMjUsc2xhY2s9MC4wMDEpCnsKICBkPC1kaW0oRTEpWzFdCiAgRWhhdDwtbWF0cml4KDAsZCxkKQogIG5ib290PSBsZW5ndGgoRGJvb3QpCiAgYlNpZ25EaXN0PC1udW1lcmljKG5ib290KQogIGlueExpc3Q8LWMoKQogIAogIGNhdXNhbEluZm88LWxpc3QoKQogIAogIGZvcihpIGluIHNlcSgxLGQtMSkpCiAgICBmb3IoaiBpbiBzZXEoaSsxLGQpKQogICAgewogICAgICBpZihFMVtpLGpdPT0xKQogICAgICAgIGlueExpc3Q8LXJiaW5kKGlueExpc3QsIGMoaSxqKSkKICAgIH0KICAKICBzaWduRmxhZzwtbnVtZXJpYyhkaW0oaW54TGlzdClbMV0pLTEKICAjID09IENyZWF0ZSB0aGUgYm9vdHN0cmFwcGluZyBzZXF1ZW5jZSBvZiBiU2lnbkRpc3QKICAKICBmb3IoIGl0ciBpbiBzZXEoZGltKGlueExpc3QpWzFdKSApCiAgewogICAgaW54PC1pbnhMaXN0W2l0cixdCiAgICBpPWlueFsxXQogICAgaj1pbnhbMl0KICAgIHN0cjwtc3ByaW50ZigiJWQsJWQiLGksaikKICAgIHByaW50KHN0cikKICAgIGZvcihrIGluIHNlcShuYm9vdCkpCiAgICB7CiAgICAgIGJTaWduRGlzdFtrXTwtb2RkRGlmZkZ1bmMoRD1EYm9vdFtba11dLGk9aW54WzFdLGo9aW54WzJdLHNsYWNrPXNsYWNrKQogICAgfQogICAgdGVzdFJlczE8LXdpbGNveC50ZXN0KHg9YWJzKGJTaWduRGlzdCksIG11ID0gU2lnblRocywgYWx0ZXJuYXRpdmUgPSAiZ3JlYXRlciIpCiAgICBpZih0ZXN0UmVzMSRwLnZhbHVlPD1hbHBoYSkKICAgIHsKICAgICAgaWYobWVhbihiU2lnbkRpc3QpID4wKQogICAgICAgIHNpZ25GbGFnW2l0cl08LTEKICAgICAgZWxzZQogICAgICAgIHNpZ25GbGFnW2l0cl08LTAKICAgIH0KICAgIAogICAgaWYoc2lnbkZsYWdbaXRyXSAhPSAtMSl7CiAgICAjPT09PT09PT09VE9ETyBkaXIgaW5mZXJlbmNlCiAgICAgIGJDYXVzYWxEaXJEaXN0PC1udW1lcmljKG5ib290KQogICAgICBmb3IoayBpbiBzZXEobmJvb3QpKQogICAgICB7CiAgICAgICAgRDwtRGJvb3RbW2tdXQogICAgCiAgICAgICAgejE8LW51bWVyaWMoZCktMQogICAgICAgIHkxPC1udW1lcmljKGQpLTEKICAgICAgICB5MVtqXTwtMQogICAgICAgIHoxW2ldPC0oc2lnbkZsYWdbaXRyXSkKICAgICAgICBhMTwtQ29uZFByb2IoRCx5PXkxLHo9ejEpJGNvbmRQCiAgICAgICAgYjE8LUNvbmRQcm9iKEQseT16MSx6PXkxKSRjb25kUAogICAgICAgIGJDYXVzYWxEaXJEaXN0W2tdPC1hMS1iMQogICAgICB9CiAgICAgIHRlc3RSZXMyPC13aWxjb3gudGVzdCh4PWFicyhiQ2F1c2FsRGlyRGlzdCksIG11ID0gQ2F1c2FsVGhzLCBhbHRlcm5hdGl2ZSA9ICJncmVhdGVyIikKICAgICAgYm1lYW4gPC0gbWVhbiggKGJDYXVzYWxEaXJEaXN0KSApCiAgICAgIGRpckZsYWc9MQogICAgICBpZih0ZXN0UmVzMiRwLnZhbHVlPD1hbHBoYSkKICAgICAgewogICAgICAgIGlmKGJtZWFuID4wKSAjIGkgLT4gagogICAgICAgIHsKICAgICAgICAgIEVoYXRbaSxqXTwtMQogICAgICAgICAgeDE8LWkKICAgICAgICAgIHkxPC1qCiAgICAgICAgIAogICAgICAgIH0KICAgICAgICBlbHNlICNqIC0+IGkKICAgICAgICB7CiAgICAgICAgICBFaGF0W2osaV08LTEKICAgICAgICAgIHgxPC1qCiAgICAgICAgICB5MTwtaQogICAgICAgICAgc3RyPC1zcHJpbnRmKCIlZCwlZCIsaixpKQogICAgICAgICAgZGlyRmxhZz0tMQogICAgICAgIH0KICAgICAgICBjYXVzYWxJbmZvW1tzdHJdXSRDRGlyQ29uZkludjwtYWJzKHF1YW50aWxlKGRpckZsYWcqYkNhdXNhbERpckRpc3QsIGMoMCthbHBoYS8yLCAxLWFscGhhLzIpKSApCiAgICAgICAgY2F1c2FsSW5mb1tbc3RyXV0kQ0Rpcm1lYW48LWFicyhibWVhbikKICAgICAgICBjYXVzYWxJbmZvW1tzdHJdXSR0ZXN0UmVzMjwtdGVzdFJlczIKICAgICAgICBjYXVzYWxJbmZvW1tzdHJdXSR0ZXN0UmVzMTwtdGVzdFJlczEKICAgICAgICBjYXVzYWxJbmZvW1tzdHJdXSRzaWduPC1zaWduRmxhZ1tpdHJdCiAgICAgICAgY2F1c2FsSW5mb1tbc3RyXV0kU2lnbkNvbmZJbnY8LXF1YW50aWxlKGJTaWduRGlzdCwgYygwK2FscGhhLzIsIDEtYWxwaGEvMikpCiAgICAgICAgY2F1c2FsSW5mb1tbc3RyXV0kU2lnbm1lYW48LW1lYW4oYlNpZ25EaXN0KQogICAgICB9CiAgICB9CiAgfQogIHJldHVybihsaXN0KEVoYXQ9RWhhdCxjYXVzYWxJbmZvPWNhdXNhbEluZm8pICkKfQpyZXMzPC1iU0NNQ2F1c2FsR3JhcGhGdW5jKHJlczIkRTEscmVzJERib290KQpgYGAKCgoKCiNSdW5uaW5nIG1haW4KCmBgYHtyfQpsaWJyYXJ5KEJpQ2F1c2FsaXR5KQpuPC01MDAKZDwtMTAKbWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZCkKCmZvcihpIGluIHNlcShuKSkKewogIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuNSkKfQojbWF0WywzXTwtIG1hdFssM10gfCBtYXRbLDZdCm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdIAptYXRbLDRdIDwtICFtYXRbLDJdIHwgbWF0Wyw1XSAKI21hdFssN10gPC0gIW1hdFssOF0gY2Fubm90IGhhdmUgZXhhY3QgcGFpcnMgdG8gY29tcHV0ZSB3aGV0aGVyIGkgLT4gagptYXRbLDldPC0gbWF0Wyw4XSB8ICFtYXRbLDddCgpsYXN0UmVzPC1DYXVzYWxHcmFwaEluZmVyTWFpbkZ1bmMobWF0KQpgYGAKYGBge3J9CiM9PT09PT09PSBNZWduaXR1ZGUgaW5mZXJlbmNlCkVoYXQ8LWxhc3RSZXMkQ2F1c2FsR1JlcyRFaGF0CkRib290PC1sYXN0UmVzJGRlcFJlcyREYm9vdCAjIERib290W1sjYnRoXV1bWyIxMDExIl1dJGNvdW50Cm48LWRpbShFaGF0KVsxXQpmb3IoaSBpbiBzZXEobikpCiAgZm9yKGogaW4gc2VxKG4pKQogIHsKICAgIGlmKEVoYXRbaSxqXT09MSkKICAgIHsKICAgICAgIz09PT09PT0gZGV0ZWN0IHBhcmVudHMgb2YgaQogICAgfQogIH0KYGBgCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ0MFssaV0pPSAibnVtZXJpYyIKICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDAKICBwcmludChzcHJpbnRmKCIlZCIsaSApICApCiAgcHJpbnQodW5pcXVlKG1hdDQwWyxpXSkpCn0KbWF0NDA8LWFzLm1hdHJpeChtYXQ0MCkKYGBgCm1pbmluZwpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKcmVzPC1iU0NNRGVwbmRlbnRHcmFwaEZ1bmMobWF0ID0gbWF0NDAsIHBmbGFnPVRSVUUpCmBgYAoK</div>
 
 
 
@@ -2382,7 +1927,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("mainNotebook.Rmd");
+  window.initializeSourceEmbed("exp.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

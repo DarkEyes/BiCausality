@@ -4,7 +4,13 @@
 \alias{bSCMDepndentGraphFunc}
 \title{bSCMDepndentGraphFunc function}
 \usage{
-bSCMDepndentGraphFunc(mat, nboot = 100, alpha = 0.05, IndpThs = 0.05)
+bSCMDepndentGraphFunc(
+  mat,
+  nboot = 100,
+  alpha = 0.05,
+  IndpThs = 0.05,
+  pflag = FALSE
+)
 }
 \description{
 bSCMDepndentGraphFunc function
