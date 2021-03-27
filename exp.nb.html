@@ -1491,13 +1491,13 @@ window.initializeCodeFolding = function(show) {
   var currentIndex = 1;
 
   // select all R code blocks
-  var rCodeBlocks = $('pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.julia');
+  var rCodeBlocks = $('pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.julia, pre.foldable');
   rCodeBlocks.each(function() {
 
     // create a collapsable div to wrap the code in
     var div = $('<div class="collapse r-code-collapse"></div>');
-    if (show || $(this)[0].classList.contains('fold-show'))
-      div.addClass('in');
+    show = (show || $(this).hasClass('fold-show')) && !$(this).hasClass('fold-hide');
+    if (show) div.addClass('in');
     var id = 'rcode-643E0F36' + currentIndex++;
     div.attr('id', id);
     $(this).before(div);
@@ -1769,8 +1769,14 @@ summary {
 <pre class="r"><code>library(devtools)
 devtools::document()</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiVXBkYXRpbmcgQmlDYXVzYWxpdHkgZG9jdW1lbnRhdGlvblxuIn0= -->
-<pre><code>Updating BiCausality documentation</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiVXBkYXRpbmcgQmlDYXVzYWxpdHkgZG9jdW1lbnRhdGlvblxuTG9hZGluZyBCaUNhdXNhbGl0eVxuTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBwc3ljaFxuIn0= -->
+<pre><code>Updating BiCausality documentation
+Loading BiCausality
+Loading required package: psych</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV3JpdGluZyBOQU1FU1BBQ0VcbldyaXRpbmcgTkFNRVNQQUNFXG4ifQ== -->
+<pre><code>Writing NAMESPACE
+Writing NAMESPACE</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1785,102 +1791,46 @@ devtools::document()</code></pre>
 <p>cleansing</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUClcbmZvcihpIGluIHNlcSgzMSkpXG57XG4gbW9kZShtYXQ0MFssaV0pPSBcIm51bWVyaWNcIlxuICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDBcbiAgcHJpbnQoc3ByaW50ZihcIiVkXCIsaSApICApXG4gIHByaW50KHVuaXF1ZShtYXQ0MFssaV0pKVxufVxuYGBgIn0= -->
-<pre class="r"><code>mat40&lt;-as.data.frame(DataTProv40$P)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF0NTA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NTAkUClcbmZvcihpIGluIHNlcSgzMSkpXG57XG4gbW9kZShtYXQ1MFssaV0pPSBcIm51bWVyaWNcIlxuICBtYXQ1MFtpcy5uYShtYXQ1MFssaV0pLCBpXSA9IDBcbiAgI3ByaW50KHNwcmludGYoXCIlZFwiLGkgKSAgKVxuICAjcHJpbnQodW5pcXVlKG1hdDUwWyxpXSkpXG59XG5tYXQ1MDwtYXMubWF0cml4KG1hdDUwKVxuYGBgIn0= -->
+<pre class="r"><code>mat50&lt;-as.data.frame(DataTProv50$P)
 for(i in seq(31))
 {
- mode(mat40[,i])= &quot;numeric&quot;
-  mat40[is.na(mat40[,i]), i] = 0
-  print(sprintf(&quot;%d&quot;,i )  )
-  print(unique(mat40[,i]))
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMVwiXG5bMV0gMCAxXG5bMV0gXCIyXCJcblsxXSAwIDFcblsxXSBcIjNcIlxuWzFdIDAgMVxuWzFdIFwiNFwiXG5bMV0gMCAxXG5bMV0gXCI1XCJcblsxXSAwIDFcblsxXSBcIjZcIlxuWzFdIDAgMVxuWzFdIFwiN1wiXG5bMV0gMCAxXG5bMV0gXCI4XCJcblsxXSAwIDFcblsxXSBcIjlcIlxuWzFdIDAgMVxuWzFdIFwiMTBcIlxuWzFdIDAgMVxuWzFdIFwiMTFcIlxuWzFdIDAgMVxuWzFdIFwiMTJcIlxuWzFdIDAgMVxuWzFdIFwiMTNcIlxuWzFdIDAgMVxuWzFdIFwiMTRcIlxuWzFdIDAgMVxuWzFdIFwiMTVcIlxuWzFdIDAgMVxuWzFdIFwiMTZcIlxuWzFdIDAgMVxuWzFdIFwiMTdcIlxuWzFdIDAgMVxuWzFdIFwiMThcIlxuWzFdIDBcblsxXSBcIjE5XCJcblsxXSAwIDFcblsxXSBcIjIwXCJcblsxXSAwIDFcblsxXSBcIjIxXCJcblsxXSAwIDFcbiJ9 -->
-<pre><code>[1] &quot;1&quot;
-[1] 0 1
-[1] &quot;2&quot;
-[1] 0 1
-[1] &quot;3&quot;
-[1] 0 1
-[1] &quot;4&quot;
-[1] 0 1
-[1] &quot;5&quot;
-[1] 0 1
-[1] &quot;6&quot;
-[1] 0 1
-[1] &quot;7&quot;
-[1] 0 1
-[1] &quot;8&quot;
-[1] 0 1
-[1] &quot;9&quot;
-[1] 0 1
-[1] &quot;10&quot;
-[1] 0 1
-[1] &quot;11&quot;
-[1] 0 1
-[1] &quot;12&quot;
-[1] 0 1
-[1] &quot;13&quot;
-[1] 0 1
-[1] &quot;14&quot;
-[1] 0 1
-[1] &quot;15&quot;
-[1] 0 1
-[1] &quot;16&quot;
-[1] 0 1
-[1] &quot;17&quot;
-[1] 0 1
-[1] &quot;18&quot;
-[1] 0
-[1] &quot;19&quot;
-[1] 0 1
-[1] &quot;20&quot;
-[1] 0 1
-[1] &quot;21&quot;
-[1] 0 1</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbiJ9 -->
-<pre><code>NAs introduced by coercion</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMjJcIlxuWzFdIDAgMVxuWzFdIFwiMjNcIlxuWzFdIDAgMVxuWzFdIFwiMjRcIlxuWzFdIDAgMVxuWzFdIFwiMjVcIlxuWzFdIDAgMVxuWzFdIFwiMjZcIlxuWzFdIDAgMVxuWzFdIFwiMjdcIlxuWzFdIDAgMVxuWzFdIFwiMjhcIlxuWzFdIDAgMVxuWzFdIFwiMjlcIlxuWzFdIDAgMVxuWzFdIFwiMzBcIlxuWzFdIDAgMVxuWzFdIFwiMzFcIlxuWzFdIDAgMVxuIn0= -->
-<pre><code>[1] &quot;22&quot;
-[1] 0 1
-[1] &quot;23&quot;
-[1] 0 1
-[1] &quot;24&quot;
-[1] 0 1
-[1] &quot;25&quot;
-[1] 0 1
-[1] &quot;26&quot;
-[1] 0 1
-[1] &quot;27&quot;
-[1] 0 1
-[1] &quot;28&quot;
-[1] 0 1
-[1] &quot;29&quot;
-[1] 0 1
-[1] &quot;30&quot;
-[1] 0 1
-[1] &quot;31&quot;
-[1] 0 1</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWF0NDA8LWFzLm1hdHJpeChtYXQ0MClcbmBgYCJ9 -->
-<pre class="r"><code>mat40&lt;-as.matrix(mat40)</code></pre>
+ mode(mat50[,i])= &quot;numeric&quot;
+  mat50[is.na(mat50[,i]), i] = 0
+  #print(sprintf(&quot;%d&quot;,i )  )
+  #print(unique(mat50[,i]))
+}
+mat50&lt;-as.matrix(mat50)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>mining</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbnJlczwtYlNDTURlcG5kZW50R3JhcGhGdW5jKG1hdCA9IG1hdDQwLCBwZmxhZz1GQUxTRSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbnJlczUwPC1iU0NNRGVwbmRlbnRHcmFwaEZ1bmMobWF0ID0gbWF0NTAsIHBmbGFnPVRSVUUsIEluZHBUaHMgPSAwLjAxKVxuYGBgIn0= -->
 <pre class="r"><code>library(BiCausality)
-res&lt;-bSCMDepndentGraphFunc(mat = mat40, pflag=FALSE)</code></pre>
+res50&lt;-bSCMDepndentGraphFunc(mat = mat50, pflag=TRUE, IndpThs = 0.01)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYkluZHBUZXN0LWJvb3QjMVwiXG5bMV0gXCJiSW5kcFRlc3QtYm9vdCMyXCJcbiJ9 -->
+<pre><code>[1] &quot;bIndpTest-boot#1&quot;
+[1] &quot;bIndpTest-boot#2&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>#TODO: build corr graph func</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGhpKGMoMzAsMjAsMjAsMzApKVxuYGBgIn0= -->
+<pre class="r"><code>phi(c(30,20,20,30))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMlxuIn0= -->
+<pre><code>[1] 0.2</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ0MFssaV0pPSAibnVtZXJpYyIKICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDAKICBwcmludChzcHJpbnRmKCIlZCIsaSApICApCiAgcHJpbnQodW5pcXVlKG1hdDQwWyxpXSkpCn0KbWF0NDA8LWFzLm1hdHJpeChtYXQ0MCkKYGBgCm1pbmluZwpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKcmVzPC1iU0NNRGVwbmRlbnRHcmFwaEZ1bmMobWF0ID0gbWF0NDAsIHBmbGFnPVRSVUUpCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NTA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NTAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ1MFssaV0pPSAibnVtZXJpYyIKICBtYXQ1MFtpcy5uYShtYXQ1MFssaV0pLCBpXSA9IDAKICAjcHJpbnQoc3ByaW50ZigiJWQiLGkgKSAgKQogICNwcmludCh1bmlxdWUobWF0NTBbLGldKSkKfQptYXQ1MDwtYXMubWF0cml4KG1hdDUwKQpgYGAKbWluaW5nCmBgYHtyfQpsaWJyYXJ5KEJpQ2F1c2FsaXR5KQpyZXM1MDwtYlNDTURlcG5kZW50R3JhcGhGdW5jKG1hdCA9IG1hdDUwLCBwZmxhZz1UUlVFLCBJbmRwVGhzID0gMC4wMSkKYGBgCiNUT0RPOiBidWlsZCBjb3JyIGdyYXBoIGZ1bmMKYGBge3J9CnBoaShjKDMwLDIwLDIwLDMwKSkKCmBgYAoK</div>
 
 
 
