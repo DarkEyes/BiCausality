@@ -18,10 +18,10 @@ bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,ths = 0.05,nboot=100,pflag=FALSE)
   {
     if(pflag==TRUE)
       print(sprintf("bIndpTest-boot#%d",k))
-    bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
-    nMat<-mat[bDx[k,],]
-    D<-VecAlignment(nMat)
-    bIndpDist[k]<-indpFunc(D,i,j,d=d,z=z)
+    bDx[k,]<-sample(1:n,length(1:n),replace = TRUE) #sampling index vector
+    nMat<-mat[bDx[k,],] #samplimng from mat and save to nMat
+    D<-VecAlignment(nMat) # align
+    bIndpDist[k]<-indpFunc(D,i,j,z=z)
   }
   testRes<-wilcox.test(x=bIndpDist, mu = ths, alternative = "greater")
   confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))

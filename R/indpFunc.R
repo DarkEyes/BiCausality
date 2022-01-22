@@ -4,8 +4,9 @@
 #'
 #'@export
 #'
-indpFunc<-function(D,i,j,d,z=c())
+indpFunc<-function(D,i,j,z=c())
 {
+  d<-length(D[[1]]$name)
   if(is.null(z)) # go full D without conditional variables
     z<-numeric(d)-1
 

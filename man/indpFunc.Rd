@@ -5,7 +5,7 @@
 \title{indpFunc function
 |p(i,j) -p(i)*p(j)| should be zero if i and j are independent}
 \usage{
-indpFunc(D, i, j, d, z = c())
+indpFunc(D, i, j, z = c())
 }
 \description{
 indpFunc function

@@ -6,6 +6,7 @@
 #'
 oddRatioFunc<-function(D,i,j,z=c(),slack=0.001)
 {
+  d<-length(D[[1]]$name)
   if(is.null(z))
     z<-numeric(d)-1
 
@@ -39,6 +40,7 @@ oddRatioFunc<-function(D,i,j,z=c(),slack=0.001)
 #'
 oddDiffFunc<-function(D,i,j,z=c(),slack=0.001)
 {
+  d<-length(D[[1]]$name)
   if(is.null(z))
     z<-numeric(d)-1
 

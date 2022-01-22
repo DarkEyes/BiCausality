@@ -33,7 +33,7 @@ bSCMdeConfoundingGraphFunc<-function(dat,IndpThs=0.05,alpha=0.05)
           for(b in seq(nboot) )
           {
             nD<-dat$Dboot[[b]]
-            bIndpDist[b]<- max(c(indpFunc(nD,i,j,d,z1), indpFunc(nD,i,j,d,z2) ) )
+            bIndpDist[b]<- max(c(indpFunc(nD,i,j,z1), indpFunc(nD,i,j,z2) ) )
           }
           testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
           #print(sprintf("pval:%f",testRes$p.value))

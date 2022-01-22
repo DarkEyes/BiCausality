@@ -4,6 +4,12 @@ output: html_notebook
 ---
 
 t
+Experiment notebook
+```{r}
+library(devtools)
+devtools::document()
+```
+t
 
 ```{r}
 supp<-function(X,values)
@@ -138,45 +144,59 @@ a1-b1
 #independent func
 ```{r}
 #TODO add given z
-indpFunc<-function(D,i,j,z=c())
+indpFunc<-function(D,i,j,d,z=c())
 {
-  if(is.null(z))
+  if(is.null(z)) # go full D without conditional variables
     z<-numeric(d)-1
-  
-  res<-CondProb(D,y=numeric(d)-1,z=z)
+
+  res<-CondProb(D,y=numeric(d)-1,z=z) #get the total n
   D<-res$nD
   n<-res$countTotal
   L<-length(D)
-  
+
   indMagitude<-0
-  
+
   z1<-numeric(d)-1
 
   for(i1 in c(0,1) )
     for(j1 in c(0,1))
     {
-        y1<-numeric(d) -1
-        y1[c(i,j)] <- c(i1,j1)
-        y2<-numeric(d) -1
-        y2[c(i)] <- i1
-        y3<-numeric(d) -1
-        y3[c(j)] <- j1
-        
-        res2<-CondProb(D,y1,z1)
-        n2<-res2$count
-        condPair<-res2$condP
-        condi<-CondProb(D,y2,z1)$condP
-        condj<-CondProb(D,y3,z1)$condP
-        indMagitude<-indMagitude+ (abs(condPair - condi*condj)*(n2/n) )
+      y1<-numeric(d) -1
+      y1[c(i,j)] <- c(i1,j1) # supp(i,j)
+      y2<-numeric(d) -1
+      y2[c(i)] <- i1 #supp(i)
+      y3<-numeric(d) -1
+      y3[c(j)] <- j1 #supp(j)
+
+      res2<-CondProb(D,y1,z1)
+      n2<-res2$count
+      condPair<-res2$condP
+      condi<-CondProb(D,y2,z1)$condP
+      condj<-CondProb(D,y3,z1)$condP
+      # |p(i,j) -p(i)*p(j)|*weight
+      indMagitude<-indMagitude+ (abs(condPair - condi*condj)*(n2/n) )
     }
-  
+
   return(indMagitude)
 }
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+}
+mat[,1]<-mat[,2] | mat[,3]
+mat[,4] <- mat[,2] | mat[,5]
+
+D<-VecAlignment(mat)
+
 z<-numeric(d)-1
-z[c(4)] = 0
-indpFunc(D,1,2,z=z)
-z[c(4)] = 1
-indpFunc(D,1,2,z=z)
+z[c(3)] = 0
+indpFunc(D,1,2,d=d,z=z)
+z[c(3)] = 1
+indpFunc(D,1,2,d=d,z=z)
 ```
 Indp Bootstrap
 ```{r}
@@ -264,8 +284,8 @@ mat[,4] <- !mat[,2] | mat[,5]
 
 z<-numeric(d)-1
 y<-numeric(d)-1
-i=5
-j=4
+i=1
+j=2
 D<-VecAlignment(mat)
 oddRatioFunc(D,i,j)
 
@@ -286,52 +306,52 @@ assocSignTest(mat,i,j,z=z)
 
 ```{r}
 
-bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
-{
-  n<-dim(mat)[1]
-  d<-dim(mat)[2]
-  nMatboot<-list()
-  Dboot<-list()
-  bDx<-matrix(0,nboot,n)
-  # == Create the bootstrapping sequence of D
-  for(k in seq(nboot))
-  {
-    bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
-    nMatboot[[k]]<-mat[bDx[k,],]
-    Dboot[[k]]<-VecAlignment(nMatboot[[k]])
-  }
-  #Check dependency of all pairwises
-  E0<-matrix(0,nrow=d,ncol=d) # save mean
-  depInfo<-list()
-  
-  for(i in seq(d-1))
-    for(j in seq(i+1,d))
-    {
-      str<-sprintf("%d,%d",i,j)
-      print(str)
-      bIndpDist<-numeric(nboot)
-      for(k in seq(nboot))
-      {
-        D<-Dboot[[k]]
-        bIndpDist[k]<-indpFunc(D,i,j)
-      }
-      testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
-      confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))
-      bmean <- mean(bIndpDist)
-
-      #check whether i is dependent with j
-      if(testRes$p.value<=alpha)
-      {
-        E0[i,j]<-1
-        E0[j,i]<-1
-        depInfo[[str]]$bmean<-bmean
-        depInfo[[str]]$confInv<-confInv
-        depInfo[[str]]$testRes<-testRes
-        depInfo[[str]]$indices<-c(i,j)
-      }
-    }
-  return(list(E0=E0,depInfo=depInfo,Dboot=Dboot) )
-}
+# bSCMDepndentGraphFunc<-function(mat,nboot=100,alpha=0.05,IndpThs=0.05)
+# {
+#   n<-dim(mat)[1]
+#   d<-dim(mat)[2]
+#   nMatboot<-list()
+#   Dboot<-list()
+#   bDx<-matrix(0,nboot,n)
+#   # == Create the bootstrapping sequence of D
+#   for(k in seq(nboot))
+#   {
+#     bDx[k,]<-sample(1:n,length(1:n),replace = TRUE)
+#     nMatboot[[k]]<-mat[bDx[k,],]
+#     Dboot[[k]]<-VecAlignment(nMatboot[[k]])
+#   }
+#   #Check dependency of all pairwises
+#   E0<-matrix(0,nrow=d,ncol=d) # save mean
+#   depInfo<-list()
+#   
+#   for(i in seq(d-1))
+#     for(j in seq(i+1,d))
+#     {
+#       str<-sprintf("%d,%d",i,j)
+#       print(str)
+#       bIndpDist<-numeric(nboot)
+#       for(k in seq(nboot))
+#       {
+#         D<-Dboot[[k]]
+#         bIndpDist[k]<-indpFunc(D,i,j)
+#       }
+#       testRes<-wilcox.test(x=bIndpDist, mu = IndpThs, alternative = "greater")
+#       confInv<-quantile(bIndpDist, c(0+alpha/2, 1-alpha/2))
+#       bmean <- mean(bIndpDist)
+# 
+#       #check whether i is dependent with j
+#       if(testRes$p.value<=alpha)
+#       {
+#         E0[i,j]<-1
+#         E0[j,i]<-1
+#         depInfo[[str]]$bmean<-bmean
+#         depInfo[[str]]$confInv<-confInv
+#         depInfo[[str]]$testRes<-testRes
+#         depInfo[[str]]$indices<-c(i,j)
+#       }
+#     }
+#   return(list(E0=E0,depInfo=depInfo,Dboot=Dboot) )
+# }
 library(BiCausality)
 n<-500
 d<-10
@@ -342,9 +362,10 @@ for(i in seq(n))
   mat[i,] <- rbinom(n=d, size=1, prob=0.5)
 }
 mat[,1]<-mat[,2] | mat[,3]
-mat[,4] <- !mat[,2] | mat[,5]
+mat[,4] <- !mat[,6] | mat[,5]
 
 res<-bSCMDepndentGraphFunc(mat)
+resO<-bSCMDepndentGraphFastFunc(mat)
 ```
 #Confounding factor checking
 ```{r}
