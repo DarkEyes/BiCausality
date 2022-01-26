@@ -227,14 +227,8 @@ pre code {
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGV2dG9vbHM6OmRvY3VtZW50KClcbmBgYCJ9 -->
 <pre class="r"><code>devtools::document()</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4oS5IFVwZGF0aW5nIEJpQ2F1c2FsaXR5IGRvY3VtZW50YXRpb25cbuKEuSBMb2FkaW5nIEJpQ2F1c2FsaXR5XG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IHBzeWNoXG4ifQ== -->
-<pre><code>ℹ Updating BiCausality documentation
-ℹ Loading BiCausality
-Loading required package: psych</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV3JpdGluZyBOQU1FU1BBQ0VcbldyaXRpbmcgTkFNRVNQQUNFXG4ifQ== -->
-<pre><code>Writing NAMESPACE
-Writing NAMESPACE</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoi4oS5IFVwZGF0aW5nIEJpQ2F1c2FsaXR5IGRvY3VtZW50YXRpb25cbiJ9 -->
+<pre><code>ℹ Updating BiCausality documentation</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -361,8 +355,120 @@ res50final&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat50)</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbmNvbmZOZXRGdW5jPC1mdW5jdGlvbihtYXQsSW5kcFRocz0wLjEpXG57XG4gIGQ8LWRpbShtYXQpWzJdXG4gIGNvbmZOZXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpXG4gIEQ8LVZlY0FsaWdubWVudChtYXQpXG4gIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpXG4gICM9PT1cbiAgZm9yKGkgaW4gc2VxKGQtMSkpXG4gICAgZm9yKGogaW4gc2VxKGkrMSxkKSlcbiAgICB7XG4gICAgICB6PC1udW1lcmljKGQpLTFcbiAgICAgIHk8LW51bWVyaWMoZCktMVxuICAgICAgeVtqXTwtYygxKVxuICAgICAgeltpXTwtYygxKVxuICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eilcbiAgICAgIGIxPC1Db25kUHJvYihELHk9eix6PXkpJGNvbmRQICMgY29uZih6fHkpIFxuICAgICAgY29uZlZhbE1hdFtpLGpdPC1hMVxuICAgICAgY29uZlZhbE1hdFtqLGldPC1iMVxuICAgICAgaWYoKGExLWIxKT4wICYmIGExPj1JbmRwVGhzKVxuICAgICAgICBjb25mTmV0W2ksal08LTFcbiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocylcbiAgICAgICAgY29uZk5ldFtqLGldPC0xXG4gICAgICBlbHNlXG4gICAgICAgIGNvbmZOZXRbaSxqXTwtMFxuICAgIH1cbiAgcmV0dXJuKGxpc3QoY29uZk5ldD1jb25mTmV0LGNvbmZWYWxNYXQ9Y29uZlZhbE1hdCkgKVxufVxuXG5uPC01MDBcbmQ8LTEwXG5tYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKVxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBtYXRbaSxdIDwtIHJiaW5vbShuPWQsIHNpemU9MSwgcHJvYj0wLjUpXG59XG5tYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXSBcbm1hdFssNF0gPC1tYXRbLDJdIHwgbWF0Wyw1XVxubWF0Wyw2XSA8LSBtYXRbLDFdIHwgbWF0Wyw0XVxucmVzPC1jb25mTmV0RnVuYyhtYXQ9bWF0LEluZHBUaHM9MC45KVxucmVzJGNvbmZOZXRcbmBgYCJ9 -->
+<pre class="r"><code>library(BiCausality)
+confNetFunc&lt;-function(mat,IndpThs=0.1)
+{
+  d&lt;-dim(mat)[2]
+  confNet&lt;-matrix(0,nrow=d,ncol=d)
+  D&lt;-VecAlignment(mat)
+  confValMat&lt;-matrix(0,nrow=d,ncol=d)
+  #===
+  for(i in seq(d-1))
+    for(j in seq(i+1,d))
+    {
+      z&lt;-numeric(d)-1
+      y&lt;-numeric(d)-1
+      y[j]&lt;-c(1)
+      z[i]&lt;-c(1)
+      a1&lt;-CondProb(D,y=y,z=z)$condP # conf(y|z)
+      b1&lt;-CondProb(D,y=z,z=y)$condP # conf(z|y) 
+      confValMat[i,j]&lt;-a1
+      confValMat[j,i]&lt;-b1
+      if((a1-b1)&gt;0 &amp;&amp; a1&gt;=IndpThs)
+        confNet[i,j]&lt;-1
+      else if((b1-a1)&gt;0 &amp;&amp; b1&gt;= IndpThs)
+        confNet[j,i]&lt;-1
+      else
+        confNet[i,j]&lt;-0
+    }
+  return(list(confNet=confNet,confValMat=confValMat) )
+}
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ0MFssaV0pPSAibnVtZXJpYyIKICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDAKICBwcmludChzcHJpbnRmKCIlZCIsaSApICApCiAgcHJpbnQodW5pcXVlKG1hdDQwWyxpXSkpCn0KbWF0NDA8LWFzLm1hdHJpeChtYXQ0MCkKYGBgCm1pbmluZwpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKIyBhbHBoYT0wLjA1CiMgbmJvb3Q9MTAwCiMgSW5kcFRocz0wLjA1CiMgQ2F1c2FsVGhzID0gMC4yNQojIHNsYWNrPTAuMDAxCiMgcmVzNTA8LWJTQ01EZXBuZGVudEdyYXBoRnVuYyhtYXQgPSBtYXQ1MCwgcGZsYWc9VFJVRSxJbmRwVGhzID0wLjAxKQojIHByaW50KCJSZW1vdmluZyBjb25mb3VuZGVyKHMpIikKIyByZXM1MF8yPC1CaUNhdXNhbGl0eTo6YlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmMocmVzNTAsSW5kcFRocz1JbmRwVGhzLGFscGhhPWFscGhhKQojIHByaW50KCJJbmZlcnJpbmcgY2F1c2FsIGdyYXBoIikKIyByZXM1MF8zPC1CaUNhdXNhbGl0eTo6YlNDTUNhdXNhbEdyYXBoRnVuYyhyZXM1MF8yJEUxLHJlczUwJERib290ICxhbHBoYT1hbHBoYSxTaWduVGhzPUluZHBUaHMsQ2F1c2FsVGhzID0gQ2F1c2FsVGhzLHNsYWNrPXNsYWNrKQoKcmVzNTBmaW5hbDwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQ1MCkKYGBgCgo=</div>
+n&lt;-500
+d&lt;-10
+mat&lt;-matrix(nrow=n,ncol=d)
+for(i in seq(n))
+{
+  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
+}
+mat[,1]&lt;-mat[,2] | mat[,3] 
+mat[,4] &lt;-mat[,2] | mat[,5]
+mat[,6] &lt;- mat[,1] | mat[,4]
+res&lt;-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDEgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    1    0    0    0     0
+ [3,]    1    0    0    0    0    1    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    1    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzJGNvbmZWYWxNYXRcbmBgYCJ9 -->
+<pre class="r"><code>res$confValMat</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICBbLDRdICAgICAgWyw1XSAgICAgIFssNl0gICAgICBbLDddICAgICAgWyw4XSAgICAgIFssOV0gICAgIFssMTBdXG4gWzEsXSAwLjAwMDAwMDAgMC42NTc3NTQwIDAuNjgxODE4MiAwLjgyNjIwMzIgMC40NDkxOTc5IDEuMDAwMDAwMCAwLjQ5MTk3ODYgMC41MTg3MTY2IDAuNTEzMzY5MCAwLjUyMTM5MDRcbiBbMixdIDEuMDAwMDAwMCAwLjAwMDAwMDAgMC41MTYyNjAyIDEuMDAwMDAwMCAwLjQyNjgyOTMgMS4wMDAwMDAwIDAuNDk1OTM1MCAwLjUxMjE5NTEgMC41NjA5NzU2IDAuNTA4MTMwMVxuIFszLF0gMS4wMDAwMDAwIDAuNDk4MDM5MiAwLjAwMDAwMDAgMC43NDUwOTgwIDAuNDk4MDM5MiAxLjAwMDAwMDAgMC40ODIzNTI5IDAuNTA1ODgyNCAwLjQ5MDE5NjEgMC41MTM3MjU1XG4gWzQsXSAwLjgxNzQ2MDMgMC42NTA3OTM3IDAuNTAyNjQ1NSAwLjAwMDAwMDAgMC42MjY5ODQxIDEuMDAwMDAwMCAwLjUwMDAwMDAgMC41MDI2NDU1IDAuNTI5MTAwNSAwLjUxMzIyNzVcbiBbNSxdIDAuNzA4ODYwOCAwLjQ0MzAzODAgMC41MzU4NjUwIDEuMDAwMDAwMCAwLjAwMDAwMDAgMS4wMDAwMDAwIDAuNTEwNTQ4NSAwLjUxMDU0ODUgMC41MzU4NjUwIDAuNTI3NDI2MlxuIFs2LF0gMC44NDQyNDM4IDAuNTU1MzA0NyAwLjU3NTYyMDggMC44NTMyNzMxIDAuNTM0OTg4NyAwLjAwMDAwMDAgMC40OTY2MTQwIDAuNTEwMTU4MCAwLjUyMTQ0NDcgMC41MTkxODc0XG4gWzcsXSAwLjcyNDQwOTQgMC40ODAzMTUwIDAuNDg0MjUyMCAwLjc0NDA5NDUgMC40NzYzNzgwIDAuODY2MTQxNyAwLjAwMDAwMDAgMC41MDM5MzcwIDAuNDgwMzE1MCAwLjUzMTQ5NjFcbiBbOCxdIDAuNzYwNzg0MyAwLjQ5NDExNzYgMC41MDU4ODI0IDAuNzQ1MDk4MCAwLjQ3NDUwOTggMC44ODYyNzQ1IDAuNTAxOTYwOCAwLjAwMDAwMDAgMC40OTgwMzkyIDAuNTU2ODYyN1xuIFs5LF0gMC43NDcwODE3IDAuNTM2OTY1MCAwLjQ4NjM4MTMgMC43NzgyMTAxIDAuNDk0MTYzNCAwLjg5ODgzMjcgMC40NzQ3MDgyIDAuNDk0MTYzNCAwLjAwMDAwMDAgMC41MTM2MTg3XG5bMTAsXSAwLjc0NzEyNjQgMC40Nzg5MjcyIDAuNTAxOTE1NyAwLjc0MzI5NTAgMC40Nzg5MjcyIDAuODgxMjI2MSAwLjUxNzI0MTQgMC41NDQwNjEzIDAuNTA1NzQ3MSAwLjAwMDAwMDBcbiJ9 -->
+<pre><code>           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]      [,8]      [,9]     [,10]
+ [1,] 0.0000000 0.6577540 0.6818182 0.8262032 0.4491979 1.0000000 0.4919786 0.5187166 0.5133690 0.5213904
+ [2,] 1.0000000 0.0000000 0.5162602 1.0000000 0.4268293 1.0000000 0.4959350 0.5121951 0.5609756 0.5081301
+ [3,] 1.0000000 0.4980392 0.0000000 0.7450980 0.4980392 1.0000000 0.4823529 0.5058824 0.4901961 0.5137255
+ [4,] 0.8174603 0.6507937 0.5026455 0.0000000 0.6269841 1.0000000 0.5000000 0.5026455 0.5291005 0.5132275
+ [5,] 0.7088608 0.4430380 0.5358650 1.0000000 0.0000000 1.0000000 0.5105485 0.5105485 0.5358650 0.5274262
+ [6,] 0.8442438 0.5553047 0.5756208 0.8532731 0.5349887 0.0000000 0.4966140 0.5101580 0.5214447 0.5191874
+ [7,] 0.7244094 0.4803150 0.4842520 0.7440945 0.4763780 0.8661417 0.0000000 0.5039370 0.4803150 0.5314961
+ [8,] 0.7607843 0.4941176 0.5058824 0.7450980 0.4745098 0.8862745 0.5019608 0.0000000 0.4980392 0.5568627
+ [9,] 0.7470817 0.5369650 0.4863813 0.7782101 0.4941634 0.8988327 0.4747082 0.4941634 0.0000000 0.5136187
+[10,] 0.7471264 0.4789272 0.5019157 0.7432950 0.4789272 0.8812261 0.5172414 0.5440613 0.5057471 0.0000000</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSlcbmBgYCJ9 -->
+<pre class="r"><code>resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC4zMzYzMjg5XG5bMV0gXCIxLDNcIlxuWzFdIC0wLjMxODI3NzdcblsxXSBcIjEsNlwiXG5bMV0gMC4xNTQ0MzQ2XG5bMV0gXCIyLDRcIlxuWzFdIDAuMzQzNDU3OVxuWzFdIFwiNCw1XCJcblsxXSAtMC4zNzg4OTk5XG5bMV0gXCI0LDZcIlxuWzFdIDAuMTQ1MjUxXG4ifQ== -->
+<pre><code>[1] &quot;Inferring dependent graph&quot;
+[1] &quot;Removing confounder(s)&quot;
+[1] &quot;Inferring causal graph&quot;
+[1] &quot;1,2&quot;
+[1] -0.3363289
+[1] &quot;1,3&quot;
+[1] -0.3182777
+[1] &quot;1,6&quot;
+[1] 0.1544346
+[1] &quot;2,4&quot;
+[1] 0.3434579
+[1] &quot;4,5&quot;
+[1] -0.3788999
+[1] &quot;4,6&quot;
+[1] 0.145251</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXRcbmBgYCJ9 -->
+<pre class="r"><code>resC$CausalGRes$Ehat</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    0    0    0    0     0
+ [3,]    1    0    0    0    0    0    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    0    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ0MFssaV0pPSAibnVtZXJpYyIKICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDAKICBwcmludChzcHJpbnRmKCIlZCIsaSApICApCiAgcHJpbnQodW5pcXVlKG1hdDQwWyxpXSkpCn0KbWF0NDA8LWFzLm1hdHJpeChtYXQ0MCkKYGBgCm1pbmluZwpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKIyBhbHBoYT0wLjA1CiMgbmJvb3Q9MTAwCiMgSW5kcFRocz0wLjA1CiMgQ2F1c2FsVGhzID0gMC4yNQojIHNsYWNrPTAuMDAxCiMgcmVzNTA8LWJTQ01EZXBuZGVudEdyYXBoRnVuYyhtYXQgPSBtYXQ1MCwgcGZsYWc9VFJVRSxJbmRwVGhzID0wLjAxKQojIHByaW50KCJSZW1vdmluZyBjb25mb3VuZGVyKHMpIikKIyByZXM1MF8yPC1CaUNhdXNhbGl0eTo6YlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmMocmVzNTAsSW5kcFRocz1JbmRwVGhzLGFscGhhPWFscGhhKQojIHByaW50KCJJbmZlcnJpbmcgY2F1c2FsIGdyYXBoIikKIyByZXM1MF8zPC1CaUNhdXNhbGl0eTo6YlNDTUNhdXNhbEdyYXBoRnVuYyhyZXM1MF8yJEUxLHJlczUwJERib290ICxhbHBoYT1hbHBoYSxTaWduVGhzPUluZHBUaHMsQ2F1c2FsVGhzID0gQ2F1c2FsVGhzLHNsYWNrPXNsYWNrKQoKcmVzNTBmaW5hbDwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQ1MCkKYGBgCgpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKY29uZk5ldEZ1bmM8LWZ1bmN0aW9uKG1hdCxJbmRwVGhzPTAuMSkKewogIGQ8LWRpbShtYXQpWzJdCiAgY29uZk5ldDwtbWF0cml4KDAsbnJvdz1kLG5jb2w9ZCkKICBEPC1WZWNBbGlnbm1lbnQobWF0KQogIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpCiAgIz09PQogIGZvcihpIGluIHNlcShkLTEpKQogICAgZm9yKGogaW4gc2VxKGkrMSxkKSkKICAgIHsKICAgICAgejwtbnVtZXJpYyhkKS0xCiAgICAgIHk8LW51bWVyaWMoZCktMQogICAgICB5W2pdPC1jKDEpCiAgICAgIHpbaV08LWMoMSkKICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eikKICAgICAgYjE8LUNvbmRQcm9iKEQseT16LHo9eSkkY29uZFAgIyBjb25mKHp8eSkgCiAgICAgIGNvbmZWYWxNYXRbaSxqXTwtYTEKICAgICAgY29uZlZhbE1hdFtqLGldPC1iMQogICAgICBpZigoYTEtYjEpPjAgJiYgYTE+PUluZHBUaHMpCiAgICAgICAgY29uZk5ldFtpLGpdPC0xCiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocykKICAgICAgICBjb25mTmV0W2osaV08LTEKICAgICAgZWxzZQogICAgICAgIGNvbmZOZXRbaSxqXTwtMAogICAgfQogIHJldHVybihsaXN0KGNvbmZOZXQ9Y29uZk5ldCxjb25mVmFsTWF0PWNvbmZWYWxNYXQpICkKfQoKbjwtNTAwCmQ8LTEwCm1hdDwtbWF0cml4KG5yb3c9bixuY29sPWQpCmZvcihpIGluIHNlcShuKSkKewogIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuNSkKfQptYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXSAKbWF0Wyw0XSA8LW1hdFssMl0gfCBtYXRbLDVdCm1hdFssNl0gPC0gbWF0WywxXSB8IG1hdFssNF0KcmVzPC1jb25mTmV0RnVuYyhtYXQ9bWF0LEluZHBUaHM9MC45KQpyZXMkY29uZk5ldApyZXMkY29uZlZhbE1hdAoKcmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSkKcmVzQyRDYXVzYWxHUmVzJEVoYXQKYGBgCgo=</div>
 
 
 
