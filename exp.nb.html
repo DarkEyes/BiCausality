@@ -354,9 +354,11 @@ res50final&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat50)</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="run-this-first---implementation-of-confnetfunc" class="section level1">
+<h1>run this first -&gt; implementation of confNetFunc</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbmNvbmZOZXRGdW5jPC1mdW5jdGlvbihtYXQsSW5kcFRocz0wLjEpXG57XG4gIGQ8LWRpbShtYXQpWzJdXG4gIGNvbmZOZXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpXG4gIEQ8LVZlY0FsaWdubWVudChtYXQpXG4gIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpXG4gICM9PT1cbiAgZm9yKGkgaW4gc2VxKGQtMSkpXG4gICAgZm9yKGogaW4gc2VxKGkrMSxkKSlcbiAgICB7XG4gICAgICB6PC1udW1lcmljKGQpLTFcbiAgICAgIHk8LW51bWVyaWMoZCktMVxuICAgICAgeVtqXTwtYygxKVxuICAgICAgeltpXTwtYygxKVxuICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eilcbiAgICAgIGIxPC1Db25kUHJvYihELHk9eix6PXkpJGNvbmRQICMgY29uZih6fHkpIFxuICAgICAgY29uZlZhbE1hdFtpLGpdPC1hMVxuICAgICAgY29uZlZhbE1hdFtqLGldPC1iMVxuICAgICAgaWYoKGExLWIxKT4wICYmIGExPj1JbmRwVGhzKVxuICAgICAgICBjb25mTmV0W2ksal08LTFcbiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocylcbiAgICAgICAgY29uZk5ldFtqLGldPC0xXG4gICAgICBlbHNlXG4gICAgICAgIGNvbmZOZXRbaSxqXTwtMFxuICAgIH1cbiAgcmV0dXJuKGxpc3QoY29uZk5ldD1jb25mTmV0LGNvbmZWYWxNYXQ9Y29uZlZhbE1hdCkgKVxufVxuXG5uPC01MDBcbmQ8LTEwXG5tYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKVxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBtYXRbaSxdIDwtIHJiaW5vbShuPWQsIHNpemU9MSwgcHJvYj0wLjUpXG59XG5tYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXSBcbm1hdFssNF0gPC1tYXRbLDJdIHwgbWF0Wyw1XVxubWF0Wyw2XSA8LSBtYXRbLDFdIHwgbWF0Wyw0XVxucmVzPC1jb25mTmV0RnVuYyhtYXQ9bWF0LEluZHBUaHM9MC45KVxucmVzJGNvbmZOZXRcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShCaUNhdXNhbGl0eSlcbmNvbmZOZXRGdW5jPC1mdW5jdGlvbihtYXQsSW5kcFRocz0wLjEpXG57XG4gIGQ8LWRpbShtYXQpWzJdXG4gIGNvbmZOZXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpXG4gIEQ8LVZlY0FsaWdubWVudChtYXQpXG4gIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpXG4gICM9PT1cbiAgZm9yKGkgaW4gc2VxKGQtMSkpXG4gICAgZm9yKGogaW4gc2VxKGkrMSxkKSlcbiAgICB7XG4gICAgICB6PC1udW1lcmljKGQpLTFcbiAgICAgIHk8LW51bWVyaWMoZCktMVxuICAgICAgeVtqXTwtYygxKVxuICAgICAgeltpXTwtYygxKVxuICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eilcbiAgICAgIGIxPC1Db25kUHJvYihELHk9eix6PXkpJGNvbmRQICMgY29uZih6fHkpIFxuICAgICAgY29uZlZhbE1hdFtpLGpdPC1hMVxuICAgICAgY29uZlZhbE1hdFtqLGldPC1iMVxuICAgICAgaWYoKGExLWIxKT4wICYmIGExPj1JbmRwVGhzKVxuICAgICAgICBjb25mTmV0W2ksal08LTFcbiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocylcbiAgICAgICAgY29uZk5ldFtqLGldPC0xXG4gICAgICBlbHNlXG4gICAgICAgIGNvbmZOZXRbaSxqXTwtMFxuICAgIH1cbiAgcmV0dXJuKGxpc3QoY29uZk5ldD1jb25mTmV0LGNvbmZWYWxNYXQ9Y29uZlZhbE1hdCkgKVxufVxuXG4jIHNldC5zZWVkKDIwMjIpXG5zZWVkTjwtMjAyMlxuXG5uPC01MDBcbmQ8LTEwXG5tYXQ8LW1hdHJpeChucm93PW4sbmNvbD1kKVxuXG5mb3IoaSBpbiBzZXEobikpXG57XG4gIHNldC5zZWVkKHNlZWROK2kpXG4gIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuNSlcbn1cbm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdIFxubWF0Wyw0XSA8LW1hdFssMl0gfCBtYXRbLDVdXG5tYXRbLDZdIDwtIG1hdFssMV0gfCBtYXRbLDRdXG5cbnRydWVNYXQ8LW1hdHJpeChucm93PWQsbmNvbD1kLDApXG50cnVlTWF0W2MoMiwzKSwxXTwtMVxudHJ1ZU1hdFtjKDIsNSksNF08LTFcbnRydWVNYXRbYygxLDQpLDZdPC0xXG50cnNUcnVlTWF0PC1nZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdCh0cnVlTWF0KVxuXG5yZXM8LWNvbmZOZXRGdW5jKG1hdD1tYXQsSW5kcFRocz0wLjkpXG5yZXMkY29uZk5ldFxuYGBgIn0= -->
 <pre class="r"><code>library(BiCausality)
 confNetFunc&lt;-function(mat,IndpThs=0.1)
 {
@@ -386,16 +388,28 @@ confNetFunc&lt;-function(mat,IndpThs=0.1)
   return(list(confNet=confNet,confValMat=confValMat) )
 }
 
+# set.seed(2022)
+seedN&lt;-2022
+
 n&lt;-500
 d&lt;-10
 mat&lt;-matrix(nrow=n,ncol=d)
+
 for(i in seq(n))
 {
+  set.seed(seedN+i)
   mat[i,] &lt;- rbinom(n=d, size=1, prob=0.5)
 }
 mat[,1]&lt;-mat[,2] | mat[,3] 
 mat[,4] &lt;-mat[,2] | mat[,5]
 mat[,6] &lt;- mat[,1] | mat[,4]
+
+trueMat&lt;-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]&lt;-1
+trueMat[c(2,5),4]&lt;-1
+trueMat[c(1,4),6]&lt;-1
+trsTrueMat&lt;-getTransitiveClosureMat(trueMat)
+
 res&lt;-confNetFunc(mat=mat,IndpThs=0.9)
 res$confNet</code></pre>
 <!-- rnb-source-end -->
@@ -412,44 +426,82 @@ res$confNet</code></pre>
  [9,]    0    0    0    0    0    0    0    0    0     0
 [10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzJGNvbmZWYWxNYXRcbmBgYCJ9 -->
-<pre class="r"><code>res$confValMat</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzJGNvbmZWYWxNYXQgIyBiYXNlbGluZVxuYGBgIn0= -->
+<pre class="r"><code>res$confValMat # baseline</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICBbLDRdICAgICAgWyw1XSAgICAgIFssNl0gICAgICBbLDddICAgICAgWyw4XSAgICAgIFssOV0gICAgIFssMTBdXG4gWzEsXSAwLjAwMDAwMDAgMC42NTc3NTQwIDAuNjgxODE4MiAwLjgyNjIwMzIgMC40NDkxOTc5IDEuMDAwMDAwMCAwLjQ5MTk3ODYgMC41MTg3MTY2IDAuNTEzMzY5MCAwLjUyMTM5MDRcbiBbMixdIDEuMDAwMDAwMCAwLjAwMDAwMDAgMC41MTYyNjAyIDEuMDAwMDAwMCAwLjQyNjgyOTMgMS4wMDAwMDAwIDAuNDk1OTM1MCAwLjUxMjE5NTEgMC41NjA5NzU2IDAuNTA4MTMwMVxuIFszLF0gMS4wMDAwMDAwIDAuNDk4MDM5MiAwLjAwMDAwMDAgMC43NDUwOTgwIDAuNDk4MDM5MiAxLjAwMDAwMDAgMC40ODIzNTI5IDAuNTA1ODgyNCAwLjQ5MDE5NjEgMC41MTM3MjU1XG4gWzQsXSAwLjgxNzQ2MDMgMC42NTA3OTM3IDAuNTAyNjQ1NSAwLjAwMDAwMDAgMC42MjY5ODQxIDEuMDAwMDAwMCAwLjUwMDAwMDAgMC41MDI2NDU1IDAuNTI5MTAwNSAwLjUxMzIyNzVcbiBbNSxdIDAuNzA4ODYwOCAwLjQ0MzAzODAgMC41MzU4NjUwIDEuMDAwMDAwMCAwLjAwMDAwMDAgMS4wMDAwMDAwIDAuNTEwNTQ4NSAwLjUxMDU0ODUgMC41MzU4NjUwIDAuNTI3NDI2MlxuIFs2LF0gMC44NDQyNDM4IDAuNTU1MzA0NyAwLjU3NTYyMDggMC44NTMyNzMxIDAuNTM0OTg4NyAwLjAwMDAwMDAgMC40OTY2MTQwIDAuNTEwMTU4MCAwLjUyMTQ0NDcgMC41MTkxODc0XG4gWzcsXSAwLjcyNDQwOTQgMC40ODAzMTUwIDAuNDg0MjUyMCAwLjc0NDA5NDUgMC40NzYzNzgwIDAuODY2MTQxNyAwLjAwMDAwMDAgMC41MDM5MzcwIDAuNDgwMzE1MCAwLjUzMTQ5NjFcbiBbOCxdIDAuNzYwNzg0MyAwLjQ5NDExNzYgMC41MDU4ODI0IDAuNzQ1MDk4MCAwLjQ3NDUwOTggMC44ODYyNzQ1IDAuNTAxOTYwOCAwLjAwMDAwMDAgMC40OTgwMzkyIDAuNTU2ODYyN1xuIFs5LF0gMC43NDcwODE3IDAuNTM2OTY1MCAwLjQ4NjM4MTMgMC43NzgyMTAxIDAuNDk0MTYzNCAwLjg5ODgzMjcgMC40NzQ3MDgyIDAuNDk0MTYzNCAwLjAwMDAwMDAgMC41MTM2MTg3XG5bMTAsXSAwLjc0NzEyNjQgMC40Nzg5MjcyIDAuNTAxOTE1NyAwLjc0MzI5NTAgMC40Nzg5MjcyIDAuODgxMjI2MSAwLjUxNzI0MTQgMC41NDQwNjEzIDAuNTA1NzQ3MSAwLjAwMDAwMDBcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgWywyXSAgICAgIFssM10gICAgICBbLDRdICAgICAgWyw1XSAgICAgIFssNl0gICAgICBbLDddICAgICAgWyw4XSAgICAgIFssOV0gICAgIFssMTBdXG4gWzEsXSAwLjAwMDAwMDAgMC42Nzc4MzUxIDAuNjU0NjM5MiAwLjg2MzQwMjEgMC41MTI4ODY2IDEuMDAwMDAwMCAwLjQ4OTY5MDcgMC40ODE5NTg4IDAuNTA3NzMyMCAwLjQzODE0NDNcbiBbMixdIDEuMDAwMDAwMCAwLjAwMDAwMDAgMC40OTA0OTQzIDEuMDAwMDAwMCAwLjQ4Mjg4OTcgMS4wMDAwMDAwIDAuNDY3NjgwNiAwLjQ2Mzg3ODMgMC41MjQ3MTQ4IDAuNDMzNDYwMVxuIFszLF0gMS4wMDAwMDAwIDAuNTA3ODc0MCAwLjAwMDAwMDAgMC43OTEzMzg2IDAuNTM5MzcwMSAxLjAwMDAwMDAgMC40OTYwNjMwIDAuNDg0MjUyMCAwLjQ4MDMxNTAgMC40NDg4MTg5XG4gWzQsXSAwLjg2MzQwMjEgMC42Nzc4MzUxIDAuNTE4MDQxMiAwLjAwMDAwMDAgMC42NDk0ODQ1IDEuMDAwMDAwMCAwLjQ3OTM4MTQgMC40NzkzODE0IDAuNTEwMzA5MyAwLjQyNTI1NzdcbiBbNSxdIDAuNzg5NjgyNSAwLjUwMzk2ODMgMC41NDM2NTA4IDEuMDAwMDAwMCAwLjAwMDAwMDAgMS4wMDAwMDAwIDAuNDg4MDk1MiAwLjQ5MjA2MzUgMC40NzYxOTA1IDAuNDI0NjAzMlxuIFs2LF0gMC44Nzk4MTg2IDAuNTk2MzcxOSAwLjU3NTk2MzcgMC44Nzk4MTg2IDAuNTcxNDI4NiAwLjAwMDAwMDAgMC40ODI5OTMyIDAuNDgyOTkzMiAwLjUwMTEzMzggMC40MzA4MzkwXG4gWzcsXSAwLjgwMTY4NzggMC41MTg5ODczIDAuNTMxNjQ1NiAwLjc4NDgxMDEgMC41MTg5ODczIDAuODk4NzM0MiAwLjAwMDAwMDAgMC40NzY3OTMyIDAuNTMxNjQ1NiAwLjQ4MTAxMjdcbiBbOCxdIDAuNzg1NzE0MyAwLjUxMjYwNTAgMC41MTY4MDY3IDAuNzgxNTEyNiAwLjUyMTAwODQgMC44OTQ5NTgwIDAuNDc0Nzg5OSAwLjAwMDAwMDAgMC41NDYyMTg1IDAuNDcwNTg4MlxuIFs5LF0gMC43ODQ4NjA2IDAuNTQ5ODAwOCAwLjQ4NjA1NTggMC43ODg4NDQ2IDAuNDc4MDg3NiAwLjg4MDQ3ODEgMC41MDE5OTIwIDAuNTE3OTI4MyAwLjAwMDAwMDAgMC40OTAwMzk4XG5bMTAsXSAwLjc1NTU1NTYgMC41MDY2NjY3IDAuNTA2NjY2NyAwLjczMzMzMzMgMC40NzU1NTU2IDAuODQ0NDQ0NCAwLjUwNjY2NjcgMC40OTc3Nzc4IDAuNTQ2NjY2NyAwLjAwMDAwMDBcbiJ9 -->
 <pre><code>           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]      [,7]      [,8]      [,9]     [,10]
- [1,] 0.0000000 0.6577540 0.6818182 0.8262032 0.4491979 1.0000000 0.4919786 0.5187166 0.5133690 0.5213904
- [2,] 1.0000000 0.0000000 0.5162602 1.0000000 0.4268293 1.0000000 0.4959350 0.5121951 0.5609756 0.5081301
- [3,] 1.0000000 0.4980392 0.0000000 0.7450980 0.4980392 1.0000000 0.4823529 0.5058824 0.4901961 0.5137255
- [4,] 0.8174603 0.6507937 0.5026455 0.0000000 0.6269841 1.0000000 0.5000000 0.5026455 0.5291005 0.5132275
- [5,] 0.7088608 0.4430380 0.5358650 1.0000000 0.0000000 1.0000000 0.5105485 0.5105485 0.5358650 0.5274262
- [6,] 0.8442438 0.5553047 0.5756208 0.8532731 0.5349887 0.0000000 0.4966140 0.5101580 0.5214447 0.5191874
- [7,] 0.7244094 0.4803150 0.4842520 0.7440945 0.4763780 0.8661417 0.0000000 0.5039370 0.4803150 0.5314961
- [8,] 0.7607843 0.4941176 0.5058824 0.7450980 0.4745098 0.8862745 0.5019608 0.0000000 0.4980392 0.5568627
- [9,] 0.7470817 0.5369650 0.4863813 0.7782101 0.4941634 0.8988327 0.4747082 0.4941634 0.0000000 0.5136187
-[10,] 0.7471264 0.4789272 0.5019157 0.7432950 0.4789272 0.8812261 0.5172414 0.5440613 0.5057471 0.0000000</code></pre>
+ [1,] 0.0000000 0.6778351 0.6546392 0.8634021 0.5128866 1.0000000 0.4896907 0.4819588 0.5077320 0.4381443
+ [2,] 1.0000000 0.0000000 0.4904943 1.0000000 0.4828897 1.0000000 0.4676806 0.4638783 0.5247148 0.4334601
+ [3,] 1.0000000 0.5078740 0.0000000 0.7913386 0.5393701 1.0000000 0.4960630 0.4842520 0.4803150 0.4488189
+ [4,] 0.8634021 0.6778351 0.5180412 0.0000000 0.6494845 1.0000000 0.4793814 0.4793814 0.5103093 0.4252577
+ [5,] 0.7896825 0.5039683 0.5436508 1.0000000 0.0000000 1.0000000 0.4880952 0.4920635 0.4761905 0.4246032
+ [6,] 0.8798186 0.5963719 0.5759637 0.8798186 0.5714286 0.0000000 0.4829932 0.4829932 0.5011338 0.4308390
+ [7,] 0.8016878 0.5189873 0.5316456 0.7848101 0.5189873 0.8987342 0.0000000 0.4767932 0.5316456 0.4810127
+ [8,] 0.7857143 0.5126050 0.5168067 0.7815126 0.5210084 0.8949580 0.4747899 0.0000000 0.5462185 0.4705882
+ [9,] 0.7848606 0.5498008 0.4860558 0.7888446 0.4780876 0.8804781 0.5019920 0.5179283 0.0000000 0.4900398
+[10,] 0.7555556 0.5066667 0.5066667 0.7333333 0.4755556 0.8444444 0.5066667 0.4977778 0.5466667 0.0000000</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;baseline trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgdHJzIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;baseline trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChyZXMkY29uZk5ldCkgKSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSBkaXJlY3RlZCBtYXRcIilcbmBgYCJ9 -->
+<pre class="r"><code>print(&quot;baseline directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgZGlyZWN0ZWQgbWF0XCJcbiJ9 -->
+<pre><code>[1] &quot;baseline directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSByZXMkY29uZk5ldCApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAwLjY2NjY2NjdcblxuJHJlY1xuWzFdIDFcblxuJEYxXG5bMV0gMC44XG4ifQ== -->
+<pre><code>$prec
+[1] 0.6666667
+
+$rec
+[1] 1
+
+$F1
+[1] 0.8</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSlcbmBgYCJ9 -->
 <pre class="r"><code>resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC4zMzYzMjg5XG5bMV0gXCIxLDNcIlxuWzFdIC0wLjMxODI3NzdcblsxXSBcIjEsNlwiXG5bMV0gMC4xNTQ0MzQ2XG5bMV0gXCIyLDRcIlxuWzFdIDAuMzQzNDU3OVxuWzFdIFwiNCw1XCJcblsxXSAtMC4zNzg4OTk5XG5bMV0gXCI0LDZcIlxuWzFdIDAuMTQ1MjUxXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC4zMjM4Nzg2XG5bMV0gXCIxLDNcIlxuWzFdIC0wLjM0NzM5ODVcblsxXSBcIjEsNlwiXG5bMV0gMC4xMjEwMjU4XG5bMV0gXCIyLDRcIlxuWzFdIDAuMzIzOTk5MlxuWzFdIFwiNCw1XCJcblsxXSAtMC4zNDk1MjIxXG5bMV0gXCI0LDZcIlxuWzFdIDAuMTIwOTg3MlxuIn0= -->
 <pre><code>[1] &quot;Inferring dependent graph&quot;
 [1] &quot;Removing confounder(s)&quot;
 [1] &quot;Inferring causal graph&quot;
 [1] &quot;1,2&quot;
-[1] -0.3363289
+[1] -0.3238786
 [1] &quot;1,3&quot;
-[1] -0.3182777
+[1] -0.3473985
 [1] &quot;1,6&quot;
-[1] 0.1544346
+[1] 0.1210258
 [1] &quot;2,4&quot;
-[1] 0.3434579
+[1] 0.3239992
 [1] &quot;4,5&quot;
-[1] -0.3788999
+[1] -0.3495221
 [1] &quot;4,6&quot;
-[1] 0.145251</code></pre>
+[1] 0.1209872</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXRcbmBgYCJ9 -->
-<pre class="r"><code>resC$CausalGRes$Ehat</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2RcbmBgYCJ9 -->
+<pre class="r"><code>resC$CausalGRes$Ehat # proposed method</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
 <pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
@@ -464,11 +516,602 @@ res$confNet</code></pre>
  [9,]    0    0    0    0    0    0    0    0    0     0
 [10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
 <!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY01hdDwtIHJlc0MkQ2F1c2FsR1JlcyRFaGF0XG5wcmludChcInByb3Bvc2VkIG1ldGhvZCB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>cMat&lt;- resC$CausalGRes$Ehat
+print(&quot;proposed method trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIHRycyBtYXRcIlxuIn0= -->
+<pre><code>[1] &quot;proposed method trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChjTWF0KSApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJwcm9wb3NlZCBtZXRob2QgZGlyZWN0ZWQgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;proposed method directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIGRpcmVjdGVkIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;proposed method directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSBjTWF0KSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="second-exp-on-sim---down-prob-of-being-1-in-sim-to-0.1" class="section level1">
+<h1>Second exp on sim -&gt; down prob of being 1 in sim to 0.1</h1>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZXQuc2VlZCgyMDIyKVxuIyBzZXQuc2VlZCgyMDIyKVxuc2VlZE48LTIwMjJcblxubjwtNTAwXG5kPC0xMFxubWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZClcblxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBzZXQuc2VlZChzZWVkTitpKVxuICBtYXRbaSxdIDwtIHJiaW5vbShuPWQsIHNpemU9MSwgcHJvYj0wLjEpXG59XG5tYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXSBcbm1hdFssNF0gPC1tYXRbLDJdIHwgbWF0Wyw1XVxubWF0Wyw2XSA8LSBtYXRbLDFdIHwgbWF0Wyw0XVxuXG50cnVlTWF0PC1tYXRyaXgobnJvdz1kLG5jb2w9ZCwwKVxudHJ1ZU1hdFtjKDIsMyksMV08LTFcbnRydWVNYXRbYygyLDUpLDRdPC0xXG50cnVlTWF0W2MoMSw0KSw2XTwtMVxudHJzVHJ1ZU1hdDwtZ2V0VHJhbnNpdGl2ZUNsb3N1cmVNYXQodHJ1ZU1hdClcblxucmVzPC1jb25mTmV0RnVuYyhtYXQ9bWF0LEluZHBUaHM9MC45KVxucmVzJGNvbmZOZXRcbmBgYCJ9 -->
+<pre class="r"><code># set.seed(2022)
+# set.seed(2022)
+seedN&lt;-2022
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ0MFssaV0pPSAibnVtZXJpYyIKICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDAKICBwcmludChzcHJpbnRmKCIlZCIsaSApICApCiAgcHJpbnQodW5pcXVlKG1hdDQwWyxpXSkpCn0KbWF0NDA8LWFzLm1hdHJpeChtYXQ0MCkKYGBgCm1pbmluZwpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKIyBhbHBoYT0wLjA1CiMgbmJvb3Q9MTAwCiMgSW5kcFRocz0wLjA1CiMgQ2F1c2FsVGhzID0gMC4yNQojIHNsYWNrPTAuMDAxCiMgcmVzNTA8LWJTQ01EZXBuZGVudEdyYXBoRnVuYyhtYXQgPSBtYXQ1MCwgcGZsYWc9VFJVRSxJbmRwVGhzID0wLjAxKQojIHByaW50KCJSZW1vdmluZyBjb25mb3VuZGVyKHMpIikKIyByZXM1MF8yPC1CaUNhdXNhbGl0eTo6YlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmMocmVzNTAsSW5kcFRocz1JbmRwVGhzLGFscGhhPWFscGhhKQojIHByaW50KCJJbmZlcnJpbmcgY2F1c2FsIGdyYXBoIikKIyByZXM1MF8zPC1CaUNhdXNhbGl0eTo6YlNDTUNhdXNhbEdyYXBoRnVuYyhyZXM1MF8yJEUxLHJlczUwJERib290ICxhbHBoYT1hbHBoYSxTaWduVGhzPUluZHBUaHMsQ2F1c2FsVGhzID0gQ2F1c2FsVGhzLHNsYWNrPXNsYWNrKQoKcmVzNTBmaW5hbDwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQ1MCkKYGBgCgpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKY29uZk5ldEZ1bmM8LWZ1bmN0aW9uKG1hdCxJbmRwVGhzPTAuMSkKewogIGQ8LWRpbShtYXQpWzJdCiAgY29uZk5ldDwtbWF0cml4KDAsbnJvdz1kLG5jb2w9ZCkKICBEPC1WZWNBbGlnbm1lbnQobWF0KQogIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpCiAgIz09PQogIGZvcihpIGluIHNlcShkLTEpKQogICAgZm9yKGogaW4gc2VxKGkrMSxkKSkKICAgIHsKICAgICAgejwtbnVtZXJpYyhkKS0xCiAgICAgIHk8LW51bWVyaWMoZCktMQogICAgICB5W2pdPC1jKDEpCiAgICAgIHpbaV08LWMoMSkKICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eikKICAgICAgYjE8LUNvbmRQcm9iKEQseT16LHo9eSkkY29uZFAgIyBjb25mKHp8eSkgCiAgICAgIGNvbmZWYWxNYXRbaSxqXTwtYTEKICAgICAgY29uZlZhbE1hdFtqLGldPC1iMQogICAgICBpZigoYTEtYjEpPjAgJiYgYTE+PUluZHBUaHMpCiAgICAgICAgY29uZk5ldFtpLGpdPC0xCiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocykKICAgICAgICBjb25mTmV0W2osaV08LTEKICAgICAgZWxzZQogICAgICAgIGNvbmZOZXRbaSxqXTwtMAogICAgfQogIHJldHVybihsaXN0KGNvbmZOZXQ9Y29uZk5ldCxjb25mVmFsTWF0PWNvbmZWYWxNYXQpICkKfQoKbjwtNTAwCmQ8LTEwCm1hdDwtbWF0cml4KG5yb3c9bixuY29sPWQpCmZvcihpIGluIHNlcShuKSkKewogIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuNSkKfQptYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXSAKbWF0Wyw0XSA8LW1hdFssMl0gfCBtYXRbLDVdCm1hdFssNl0gPC0gbWF0WywxXSB8IG1hdFssNF0KcmVzPC1jb25mTmV0RnVuYyhtYXQ9bWF0LEluZHBUaHM9MC45KQpyZXMkY29uZk5ldApyZXMkY29uZlZhbE1hdAoKcmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSkKcmVzQyRDYXVzYWxHUmVzJEVoYXQKYGBgCgo=</div>
+n&lt;-500
+d&lt;-10
+mat&lt;-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.1)
+}
+mat[,1]&lt;-mat[,2] | mat[,3] 
+mat[,4] &lt;-mat[,2] | mat[,5]
+mat[,6] &lt;- mat[,1] | mat[,4]
+
+trueMat&lt;-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]&lt;-1
+trueMat[c(2,5),4]&lt;-1
+trueMat[c(1,4),6]&lt;-1
+trsTrueMat&lt;-getTransitiveClosureMat(trueMat)
+
+res&lt;-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDEgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    1    0    0    0     0
+ [3,]    1    0    0    0    0    1    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    1    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzJGNvbmZWYWxNYXQgIyBiYXNlbGluZVxuYGBgIn0= -->
+<pre class="r"><code>res$confValMat # baseline</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgIFssMl0gICAgICAgWywzXSAgICAgIFssNF0gICAgICAgWyw1XSAgICAgIFssNl0gICAgICAgWyw3XSAgICAgICBbLDhdICAgICAgIFssOV1cbiBbMSxdIDAuMDAwMDAwMCAwLjY3MzQ2OTM5IDAuNDE4MzY3MzUgMC43MzQ2OTM5IDAuMTUzMDYxMjIgMS4wMDAwMDAwIDAuMDcxNDI4NTcgMC4xMDIwNDA4MiAwLjEwMjA0MDgyXG4gWzIsXSAxLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjEzNjM2MzY0IDEuMDAwMDAwMCAwLjEzNjM2MzY0IDEuMDAwMDAwMCAwLjA3NTc1NzU4IDAuMDc1NzU3NTggMC4xMDYwNjA2MVxuIFszLF0gMS4wMDAwMDAwIDAuMjE5NTEyMjAgMC4wMDAwMDAwMCAwLjM2NTg1MzcgMC4xNzA3MzE3MSAxLjAwMDAwMDAgMC4wNzMxNzA3MyAwLjE3MDczMTcxIDAuMDk3NTYwOThcbiBbNCxdIDAuNjMxNTc4OSAwLjU3ODk0NzM3IDAuMTMxNTc4OTUgMC4wMDAwMDAwIDAuNTAwMDAwMDAgMS4wMDAwMDAwIDAuMDk2NDkxMjMgMC4wODc3MTkzMCAwLjEwNTI2MzE2XG4gWzUsXSAwLjI2MzE1NzkgMC4xNTc4OTQ3NCAwLjEyMjgwNzAyIDEuMDAwMDAwMCAwLjAwMDAwMDAwIDEuMDAwMDAwMCAwLjEyMjgwNzAyIDAuMTA1MjYzMTYgMC4xMDUyNjMxNlxuIFs2LF0gMC43MDAwMDAwIDAuNDcxNDI4NTcgMC4yOTI4NTcxNCAwLjgxNDI4NTcgMC40MDcxNDI4NiAwLjAwMDAwMDAgMC4wOTI4NTcxNCAwLjEwNzE0Mjg2IDAuMTAwMDAwMDBcbiBbNyxdIDAuMTU1NTU1NiAwLjExMTExMTExIDAuMDY2NjY2NjcgMC4yNDQ0NDQ0IDAuMTU1NTU1NTYgMC4yODg4ODg5IDAuMDAwMDAwMDAgMC4wNDQ0NDQ0NCAwLjIwMDAwMDAwXG4gWzgsXSAwLjE2NjY2NjcgMC4wODMzMzMzMyAwLjExNjY2NjY3IDAuMTY2NjY2NyAwLjEwMDAwMDAwIDAuMjUwMDAwMCAwLjAzMzMzMzMzIDAuMDAwMDAwMDAgMC4wODMzMzMzM1xuIFs5LF0gMC4yMTczOTEzIDAuMTUyMTczOTEgMC4wODY5NTY1MiAwLjI2MDg2OTYgMC4xMzA0MzQ3OCAwLjMwNDM0NzggMC4xOTU2NTIxNyAwLjEwODY5NTY1IDAuMDAwMDAwMDBcblsxMCxdIDAuMjIyMjIyMiAwLjE1NTU1NTU2IDAuMDg4ODg4ODkgMC4yNDQ0NDQ0IDAuMDg4ODg4ODkgMC4yODg4ODg5IDAuMTMzMzMzMzMgMC4xNzc3Nzc3OCAwLjA4ODg4ODg5XG4gICAgICAgICAgIFssMTBdXG4gWzEsXSAwLjEwMjA0MDgyXG4gWzIsXSAwLjEwNjA2MDYxXG4gWzMsXSAwLjA5NzU2MDk4XG4gWzQsXSAwLjA5NjQ5MTIzXG4gWzUsXSAwLjA3MDE3NTQ0XG4gWzYsXSAwLjA5Mjg1NzE0XG4gWzcsXSAwLjEzMzMzMzMzXG4gWzgsXSAwLjEzMzMzMzMzXG4gWzksXSAwLjA4Njk1NjUyXG5bMTAsXSAwLjAwMDAwMDAwXG4ifQ== -->
+<pre><code>           [,1]       [,2]       [,3]      [,4]       [,5]      [,6]       [,7]       [,8]       [,9]
+ [1,] 0.0000000 0.67346939 0.41836735 0.7346939 0.15306122 1.0000000 0.07142857 0.10204082 0.10204082
+ [2,] 1.0000000 0.00000000 0.13636364 1.0000000 0.13636364 1.0000000 0.07575758 0.07575758 0.10606061
+ [3,] 1.0000000 0.21951220 0.00000000 0.3658537 0.17073171 1.0000000 0.07317073 0.17073171 0.09756098
+ [4,] 0.6315789 0.57894737 0.13157895 0.0000000 0.50000000 1.0000000 0.09649123 0.08771930 0.10526316
+ [5,] 0.2631579 0.15789474 0.12280702 1.0000000 0.00000000 1.0000000 0.12280702 0.10526316 0.10526316
+ [6,] 0.7000000 0.47142857 0.29285714 0.8142857 0.40714286 0.0000000 0.09285714 0.10714286 0.10000000
+ [7,] 0.1555556 0.11111111 0.06666667 0.2444444 0.15555556 0.2888889 0.00000000 0.04444444 0.20000000
+ [8,] 0.1666667 0.08333333 0.11666667 0.1666667 0.10000000 0.2500000 0.03333333 0.00000000 0.08333333
+ [9,] 0.2173913 0.15217391 0.08695652 0.2608696 0.13043478 0.3043478 0.19565217 0.10869565 0.00000000
+[10,] 0.2222222 0.15555556 0.08888889 0.2444444 0.08888889 0.2888889 0.13333333 0.17777778 0.08888889
+           [,10]
+ [1,] 0.10204082
+ [2,] 0.10606061
+ [3,] 0.09756098
+ [4,] 0.09649123
+ [5,] 0.07017544
+ [6,] 0.09285714
+ [7,] 0.13333333
+ [8,] 0.13333333
+ [9,] 0.08695652
+[10,] 0.00000000</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;baseline trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgdHJzIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;baseline trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChyZXMkY29uZk5ldCkgKSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSBkaXJlY3RlZCBtYXRcIilcbmBgYCJ9 -->
+<pre class="r"><code>print(&quot;baseline directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgZGlyZWN0ZWQgbWF0XCJcbiJ9 -->
+<pre><code>[1] &quot;baseline directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSByZXMkY29uZk5ldCApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAwLjY2NjY2NjdcblxuJHJlY1xuWzFdIDFcblxuJEYxXG5bMV0gMC44XG4ifQ== -->
+<pre><code>$prec
+[1] 0.6666667
+
+$rec
+[1] 1
+
+$F1
+[1] 0.8</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSlcbmBgYCJ9 -->
+<pre class="r"><code>resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC4zMjU4MjQ3XG5bMV0gXCIxLDNcIlxuWzFdIC0wLjU4NTExMTVcblsxXSBcIjEsNlwiXG5bMV0gMC4zMDM4MDYyXG5bMV0gXCIyLDRcIlxuWzFdIDAuNDIzMzE3NVxuWzFdIFwiNCw1XCJcblsxXSAtMC40OTk3MjhcblsxXSBcIjQsNlwiXG5bMV0gMC4xODU5NDExXG4ifQ== -->
+<pre><code>[1] &quot;Inferring dependent graph&quot;
+[1] &quot;Removing confounder(s)&quot;
+[1] &quot;Inferring causal graph&quot;
+[1] &quot;1,2&quot;
+[1] -0.3258247
+[1] &quot;1,3&quot;
+[1] -0.5851115
+[1] &quot;1,6&quot;
+[1] 0.3038062
+[1] &quot;2,4&quot;
+[1] 0.4233175
+[1] &quot;4,5&quot;
+[1] -0.499728
+[1] &quot;4,6&quot;
+[1] 0.1859411</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2RcbmBgYCJ9 -->
+<pre class="r"><code>resC$CausalGRes$Ehat # proposed method</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    0    0    0    0     0
+ [3,]    1    0    0    0    0    0    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    0    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY01hdDwtIHJlc0MkQ2F1c2FsR1JlcyRFaGF0XG5wcmludChcInByb3Bvc2VkIG1ldGhvZCB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>cMat&lt;- resC$CausalGRes$Ehat
+print(&quot;proposed method trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIHRycyBtYXRcIlxuIn0= -->
+<pre><code>[1] &quot;proposed method trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChjTWF0KSApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJwcm9wb3NlZCBtZXRob2QgZGlyZWN0ZWQgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;proposed method directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIGRpcmVjdGVkIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;proposed method directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSBjTWF0KSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="third-exp-on-sim---down-prob-of-being-1-in-sim-to-0.08" class="section level1">
+<h1>Third exp on sim -&gt; down prob of being 1 in sim to 0.08</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZXQuc2VlZCgyMDIyKVxuc2VlZE48LTIwMjJcblxubjwtNTAwXG5kPC0xMFxubWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZClcblxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBzZXQuc2VlZChzZWVkTitpKVxuICBtYXRbaSxdIDwtIHJiaW5vbShuPWQsIHNpemU9MSwgcHJvYj0wLjA4KVxufVxubWF0WywxXTwtbWF0WywyXSB8IG1hdFssM10gXG5tYXRbLDRdIDwtbWF0WywyXSB8IG1hdFssNV1cbm1hdFssNl0gPC0gbWF0WywxXSB8IG1hdFssNF1cblxudHJ1ZU1hdDwtbWF0cml4KG5yb3c9ZCxuY29sPWQsMClcbnRydWVNYXRbYygyLDMpLDFdPC0xXG50cnVlTWF0W2MoMiw1KSw0XTwtMVxudHJ1ZU1hdFtjKDEsNCksNl08LTFcbnRyc1RydWVNYXQ8LWdldFRyYW5zaXRpdmVDbG9zdXJlTWF0KHRydWVNYXQpXG5cbnJlczwtY29uZk5ldEZ1bmMobWF0PW1hdCxJbmRwVGhzPTAuOSlcbnJlcyRjb25mTmV0XG5gYGAifQ== -->
+<pre class="r"><code># set.seed(2022)
+seedN&lt;-2022
+
+n&lt;-500
+d&lt;-10
+mat&lt;-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.08)
+}
+mat[,1]&lt;-mat[,2] | mat[,3] 
+mat[,4] &lt;-mat[,2] | mat[,5]
+mat[,6] &lt;- mat[,1] | mat[,4]
+
+trueMat&lt;-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]&lt;-1
+trueMat[c(2,5),4]&lt;-1
+trueMat[c(1,4),6]&lt;-1
+trsTrueMat&lt;-getTransitiveClosureMat(trueMat)
+
+res&lt;-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDEgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    1    0    0    0     0
+ [3,]    1    0    0    0    0    1    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    1    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzJGNvbmZWYWxNYXQgIyBiYXNlbGluZVxuYGBgIn0= -->
+<pre class="r"><code>res$confValMat # baseline</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICBbLDFdICAgICAgIFssMl0gICAgICAgWywzXSAgICAgIFssNF0gICAgICAgWyw1XSAgICAgIFssNl0gICAgICAgWyw3XSAgICAgICBbLDhdICAgICAgIFssOV1cbiBbMSxdIDAuMDAwMDAwMCAwLjY1MDAwMDAwIDAuMzg3NTAwMDAgMC42ODc1MDAwIDAuMTAwMDAwMDAgMS4wMDAwMDAwIDAuMDYyNTAwMDAgMC4wNzUwMDAwMCAwLjA4NzUwMDAwXG4gWzIsXSAxLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjA1NzY5MjMxIDEuMDAwMDAwMCAwLjA5NjE1Mzg1IDEuMDAwMDAwMCAwLjA5NjE1Mzg1IDAuMDM4NDYxNTQgMC4wOTYxNTM4NVxuIFszLF0gMS4wMDAwMDAwIDAuMDk2Nzc0MTkgMC4wMDAwMDAwMCAwLjE5MzU0ODQgMC4wOTY3NzQxOSAxLjAwMDAwMDAgMC4wMDAwMDAwMCAwLjEyOTAzMjI2IDAuMDk2Nzc0MTlcbiBbNCxdIDAuNjE3OTc3NSAwLjU4NDI2OTY2IDAuMDY3NDE1NzMgMC4wMDAwMDAwIDAuNDcxOTEwMTEgMS4wMDAwMDAwIDAuMDg5ODg3NjQgMC4wNTYxNzk3OCAwLjEwMTEyMzYwXG4gWzUsXSAwLjE5MDQ3NjIgMC4xMTkwNDc2MiAwLjA3MTQyODU3IDEuMDAwMDAwMCAwLjAwMDAwMDAwIDEuMDAwMDAwMCAwLjA5NTIzODEwIDAuMDk1MjM4MTAgMC4xMTkwNDc2MlxuIFs2LF0gMC43MDE3NTQ0IDAuNDU2MTQwMzUgMC4yNzE5Mjk4MiAwLjc4MDcwMTggMC4zNjg0MjEwNSAwLjAwMDAwMDAgMC4wNzAxNzU0NCAwLjA3ODk0NzM3IDAuMDg3NzE5MzBcbiBbNyxdIDAuMTQyODU3MSAwLjE0Mjg1NzE0IDAuMDAwMDAwMDAgMC4yMjg1NzE0IDAuMTE0Mjg1NzEgMC4yMjg1NzE0IDAuMDAwMDAwMDAgMC4wMjg1NzE0MyAwLjE0Mjg1NzE0XG4gWzgsXSAwLjEyNTAwMDAgMC4wNDE2NjY2NyAwLjA4MzMzMzMzIDAuMTA0MTY2NyAwLjA4MzMzMzMzIDAuMTg3NTAwMCAwLjAyMDgzMzMzIDAuMDAwMDAwMDAgMC4wNDE2NjY2N1xuIFs5LF0gMC4xODQyMTA1IDAuMTMxNTc4OTUgMC4wNzg5NDczNyAwLjIzNjg0MjEgMC4xMzE1Nzg5NSAwLjI2MzE1NzkgMC4xMzE1Nzg5NSAwLjA1MjYzMTU4IDAuMDAwMDAwMDBcblsxMCxdIDAuMTk0NDQ0NCAwLjEzODg4ODg5IDAuMDU1NTU1NTYgMC4xMzg4ODg5IDAuMDAwMDAwMDAgMC4xOTQ0NDQ0IDAuMTExMTExMTEgMC4wODMzMzMzMyAwLjA4MzMzMzMzXG4gICAgICAgICAgIFssMTBdXG4gWzEsXSAwLjA4NzUwMDAwXG4gWzIsXSAwLjA5NjE1Mzg1XG4gWzMsXSAwLjA2NDUxNjEzXG4gWzQsXSAwLjA1NjE3OTc4XG4gWzUsXSAwLjAwMDAwMDAwXG4gWzYsXSAwLjA2MTQwMzUxXG4gWzcsXSAwLjExNDI4NTcxXG4gWzgsXSAwLjA2MjUwMDAwXG4gWzksXSAwLjA3ODk0NzM3XG5bMTAsXSAwLjAwMDAwMDAwXG4ifQ== -->
+<pre><code>           [,1]       [,2]       [,3]      [,4]       [,5]      [,6]       [,7]       [,8]       [,9]
+ [1,] 0.0000000 0.65000000 0.38750000 0.6875000 0.10000000 1.0000000 0.06250000 0.07500000 0.08750000
+ [2,] 1.0000000 0.00000000 0.05769231 1.0000000 0.09615385 1.0000000 0.09615385 0.03846154 0.09615385
+ [3,] 1.0000000 0.09677419 0.00000000 0.1935484 0.09677419 1.0000000 0.00000000 0.12903226 0.09677419
+ [4,] 0.6179775 0.58426966 0.06741573 0.0000000 0.47191011 1.0000000 0.08988764 0.05617978 0.10112360
+ [5,] 0.1904762 0.11904762 0.07142857 1.0000000 0.00000000 1.0000000 0.09523810 0.09523810 0.11904762
+ [6,] 0.7017544 0.45614035 0.27192982 0.7807018 0.36842105 0.0000000 0.07017544 0.07894737 0.08771930
+ [7,] 0.1428571 0.14285714 0.00000000 0.2285714 0.11428571 0.2285714 0.00000000 0.02857143 0.14285714
+ [8,] 0.1250000 0.04166667 0.08333333 0.1041667 0.08333333 0.1875000 0.02083333 0.00000000 0.04166667
+ [9,] 0.1842105 0.13157895 0.07894737 0.2368421 0.13157895 0.2631579 0.13157895 0.05263158 0.00000000
+[10,] 0.1944444 0.13888889 0.05555556 0.1388889 0.00000000 0.1944444 0.11111111 0.08333333 0.08333333
+           [,10]
+ [1,] 0.08750000
+ [2,] 0.09615385
+ [3,] 0.06451613
+ [4,] 0.05617978
+ [5,] 0.00000000
+ [6,] 0.06140351
+ [7,] 0.11428571
+ [8,] 0.06250000
+ [9,] 0.07894737
+[10,] 0.00000000</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;baseline trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgdHJzIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;baseline trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChyZXMkY29uZk5ldCkgKSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSBkaXJlY3RlZCBtYXRcIilcbmBgYCJ9 -->
+<pre class="r"><code>print(&quot;baseline directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgZGlyZWN0ZWQgbWF0XCJcbiJ9 -->
+<pre><code>[1] &quot;baseline directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSByZXMkY29uZk5ldCApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAwLjY2NjY2NjdcblxuJHJlY1xuWzFdIDFcblxuJEYxXG5bMV0gMC44XG4ifQ== -->
+<pre><code>$prec
+[1] 0.6666667
+
+$rec
+[1] 1
+
+$F1
+[1] 0.8</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSlcbmBgYCJ9 -->
+<pre class="r"><code>resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC4zNDcwNjQxXG5bMV0gXCIxLDZcIlxuWzFdIDAuMzAxODM3NFxuWzFdIFwiMiw0XCJcblsxXSAwLjQxNjYwNjdcblsxXSBcIjQsNVwiXG5bMV0gLTAuNTI2NjAyXG5bMV0gXCI0LDZcIlxuWzFdIDAuMjE4Mzg5N1xuIn0= -->
+<pre><code>[1] &quot;Inferring dependent graph&quot;
+[1] &quot;Removing confounder(s)&quot;
+[1] &quot;Inferring causal graph&quot;
+[1] &quot;1,2&quot;
+[1] -0.3470641
+[1] &quot;1,6&quot;
+[1] 0.3018374
+[1] &quot;2,4&quot;
+[1] 0.4166067
+[1] &quot;4,5&quot;
+[1] -0.526602
+[1] &quot;4,6&quot;
+[1] 0.2183897</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2RcbmBgYCJ9 -->
+<pre class="r"><code>resC$CausalGRes$Ehat # proposed method</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    0    0    0    0     0
+ [3,]    0    0    0    0    0    0    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    0    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY01hdDwtIHJlc0MkQ2F1c2FsR1JlcyRFaGF0XG5wcmludChcInByb3Bvc2VkIG1ldGhvZCB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>cMat&lt;- resC$CausalGRes$Ehat
+print(&quot;proposed method trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIHRycyBtYXRcIlxuIn0= -->
+<pre><code>[1] &quot;proposed method trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChjTWF0KSApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAwLjc3Nzc3NzhcblxuJEYxXG5bMV0gMC44NzVcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 0.7777778
+
+$F1
+[1] 0.875</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJwcm9wb3NlZCBtZXRob2QgZGlyZWN0ZWQgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;proposed method directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIGRpcmVjdGVkIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;proposed method directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSBjTWF0KSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAwLjgzMzMzMzNcblxuJEYxXG5bMV0gMC45MDkwOTA5XG4ifQ== -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 0.8333333
+
+$F1
+[1] 0.9090909</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="third-exp-on-sim---down-prob-of-being-1-in-sim-to-0.05" class="section level1">
+<h1>Third exp on sim -&gt; down prob of being 1 in sim to 0.05</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZXQuc2VlZCgyMDIyKVxuc2VlZE48LTIwMjJcblxubjwtNTAwXG5kPC0xMFxubWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZClcblxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBzZXQuc2VlZChzZWVkTitpKVxuICBtYXRbaSxdIDwtIHJiaW5vbShuPWQsIHNpemU9MSwgcHJvYj0wLjA1KVxufVxubWF0WywxXTwtbWF0WywyXSB8IG1hdFssM10gXG5tYXRbLDRdIDwtbWF0WywyXSB8IG1hdFssNV1cbm1hdFssNl0gPC0gbWF0WywxXSB8IG1hdFssNF1cblxudHJ1ZU1hdDwtbWF0cml4KG5yb3c9ZCxuY29sPWQsMClcbnRydWVNYXRbYygyLDMpLDFdPC0xXG50cnVlTWF0W2MoMiw1KSw0XTwtMVxudHJ1ZU1hdFtjKDEsNCksNl08LTFcbnRyc1RydWVNYXQ8LWdldFRyYW5zaXRpdmVDbG9zdXJlTWF0KHRydWVNYXQpXG5cbnJlczwtY29uZk5ldEZ1bmMobWF0PW1hdCxJbmRwVGhzPTAuOSlcbnJlcyRjb25mTmV0XG5gYGAifQ== -->
+<pre class="r"><code># set.seed(2022)
+seedN&lt;-2022
+
+n&lt;-500
+d&lt;-10
+mat&lt;-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] &lt;- rbinom(n=d, size=1, prob=0.05)
+}
+mat[,1]&lt;-mat[,2] | mat[,3] 
+mat[,4] &lt;-mat[,2] | mat[,5]
+mat[,6] &lt;- mat[,1] | mat[,4]
+
+trueMat&lt;-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]&lt;-1
+trueMat[c(2,5),4]&lt;-1
+trueMat[c(1,4),6]&lt;-1
+trsTrueMat&lt;-getTransitiveClosureMat(trueMat)
+
+res&lt;-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMSAgICAwICAgIDAgICAgMCAgICAwICAgIDEgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMSAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    1    0    0    0     0
+ [3,]    1    0    0    0    0    1    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    1    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzJGNvbmZWYWxNYXQgIyBiYXNlbGluZVxuYGBgIn0= -->
+<pre class="r"><code>res$confValMat # baseline</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgWywxXSAgICAgICBbLDJdICAgICAgIFssM10gICAgICAgWyw0XSAgICAgICBbLDVdICAgICAgWyw2XSAgICAgICBbLDddICAgICAgIFssOF0gICAgICAgWyw5XVxuIFsxLF0gMC4wMDAwMDAwMCAwLjY0OTEyMjgxIDAuMzg1OTY0OTEgMC43MDE3NTQzOSAwLjEyMjgwNzAyIDEuMDAwMDAwMCAwLjAzNTA4NzcyIDAuMDUyNjMxNTggMC4wNzAxNzU0NFxuIFsyLF0gMS4wMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDU0MDU0MDUgMS4wMDAwMDAwMCAwLjEwODEwODExIDEuMDAwMDAwMCAwLjA1NDA1NDA1IDAuMDI3MDI3MDMgMC4wODEwODEwOFxuIFszLF0gMS4wMDAwMDAwMCAwLjA5MDkwOTA5IDAuMDAwMDAwMDAgMC4yMjcyNzI3MyAwLjEzNjM2MzY0IDEuMDAwMDAwMCAwLjAwMDAwMDAwIDAuMDkwOTA5MDkgMC4wNDU0NTQ1NVxuIFs0LF0gMC42MTUzODQ2MiAwLjU2OTIzMDc3IDAuMDc2OTIzMDggMC4wMDAwMDAwMCAwLjQ5MjMwNzY5IDEuMDAwMDAwMCAwLjA2MTUzODQ2IDAuMDMwNzY5MjMgMC4wNjE1Mzg0NlxuIFs1LF0gMC4yMTg3NTAwMCAwLjEyNTAwMDAwIDAuMDkzNzUwMDAgMS4wMDAwMDAwMCAwLjAwMDAwMDAwIDEuMDAwMDAwMCAwLjA2MjUwMDAwIDAuMDYyNTAwMDAgMC4wNjI1MDAwMFxuIFs2LF0gMC42OTUxMjE5NSAwLjQ1MTIxOTUxIDAuMjY4MjkyNjggMC43OTI2ODI5MyAwLjM5MDI0MzkwIDAuMDAwMDAwMCAwLjA0ODc4MDQ5IDAuMDQ4NzgwNDkgMC4wNjA5NzU2MVxuIFs3LF0gMC4wODMzMzMzMyAwLjA4MzMzMzMzIDAuMDAwMDAwMDAgMC4xNjY2NjY2NyAwLjA4MzMzMzMzIDAuMTY2NjY2NyAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wODMzMzMzM1xuIFs4LF0gMC4wOTM3NTAwMCAwLjAzMTI1MDAwIDAuMDYyNTAwMDAgMC4wNjI1MDAwMCAwLjA2MjUwMDAwIDAuMTI1MDAwMCAwLjAwMDAwMDAwIDAuMDAwMDAwMDAgMC4wMzEyNTAwMFxuIFs5LF0gMC4xNTM4NDYxNSAwLjExNTM4NDYyIDAuMDM4NDYxNTQgMC4xNTM4NDYxNSAwLjA3NjkyMzA4IDAuMTkyMzA3NyAwLjA3NjkyMzA4IDAuMDM4NDYxNTQgMC4wMDAwMDAwMFxuWzEwLF0gMC4xMDUyNjMxNiAwLjA1MjYzMTU4IDAuMDUyNjMxNTggMC4wNTI2MzE1OCAwLjAwMDAwMDAwIDAuMTA1MjYzMiAwLjE1Nzg5NDc0IDAuMDUyNjMxNTggMC4wNTI2MzE1OFxuICAgICAgICAgICBbLDEwXVxuIFsxLF0gMC4wMzUwODc3MlxuIFsyLF0gMC4wMjcwMjcwM1xuIFszLF0gMC4wNDU0NTQ1NVxuIFs0LF0gMC4wMTUzODQ2MlxuIFs1LF0gMC4wMDAwMDAwMFxuIFs2LF0gMC4wMjQzOTAyNFxuIFs3LF0gMC4xMjUwMDAwMFxuIFs4LF0gMC4wMzEyNTAwMFxuIFs5LF0gMC4wMzg0NjE1NFxuWzEwLF0gMC4wMDAwMDAwMFxuIn0= -->
+<pre><code>            [,1]       [,2]       [,3]       [,4]       [,5]      [,6]       [,7]       [,8]       [,9]
+ [1,] 0.00000000 0.64912281 0.38596491 0.70175439 0.12280702 1.0000000 0.03508772 0.05263158 0.07017544
+ [2,] 1.00000000 0.00000000 0.05405405 1.00000000 0.10810811 1.0000000 0.05405405 0.02702703 0.08108108
+ [3,] 1.00000000 0.09090909 0.00000000 0.22727273 0.13636364 1.0000000 0.00000000 0.09090909 0.04545455
+ [4,] 0.61538462 0.56923077 0.07692308 0.00000000 0.49230769 1.0000000 0.06153846 0.03076923 0.06153846
+ [5,] 0.21875000 0.12500000 0.09375000 1.00000000 0.00000000 1.0000000 0.06250000 0.06250000 0.06250000
+ [6,] 0.69512195 0.45121951 0.26829268 0.79268293 0.39024390 0.0000000 0.04878049 0.04878049 0.06097561
+ [7,] 0.08333333 0.08333333 0.00000000 0.16666667 0.08333333 0.1666667 0.00000000 0.00000000 0.08333333
+ [8,] 0.09375000 0.03125000 0.06250000 0.06250000 0.06250000 0.1250000 0.00000000 0.00000000 0.03125000
+ [9,] 0.15384615 0.11538462 0.03846154 0.15384615 0.07692308 0.1923077 0.07692308 0.03846154 0.00000000
+[10,] 0.10526316 0.05263158 0.05263158 0.05263158 0.00000000 0.1052632 0.15789474 0.05263158 0.05263158
+           [,10]
+ [1,] 0.03508772
+ [2,] 0.02702703
+ [3,] 0.04545455
+ [4,] 0.01538462
+ [5,] 0.00000000
+ [6,] 0.02439024
+ [7,] 0.12500000
+ [8,] 0.03125000
+ [9,] 0.03846154
+[10,] 0.00000000</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;baseline trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgdHJzIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;baseline trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChyZXMkY29uZk5ldCkgKSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAxXG5cbiRGMVxuWzFdIDFcbiJ9 -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 1
+
+$F1
+[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJiYXNlbGluZSBkaXJlY3RlZCBtYXRcIilcbmBgYCJ9 -->
+<pre class="r"><code>print(&quot;baseline directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYmFzZWxpbmUgZGlyZWN0ZWQgbWF0XCJcbiJ9 -->
+<pre><code>[1] &quot;baseline directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSByZXMkY29uZk5ldCApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAwLjY2NjY2NjdcblxuJHJlY1xuWzFdIDFcblxuJEYxXG5bMV0gMC44XG4ifQ== -->
+<pre><code>$prec
+[1] 0.6666667
+
+$rec
+[1] 1
+
+$F1
+[1] 0.8</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSlcbmBgYCJ9 -->
+<pre class="r"><code>resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC4zNDk1NTYxXG5bMV0gXCIyLDRcIlxuWzFdIDAuNDI5ODQ1NFxuWzFdIFwiNCw1XCJcblsxXSAtMC41MDgwMDIxXG5bMV0gXCI0LDZcIlxuWzFdIDAuMjA5MTg1NlxuIn0= -->
+<pre><code>[1] &quot;Inferring dependent graph&quot;
+[1] &quot;Removing confounder(s)&quot;
+[1] &quot;Inferring causal graph&quot;
+[1] &quot;1,2&quot;
+[1] -0.3495561
+[1] &quot;2,4&quot;
+[1] 0.4298454
+[1] &quot;4,5&quot;
+[1] -0.5080021
+[1] &quot;4,6&quot;
+[1] 0.2091856</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2RcbmBgYCJ9 -->
+<pre class="r"><code>resC$CausalGRes$Ehat # proposed method</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFszLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    0    0    0    0     0
+ [2,]    1    0    0    1    0    0    0    0    0     0
+ [3,]    0    0    0    0    0    0    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    0    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY01hdDwtIHJlc0MkQ2F1c2FsR1JlcyRFaGF0XG5wcmludChcInByb3Bvc2VkIG1ldGhvZCB0cnMgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>cMat&lt;- resC$CausalGRes$Ehat
+print(&quot;proposed method trs mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIHRycyBtYXRcIlxuIn0= -->
+<pre><code>[1] &quot;proposed method trs mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChjTWF0KSApIClcbmBgYCJ9 -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAwLjY2NjY2NjdcblxuJEYxXG5bMV0gMC44XG4ifQ== -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 0.6666667
+
+$F1
+[1] 0.8</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoXCJwcm9wb3NlZCBtZXRob2QgZGlyZWN0ZWQgbWF0XCIpXG5gYGAifQ== -->
+<pre class="r"><code>print(&quot;proposed method directed mat&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwicHJvcG9zZWQgbWV0aG9kIGRpcmVjdGVkIG1hdFwiXG4ifQ== -->
+<pre><code>[1] &quot;proposed method directed mat&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSBjTWF0KSApXG5gYGAifQ== -->
+<pre class="r"><code>print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJHByZWNcblsxXSAxXG5cbiRyZWNcblsxXSAwLjY2NjY2NjdcblxuJEYxXG5bMV0gMC44XG4ifQ== -->
+<pre><code>$prec
+[1] 1
+
+$rec
+[1] 0.6666667
+
+$F1
+[1] 0.8</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRVhQIE5vdGVib29rIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpFeHBlcmltZW50IG5vdGVib29rCmBgYHtyfQpsaWJyYXJ5KGRldnRvb2xzKQpkZXZ0b29sczo6ZG9jdW1lbnQoKQpgYGAKCmxvYWQKYGBge3J9CmxvYWQoIlRQTUFQZGF0YTYxLnJkYXRhIikKYGBgCmNsZWFuc2luZwpgYGB7cn0KbWF0NDA8LWFzLmRhdGEuZnJhbWUoRGF0YVRQcm92NDAkUCkKZm9yKGkgaW4gc2VxKDMxKSkKewogbW9kZShtYXQ0MFssaV0pPSAibnVtZXJpYyIKICBtYXQ0MFtpcy5uYShtYXQ0MFssaV0pLCBpXSA9IDAKICBwcmludChzcHJpbnRmKCIlZCIsaSApICApCiAgcHJpbnQodW5pcXVlKG1hdDQwWyxpXSkpCn0KbWF0NDA8LWFzLm1hdHJpeChtYXQ0MCkKYGBgCm1pbmluZwpgYGB7cn0KbGlicmFyeShCaUNhdXNhbGl0eSkKIyBhbHBoYT0wLjA1CiMgbmJvb3Q9MTAwCiMgSW5kcFRocz0wLjA1CiMgQ2F1c2FsVGhzID0gMC4yNQojIHNsYWNrPTAuMDAxCiMgcmVzNTA8LWJTQ01EZXBuZGVudEdyYXBoRnVuYyhtYXQgPSBtYXQ1MCwgcGZsYWc9VFJVRSxJbmRwVGhzID0wLjAxKQojIHByaW50KCJSZW1vdmluZyBjb25mb3VuZGVyKHMpIikKIyByZXM1MF8yPC1CaUNhdXNhbGl0eTo6YlNDTWRlQ29uZm91bmRpbmdHcmFwaEZ1bmMocmVzNTAsSW5kcFRocz1JbmRwVGhzLGFscGhhPWFscGhhKQojIHByaW50KCJJbmZlcnJpbmcgY2F1c2FsIGdyYXBoIikKIyByZXM1MF8zPC1CaUNhdXNhbGl0eTo6YlNDTUNhdXNhbEdyYXBoRnVuYyhyZXM1MF8yJEUxLHJlczUwJERib290ICxhbHBoYT1hbHBoYSxTaWduVGhzPUluZHBUaHMsQ2F1c2FsVGhzID0gQ2F1c2FsVGhzLHNsYWNrPXNsYWNrKQoKcmVzNTBmaW5hbDwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQ1MCkKYGBgCgojIHJ1biB0aGlzIGZpcnN0IC0+IGltcGxlbWVudGF0aW9uIG9mIGNvbmZOZXRGdW5jCmBgYHtyfQpsaWJyYXJ5KEJpQ2F1c2FsaXR5KQpjb25mTmV0RnVuYzwtZnVuY3Rpb24obWF0LEluZHBUaHM9MC4xKQp7CiAgZDwtZGltKG1hdClbMl0KICBjb25mTmV0PC1tYXRyaXgoMCxucm93PWQsbmNvbD1kKQogIEQ8LVZlY0FsaWdubWVudChtYXQpCiAgY29uZlZhbE1hdDwtbWF0cml4KDAsbnJvdz1kLG5jb2w9ZCkKICAjPT09CiAgZm9yKGkgaW4gc2VxKGQtMSkpCiAgICBmb3IoaiBpbiBzZXEoaSsxLGQpKQogICAgewogICAgICB6PC1udW1lcmljKGQpLTEKICAgICAgeTwtbnVtZXJpYyhkKS0xCiAgICAgIHlbal08LWMoMSkKICAgICAgeltpXTwtYygxKQogICAgICBhMTwtQ29uZFByb2IoRCx5PXksej16KSRjb25kUCAjIGNvbmYoeXx6KQogICAgICBiMTwtQ29uZFByb2IoRCx5PXosej15KSRjb25kUCAjIGNvbmYoenx5KSAKICAgICAgY29uZlZhbE1hdFtpLGpdPC1hMQogICAgICBjb25mVmFsTWF0W2osaV08LWIxCiAgICAgIGlmKChhMS1iMSk+MCAmJiBhMT49SW5kcFRocykKICAgICAgICBjb25mTmV0W2ksal08LTEKICAgICAgZWxzZSBpZigoYjEtYTEpPjAgJiYgYjE+PSBJbmRwVGhzKQogICAgICAgIGNvbmZOZXRbaixpXTwtMQogICAgICBlbHNlCiAgICAgICAgY29uZk5ldFtpLGpdPC0wCiAgICB9CiAgcmV0dXJuKGxpc3QoY29uZk5ldD1jb25mTmV0LGNvbmZWYWxNYXQ9Y29uZlZhbE1hdCkgKQp9CgojIHNldC5zZWVkKDIwMjIpCnNlZWROPC0yMDIyCgpuPC01MDAKZDwtMTAKbWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZCkKCmZvcihpIGluIHNlcShuKSkKewogIHNldC5zZWVkKHNlZWROK2kpCiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC41KQp9Cm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdIAptYXRbLDRdIDwtbWF0WywyXSB8IG1hdFssNV0KbWF0Wyw2XSA8LSBtYXRbLDFdIHwgbWF0Wyw0XQoKdHJ1ZU1hdDwtbWF0cml4KG5yb3c9ZCxuY29sPWQsMCkKdHJ1ZU1hdFtjKDIsMyksMV08LTEKdHJ1ZU1hdFtjKDIsNSksNF08LTEKdHJ1ZU1hdFtjKDEsNCksNl08LTEKdHJzVHJ1ZU1hdDwtZ2V0VHJhbnNpdGl2ZUNsb3N1cmVNYXQodHJ1ZU1hdCkKCnJlczwtY29uZk5ldEZ1bmMobWF0PW1hdCxJbmRwVGhzPTAuOSkKcmVzJGNvbmZOZXQKcmVzJGNvbmZWYWxNYXQgIyBiYXNlbGluZQpwcmludCgiYmFzZWxpbmUgdHJzIG1hdCIpCnByaW50KCBjb21wYXJlUHJlZEFkak1hdHJpeDJUcnVlQWRqTWF0KHRydWVBZGpNYXQ9dHJzVHJ1ZU1hdCwgYWRqTWF0ID0gZ2V0VHJhbnNpdGl2ZUNsb3N1cmVNYXQocmVzJGNvbmZOZXQpICkgKQpwcmludCgiYmFzZWxpbmUgZGlyZWN0ZWQgbWF0IikKcHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSByZXMkY29uZk5ldCApICkKCnJlc0M8LUJpQ2F1c2FsaXR5OjpDYXVzYWxHcmFwaEluZmVyTWFpbkZ1bmMobWF0ID0gbWF0LENhdXNhbFRocz0wLjEpCnJlc0MkQ2F1c2FsR1JlcyRFaGF0ICMgcHJvcG9zZWQgbWV0aG9kCgpjTWF0PC0gcmVzQyRDYXVzYWxHUmVzJEVoYXQKcHJpbnQoInByb3Bvc2VkIG1ldGhvZCB0cnMgbWF0IikKcHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChjTWF0KSApICkKcHJpbnQoInByb3Bvc2VkIG1ldGhvZCBkaXJlY3RlZCBtYXQiKQpwcmludCggY29tcGFyZVByZWRBZGpNYXRyaXgyVHJ1ZUFkak1hdCh0cnVlQWRqTWF0PXRydWVNYXQsIGFkak1hdCA9IGNNYXQpICkKYGBgCiMgU2Vjb25kIGV4cCBvbiBzaW0gLT4gZG93biBwcm9iIG9mIGJlaW5nIDEgaW4gc2ltIHRvIDAuMQpgYGB7cn0KIyBzZXQuc2VlZCgyMDIyKQojIHNldC5zZWVkKDIwMjIpCnNlZWROPC0yMDIyCgpuPC01MDAKZDwtMTAKbWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZCkKCmZvcihpIGluIHNlcShuKSkKewogIHNldC5zZWVkKHNlZWROK2kpCiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC4xKQp9Cm1hdFssMV08LW1hdFssMl0gfCBtYXRbLDNdIAptYXRbLDRdIDwtbWF0WywyXSB8IG1hdFssNV0KbWF0Wyw2XSA8LSBtYXRbLDFdIHwgbWF0Wyw0XQoKdHJ1ZU1hdDwtbWF0cml4KG5yb3c9ZCxuY29sPWQsMCkKdHJ1ZU1hdFtjKDIsMyksMV08LTEKdHJ1ZU1hdFtjKDIsNSksNF08LTEKdHJ1ZU1hdFtjKDEsNCksNl08LTEKdHJzVHJ1ZU1hdDwtZ2V0VHJhbnNpdGl2ZUNsb3N1cmVNYXQodHJ1ZU1hdCkKCnJlczwtY29uZk5ldEZ1bmMobWF0PW1hdCxJbmRwVGhzPTAuOSkKcmVzJGNvbmZOZXQKcmVzJGNvbmZWYWxNYXQgIyBiYXNlbGluZQpwcmludCgiYmFzZWxpbmUgdHJzIG1hdCIpCnByaW50KCBjb21wYXJlUHJlZEFkak1hdHJpeDJUcnVlQWRqTWF0KHRydWVBZGpNYXQ9dHJzVHJ1ZU1hdCwgYWRqTWF0ID0gZ2V0VHJhbnNpdGl2ZUNsb3N1cmVNYXQocmVzJGNvbmZOZXQpICkgKQpwcmludCgiYmFzZWxpbmUgZGlyZWN0ZWQgbWF0IikKcHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSByZXMkY29uZk5ldCApICkKCnJlc0M8LUJpQ2F1c2FsaXR5OjpDYXVzYWxHcmFwaEluZmVyTWFpbkZ1bmMobWF0ID0gbWF0LENhdXNhbFRocz0wLjEpCnJlc0MkQ2F1c2FsR1JlcyRFaGF0ICMgcHJvcG9zZWQgbWV0aG9kCgpjTWF0PC0gcmVzQyRDYXVzYWxHUmVzJEVoYXQKcHJpbnQoInByb3Bvc2VkIG1ldGhvZCB0cnMgbWF0IikKcHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChjTWF0KSApICkKcHJpbnQoInByb3Bvc2VkIG1ldGhvZCBkaXJlY3RlZCBtYXQiKQpwcmludCggY29tcGFyZVByZWRBZGpNYXRyaXgyVHJ1ZUFkak1hdCh0cnVlQWRqTWF0PXRydWVNYXQsIGFkak1hdCA9IGNNYXQpICkKYGBgCiMgVGhpcmQgZXhwIG9uIHNpbSAtPiBkb3duIHByb2Igb2YgYmVpbmcgMSBpbiBzaW0gdG8gMC4wOApgYGB7cn0KIyBzZXQuc2VlZCgyMDIyKQpzZWVkTjwtMjAyMgoKbjwtNTAwCmQ8LTEwCm1hdDwtbWF0cml4KG5yb3c9bixuY29sPWQpCgpmb3IoaSBpbiBzZXEobikpCnsKICBzZXQuc2VlZChzZWVkTitpKQogIG1hdFtpLF0gPC0gcmJpbm9tKG49ZCwgc2l6ZT0xLCBwcm9iPTAuMDgpCn0KbWF0WywxXTwtbWF0WywyXSB8IG1hdFssM10gCm1hdFssNF0gPC1tYXRbLDJdIHwgbWF0Wyw1XQptYXRbLDZdIDwtIG1hdFssMV0gfCBtYXRbLDRdCgp0cnVlTWF0PC1tYXRyaXgobnJvdz1kLG5jb2w9ZCwwKQp0cnVlTWF0W2MoMiwzKSwxXTwtMQp0cnVlTWF0W2MoMiw1KSw0XTwtMQp0cnVlTWF0W2MoMSw0KSw2XTwtMQp0cnNUcnVlTWF0PC1nZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdCh0cnVlTWF0KQoKcmVzPC1jb25mTmV0RnVuYyhtYXQ9bWF0LEluZHBUaHM9MC45KQpyZXMkY29uZk5ldApyZXMkY29uZlZhbE1hdCAjIGJhc2VsaW5lCnByaW50KCJiYXNlbGluZSB0cnMgbWF0IikKcHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnNUcnVlTWF0LCBhZGpNYXQgPSBnZXRUcmFuc2l0aXZlQ2xvc3VyZU1hdChyZXMkY29uZk5ldCkgKSApCnByaW50KCJiYXNlbGluZSBkaXJlY3RlZCBtYXQiKQpwcmludCggY29tcGFyZVByZWRBZGpNYXRyaXgyVHJ1ZUFkak1hdCh0cnVlQWRqTWF0PXRydWVNYXQsIGFkak1hdCA9IHJlcyRjb25mTmV0ICkgKQoKcmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBtYXQsQ2F1c2FsVGhzPTAuMSkKcmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2QKCmNNYXQ8LSByZXNDJENhdXNhbEdSZXMkRWhhdApwcmludCgicHJvcG9zZWQgbWV0aG9kIHRycyBtYXQiKQpwcmludCggY29tcGFyZVByZWRBZGpNYXRyaXgyVHJ1ZUFkak1hdCh0cnVlQWRqTWF0PXRyc1RydWVNYXQsIGFkak1hdCA9IGdldFRyYW5zaXRpdmVDbG9zdXJlTWF0KGNNYXQpICkgKQpwcmludCgicHJvcG9zZWQgbWV0aG9kIGRpcmVjdGVkIG1hdCIpCnByaW50KCBjb21wYXJlUHJlZEFkak1hdHJpeDJUcnVlQWRqTWF0KHRydWVBZGpNYXQ9dHJ1ZU1hdCwgYWRqTWF0ID0gY01hdCkgKQpgYGAKIyBUaGlyZCBleHAgb24gc2ltIC0+IGRvd24gcHJvYiBvZiBiZWluZyAxIGluIHNpbSB0byAwLjA1CmBgYHtyfQojIHNldC5zZWVkKDIwMjIpCnNlZWROPC0yMDIyCgpuPC01MDAKZDwtMTAKbWF0PC1tYXRyaXgobnJvdz1uLG5jb2w9ZCkKCmZvcihpIGluIHNlcShuKSkKewogIHNldC5zZWVkKHNlZWROK2kpCiAgbWF0W2ksXSA8LSByYmlub20obj1kLCBzaXplPTEsIHByb2I9MC4wNSkKfQptYXRbLDFdPC1tYXRbLDJdIHwgbWF0WywzXSAKbWF0Wyw0XSA8LW1hdFssMl0gfCBtYXRbLDVdCm1hdFssNl0gPC0gbWF0WywxXSB8IG1hdFssNF0KCnRydWVNYXQ8LW1hdHJpeChucm93PWQsbmNvbD1kLDApCnRydWVNYXRbYygyLDMpLDFdPC0xCnRydWVNYXRbYygyLDUpLDRdPC0xCnRydWVNYXRbYygxLDQpLDZdPC0xCnRyc1RydWVNYXQ8LWdldFRyYW5zaXRpdmVDbG9zdXJlTWF0KHRydWVNYXQpCgpyZXM8LWNvbmZOZXRGdW5jKG1hdD1tYXQsSW5kcFRocz0wLjkpCnJlcyRjb25mTmV0CnJlcyRjb25mVmFsTWF0ICMgYmFzZWxpbmUKcHJpbnQoImJhc2VsaW5lIHRycyBtYXQiKQpwcmludCggY29tcGFyZVByZWRBZGpNYXRyaXgyVHJ1ZUFkak1hdCh0cnVlQWRqTWF0PXRyc1RydWVNYXQsIGFkak1hdCA9IGdldFRyYW5zaXRpdmVDbG9zdXJlTWF0KHJlcyRjb25mTmV0KSApICkKcHJpbnQoImJhc2VsaW5lIGRpcmVjdGVkIG1hdCIpCnByaW50KCBjb21wYXJlUHJlZEFkak1hdHJpeDJUcnVlQWRqTWF0KHRydWVBZGpNYXQ9dHJ1ZU1hdCwgYWRqTWF0ID0gcmVzJGNvbmZOZXQgKSApCgpyZXNDPC1CaUNhdXNhbGl0eTo6Q2F1c2FsR3JhcGhJbmZlck1haW5GdW5jKG1hdCA9IG1hdCxDYXVzYWxUaHM9MC4xKQpyZXNDJENhdXNhbEdSZXMkRWhhdCAjIHByb3Bvc2VkIG1ldGhvZAoKY01hdDwtIHJlc0MkQ2F1c2FsR1JlcyRFaGF0CnByaW50KCJwcm9wb3NlZCBtZXRob2QgdHJzIG1hdCIpCnByaW50KCBjb21wYXJlUHJlZEFkak1hdHJpeDJUcnVlQWRqTWF0KHRydWVBZGpNYXQ9dHJzVHJ1ZU1hdCwgYWRqTWF0ID0gZ2V0VHJhbnNpdGl2ZUNsb3N1cmVNYXQoY01hdCkgKSApCnByaW50KCJwcm9wb3NlZCBtZXRob2QgZGlyZWN0ZWQgbWF0IikKcHJpbnQoIGNvbXBhcmVQcmVkQWRqTWF0cml4MlRydWVBZGpNYXQodHJ1ZUFkak1hdD10cnVlTWF0LCBhZGpNYXQgPSBjTWF0KSApCmBgYAo=</div>
 
 
 

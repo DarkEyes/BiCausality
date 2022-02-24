@@ -42,6 +42,7 @@ library(BiCausality)
 res50final<-BiCausality::CausalGraphInferMainFunc(mat = mat50)
 ```
 
+# run this first -> implementation of confNetFunc
 ```{r}
 library(BiCausality)
 confNetFunc<-function(mat,IndpThs=0.1)
@@ -72,21 +73,166 @@ confNetFunc<-function(mat,IndpThs=0.1)
   return(list(confNet=confNet,confValMat=confValMat) )
 }
 
+# set.seed(2022)
+seedN<-2022
+
 n<-500
 d<-10
 mat<-matrix(nrow=n,ncol=d)
+
 for(i in seq(n))
 {
+  set.seed(seedN+i)
   mat[i,] <- rbinom(n=d, size=1, prob=0.5)
 }
 mat[,1]<-mat[,2] | mat[,3] 
 mat[,4] <-mat[,2] | mat[,5]
 mat[,6] <- mat[,1] | mat[,4]
+
+trueMat<-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]<-1
+trueMat[c(2,5),4]<-1
+trueMat[c(1,4),6]<-1
+trsTrueMat<-getTransitiveClosureMat(trueMat)
+
 res<-confNetFunc(mat=mat,IndpThs=0.9)
 res$confNet
-res$confValMat
+res$confValMat # baseline
+print("baseline trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )
+print("baseline directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )
 
 resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)
-resC$CausalGRes$Ehat
-```
+resC$CausalGRes$Ehat # proposed method
 
+cMat<- resC$CausalGRes$Ehat
+print("proposed method trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )
+print("proposed method directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
+```
+# Second exp on sim -> down prob of being 1 in sim to 0.1
+```{r}
+# set.seed(2022)
+# set.seed(2022)
+seedN<-2022
+
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.1)
+}
+mat[,1]<-mat[,2] | mat[,3] 
+mat[,4] <-mat[,2] | mat[,5]
+mat[,6] <- mat[,1] | mat[,4]
+
+trueMat<-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]<-1
+trueMat[c(2,5),4]<-1
+trueMat[c(1,4),6]<-1
+trsTrueMat<-getTransitiveClosureMat(trueMat)
+
+res<-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet
+res$confValMat # baseline
+print("baseline trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )
+print("baseline directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )
+
+resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)
+resC$CausalGRes$Ehat # proposed method
+
+cMat<- resC$CausalGRes$Ehat
+print("proposed method trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )
+print("proposed method directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
+```
+# Third exp on sim -> down prob of being 1 in sim to 0.08
+```{r}
+# set.seed(2022)
+seedN<-2022
+
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.08)
+}
+mat[,1]<-mat[,2] | mat[,3] 
+mat[,4] <-mat[,2] | mat[,5]
+mat[,6] <- mat[,1] | mat[,4]
+
+trueMat<-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]<-1
+trueMat[c(2,5),4]<-1
+trueMat[c(1,4),6]<-1
+trsTrueMat<-getTransitiveClosureMat(trueMat)
+
+res<-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet
+res$confValMat # baseline
+print("baseline trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )
+print("baseline directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )
+
+resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)
+resC$CausalGRes$Ehat # proposed method
+
+cMat<- resC$CausalGRes$Ehat
+print("proposed method trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )
+print("proposed method directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
+```
+# Third exp on sim -> down prob of being 1 in sim to 0.05
+```{r}
+# set.seed(2022)
+seedN<-2022
+
+n<-500
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.05)
+}
+mat[,1]<-mat[,2] | mat[,3] 
+mat[,4] <-mat[,2] | mat[,5]
+mat[,6] <- mat[,1] | mat[,4]
+
+trueMat<-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]<-1
+trueMat[c(2,5),4]<-1
+trueMat[c(1,4),6]<-1
+trsTrueMat<-getTransitiveClosureMat(trueMat)
+
+res<-confNetFunc(mat=mat,IndpThs=0.9)
+res$confNet
+res$confValMat # baseline
+print("baseline trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )
+print("baseline directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet ) )
+
+resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)
+resC$CausalGRes$Ehat # proposed method
+
+cMat<- resC$CausalGRes$Ehat
+print("proposed method trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )
+print("proposed method directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
+```

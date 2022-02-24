@@ -13,6 +13,8 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
   inxList<-c()
 
   causalInfo<-list()
+  if(sum(E1) ==0)
+    return(list(Ehat=E1,causalInfo=causalInfo))
 
   for(i in seq(1,d-1))
     for(j in seq(i+1,d))
