@@ -29,7 +29,7 @@ CondProb<-function(D,y,z)
   {
     flag<-sum(nD[[i]]$name[filterY] == y[filterY])
     countTotal<-countTotal+nD[[i]]$count
-    if(flag == sum(filterY))  #  check whether nD[[i]] bits in y' positions are the same as y's
+    if(flag == sum(filterY))  #  check whether nD[[i]] bits in y's positions are the same as y's
     {
       count<-count+nD[[i]]$count
     }
