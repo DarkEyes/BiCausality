@@ -8,6 +8,7 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
 {
   d<-dim(E1)[1]
   Ehat<-matrix(0,d,d)
+  EValHat<-matrix(0,d,d)
   nboot= length(Dboot)
   bSignDist<-numeric(nboot)
   inxList<-c()
@@ -49,6 +50,9 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
     if(signFlag[itr] != -1){
       #=========TODO dir inference
       bCausalDirDist<-numeric(nboot)
+
+      bCausalDirValDistA<-numeric(nboot) # Y given Z
+      bCausalDirValDistB<-numeric(nboot) # Z given Y
       for(k in seq(nboot))
       {
         D<-Dboot[[k]]
@@ -60,6 +64,8 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
         a1<-CondProb(D,y=y1,z=z1)$condP
         b1<-CondProb(D,y=z1,z=y1)$condP
         bCausalDirDist[k]<-a1-b1
+        bCausalDirValDistA[k]<-a1
+        bCausalDirValDistB[k]<-b1
       }
       testRes2<-wilcox.test(x=abs(bCausalDirDist), mu = CausalThs, alternative = "greater")
       bmean <- mean( (bCausalDirDist) )
@@ -70,17 +76,16 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
         if(bmean >0) # i -> j
         {
           Ehat[i,j]<-1
-          x1<-i
-          y1<-j
-
+          EValHat[i,j]<-mean(bCausalDirValDistA)
+          causalInfo[[str]]$CDirConfValInv<-abs(quantile(bCausalDirValDistA, c(0+alpha/2, 1-alpha/2)) )
         }
         else #j -> i
         {
           Ehat[j,i]<-1
-          x1<-j
-          y1<-i
+          EValHat[j,i]<-mean(bCausalDirValDistB)
           str<-sprintf("%d,%d",j,i)
           dirFlag=-1
+          causalInfo[[str]]$CDirConfValInv<-abs(quantile(bCausalDirValDistB, c(0+alpha/2, 1-alpha/2)) )
         }
         causalInfo[[str]]$CDirConfInv<-abs(quantile(dirFlag*bCausalDirDist, c(0+alpha/2, 1-alpha/2)) )
         causalInfo[[str]]$CDirmean<-abs(bmean)
@@ -92,5 +97,5 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
       }
     }
   }
-  return(list(Ehat=Ehat,causalInfo=causalInfo) )
+  return(list(Ehat=Ehat,causalInfo=causalInfo,EValHat=EValHat) )
 }
