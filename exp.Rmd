@@ -15,15 +15,15 @@ load("TPMAPdata61.rdata")
 ```
 cleansing
 ```{r}
-mat40<-as.data.frame(DataTProv40$P)
+mat50<-as.data.frame(DataTProv50$P)
 for(i in seq(31))
 {
- mode(mat40[,i])= "numeric"
-  mat40[is.na(mat40[,i]), i] = 0
+ mode(mat50[,i])= "numeric"
+  mat50[is.na(mat50[,i]), i] = 0
   print(sprintf("%d",i )  )
-  print(unique(mat40[,i]))
+  print(unique(mat50[,i]))
 }
-mat40<-as.matrix(mat40)
+mat50<-as.matrix(mat50)
 ```
 mining
 ```{r}
@@ -40,38 +40,12 @@ library(BiCausality)
 # res50_3<-BiCausality::bSCMCausalGraphFunc(res50_2$E1,res50$Dboot ,alpha=alpha,SignThs=IndpThs,CausalThs = CausalThs,slack=slack)
 
 res50final<-BiCausality::CausalGraphInferMainFunc(mat = mat50)
+save(mat50,res50final,file="res50final_new.Rdata")
 ```
 
 # run this first -> implementation of confNetFunc
 ```{r}
 library(BiCausality)
-confNetFunc<-function(mat,IndpThs=0.1)
-{
-  d<-dim(mat)[2]
-  confNet<-matrix(0,nrow=d,ncol=d)
-  D<-VecAlignment(mat)
-  confValMat<-matrix(0,nrow=d,ncol=d)
-  #===
-  for(i in seq(d-1))
-    for(j in seq(i+1,d))
-    {
-      z<-numeric(d)-1
-      y<-numeric(d)-1
-      y[j]<-c(1)
-      z[i]<-c(1)
-      a1<-CondProb(D,y=y,z=z)$condP # conf(y|z)
-      b1<-CondProb(D,y=z,z=y)$condP # conf(z|y) 
-      confValMat[i,j]<-a1
-      confValMat[j,i]<-b1
-      if((a1-b1)>0 && a1>=IndpThs)
-        confNet[i,j]<-1
-      else if((b1-a1)>0 && b1>= IndpThs)
-        confNet[j,i]<-1
-      else
-        confNet[i,j]<-0
-    }
-  return(list(confNet=confNet,confValMat=confValMat) )
-}
 
 # set.seed(2022)
 seedN<-2022
