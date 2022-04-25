@@ -1835,9 +1835,15 @@ TWINmat&lt;-matrix(0,nrow=n,ncol=2)</code></pre>
 <pre class="r"><code>library(devtools)
 devtools::document()</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4oS5IFVwZGF0aW5nIEJpQ2F1c2FsaXR5IGRvY3VtZW50YXRpb25cbuKEuSBMb2FkaW5nIEJpQ2F1c2FsaXR5XG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoi4oS5IFVwZGF0aW5nIEJpQ2F1c2FsaXR5IGRvY3VtZW50YXRpb25cbuKEuSBMb2FkaW5nIEJpQ2F1c2FsaXR5XG5XYXJuaW5nOiBcbuKUgOKUgCBDb25mbGljdHMg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAIEJpQ2F1c2FsaXR5IGNvbmZsaWN0cyDilIDilIBcbnggY29uZk5ldEZ1bmMoKSBtYXNrcyBCaUNhdXNhbGl0eTo6Y29uZk5ldEZ1bmMoKVxuXG5EaWQgeW91IGFjY2lkZW50YWxseSBzb3VyY2UgYSBmaWxlIHJhdGhlciB0aGFuIHVzaW5nIGBsb2FkX2FsbCgpYD9cblJ1biBgcm0obGlzdCA9IGMoXCJjb25mTmV0RnVuY1wiKSlgIHRvIHJlbW92ZSB0aGUgY29uZmxpY3RzLlxuIn0= -->
 <pre><code>ℹ Updating BiCausality documentation
-ℹ Loading BiCausality</code></pre>
+ℹ Loading BiCausality
+Warning: 
+── Conflicts ───────────────────────────────────── BiCausality conflicts ──
+x confNetFunc() masks BiCausality::confNetFunc()
+
+Did you accidentally source a file rather than using `load_all()`?
+Run `rm(list = c(&quot;confNetFunc&quot;))` to remove the conflicts.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiV3JpdGluZyBOQU1FU1BBQ0VcbldyaXRpbmcgTkFNRVNQQUNFXG4ifQ== -->
 <pre><code>Writing NAMESPACE
@@ -1875,12 +1881,10 @@ confNetFunc&lt;-function(mat,IndpThs=0.1)
 
 resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = TWINmat,CausalThs=0.1,IndpThs=.01)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuWzFdIFwiMSwyXCJcblsxXSAtMC41Mzg2ODRcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiSW5mZXJyaW5nIGRlcGVuZGVudCBncmFwaFwiXG5bMV0gXCJSZW1vdmluZyBjb25mb3VuZGVyKHMpXCJcblsxXSBcIkluZmVycmluZyBjYXVzYWwgZ3JhcGhcIlxuIn0= -->
 <pre><code>[1] &quot;Inferring dependent graph&quot;
 [1] &quot;Removing confounder(s)&quot;
-[1] &quot;Inferring causal graph&quot;
-[1] &quot;1,2&quot;
-[1] -0.538684</code></pre>
+[1] &quot;Inferring causal graph&quot;</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2RcbmBgYCJ9 -->
 <pre class="r"><code>resC$CausalGRes$Ehat # proposed method</code></pre>

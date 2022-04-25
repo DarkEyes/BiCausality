@@ -33,7 +33,7 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
     i=inx[1]
     j=inx[2]
     str<-sprintf("%d,%d",i,j)
-    print(str)
+    #print(str)
     for(k in seq(nboot))
     {
       bSignDist[k]<-oddDiffFunc(D=Dboot[[k]],i=inx[1],j=inx[2],slack=slack)
@@ -69,7 +69,7 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
       }
       testRes2<-wilcox.test(x=abs(bCausalDirDist), mu = CausalThs, alternative = "greater")
       bmean <- mean( (bCausalDirDist) )
-      print(bmean)
+      #print(bmean)
       dirFlag=1
       if(testRes2$p.value<=alpha)
       {
