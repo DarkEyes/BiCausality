@@ -45,7 +45,7 @@ mat[,6] <- mat[,1] | mat[,4] # 6 causes by 1 and 4
 ```
 
 We use the following function to infer whether X causes Y.
-```{r}
+```r
 # Run the function
 library(BiCausality)
 resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, IndpThs=0.05)
