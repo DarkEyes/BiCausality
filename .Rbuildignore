@@ -1,2 +1,8 @@
 ^BiCausality\.Rproj$
 ^\.Rproj\.user$
+^exp$
+^data$
+^cran-comments\.md$
+^doc$
+^Meta$
+^LICENSE$

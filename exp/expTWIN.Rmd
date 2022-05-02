@@ -1,0 +1,138 @@
+---
+title: "TWIN Notebook"
+output: html_notebook
+---
+# Ref: 
+# https://www.cdc.gov/growthcharts/html_charts/wtageinf.htm
+# https://academic.oup.com/qje/article-abstract/120/3/1031/1841462
+# https://github.com/AMLab-Amsterdam/CEVAE/blob/master/datasets/TWINS/ReadmeTwins
+# https://github.com/rguo12/awesome-causality-data
+Loading
+
+```{r}
+TWIN_Y<-read.csv(file="../data/twin_pairs_Y_3years_samesex.csv")
+TWIN_W<-read.csv(file="../data/twin_pairs_T_3years_samesex.csv")
+n<-dim(TWIN_Y)[1]
+ths<-1000
+#1:w<=ths both, 2:w<=ths one, 3: w<=ths none, 4:die both, 5: die one, 6: die none 
+TWINmat<-matrix(0,nrow=n,ncol=2)
+```
+Fill matrix
+```{r}
+for(i in seq(n))
+{
+  flag1=flag2=0
+  if(TWIN_W[i,2]<=ths)
+    flag1<-1
+  if(TWIN_W[i,3]<=ths)
+    flag2<-1
+  #TWINmat[i,1]<- flag1 & flag2
+  #TWINmat[i,2]<- xor(flag1 , flag2)
+  #TWINmat[i,3]<- !flag1 & !flag2
+  
+  #TWINmat[i,4]<- TWIN_Y[i,2] & TWIN_Y[i,3]
+  #TWINmat[i,5]<- xor(TWIN_Y[i,2] , TWIN_Y[i,3])
+  #TWINmat[i,6]<- !TWIN_Y[i,2] & !TWIN_Y[i,3]
+  
+  TWINmat[i,1]<- flag1 | flag2
+  TWINmat[i,2]<- TWIN_Y[i,2] & TWIN_Y[i,3]
+}
+```
+#save
+```{r}
+save(TWINmat,res,resC,file="../data/TWINres.Rdata")
+```
+# analyze
+```{r}
+library(devtools)
+devtools::document()
+library(BiCausality)
+confNetFunc<-function(mat,IndpThs=0.1)
+{
+  d<-dim(mat)[2]
+  confNet<-matrix(0,nrow=d,ncol=d)
+  D<-VecAlignment(mat)
+  confValMat<-matrix(0,nrow=d,ncol=d)
+  #===
+  for(i in seq(d-1))
+    for(j in seq(i+1,d))
+    {
+      z<-numeric(d)-1
+      y<-numeric(d)-1
+      y[j]<-c(1)
+      z[i]<-c(1)
+      a1<-CondProb(D,y=y,z=z)$condP # conf(y|z)
+      b1<-CondProb(D,y=z,z=y)$condP # conf(z|y) 
+      confValMat[i,j]<-a1
+      confValMat[j,i]<-b1
+      if((a1-b1)>0 && a1>=IndpThs)
+        confNet[i,j]<-1
+      else if((b1-a1)>0 && b1>= IndpThs)
+        confNet[j,i]<-1
+      else
+        confNet[i,j]<-0
+    }
+  return(list(confNet=confNet,confValMat=confValMat) )
+}
+
+resC<-BiCausality::CausalGraphInferMainFunc(mat = TWINmat,CausalThs=0.1,IndpThs=.01)
+resC$CausalGRes$Ehat # proposed method
+
+res<-confNetFunc(TWINmat)
+```
+========== Eighth-Grade Pupils in the Netherlands
+```{r}
+library(MASS)
+data("nlschools")
+ths<-0.25
+n<-dim(nlschools)[1]
+d<-dim(nlschools)[2]
+matShool<-matrix(0,ncol=d-1,nrow=n) # remove Class ID
+
+matShool[,1]<-nlschools$lang<quantile(nlschools$lang,c(ths)) # language test score.
+matShool[,2]<-nlschools$IQ<quantile(nlschools$IQ,c(ths))
+matShool[,3]<-nlschools$GS<quantile(nlschools$GS,c(ths)) # class size
+matShool[,4]<-nlschools$SES<quantile(nlschools$SES,c(ths)) # social-economic status of pupil's family.
+matShool[,5]<-nlschools$COMB ==1 #were the pupils taught in a multi-grade class (0/1)? 
+
+
+```
+#run school
+```{r}
+library(devtools)
+devtools::document()
+library(BiCausality)
+resC<-BiCausality::CausalGraphInferMainFunc(mat = matShool,CausalThs=0.1,IndpThs=.01)
+res<-confNetFunc(matShool)
+```
+Test
+```{r}
+library(devtools)
+devtools::document()
+library(BiCausality)
+path1<-"pairs/pair0057.txt"
+dat<-read.csv(file=path1,sep = "",header = FALSE)
+X<-dat[[1]]
+Y<-dat[[2]]
+f1<-data.frame(X=X,Y=Y)
+fx<-data.frame(X=X)
+fy<-data.frame(Y=Y)
+m1<-lm(Y~X,data=f1)
+m2<-lm(X~Y,data=f1)
+ypred<-predict(m1,fx)
+xpred<-predict(m2,fy)
+# A<-h(B)+noise where h(B) ind. with noise
+xnoise<-Y-ypred # Y=f(X)+xnoise & Ypred<-f(X) Hence, xnoise<-Y-Ypred
+ynoise<-X-xpred # X=g(Y)+ynoise & Xpred<-g(Y) Hence, ynoise<-X-Xpred
+c1<-cor(X,xnoise)
+#sprintf("corr X, xnoise p.val=%f",c1$p.value)
+c2<-cor(Y,ynoise)
+#sprintf("corr Y, ynoise p.val=%f",c2$p.value)
+if(c1<c2)
+{
+  print("X->Y")
+}else{
+  print("Y->X")
+}
+```
+

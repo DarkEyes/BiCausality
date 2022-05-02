@@ -1,2 +1,127 @@
 # BiCausality
  
+BiCausality: Binary Causality Inference Framework
+===========================================================
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
+[![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://spdx.org/licenses/MIT.html)
+
+A framework to infer causality on binary data using frequent pattern minging and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infer empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. 
+
+Installation
+------------
+
+For the newest version on github, please call the following command in R terminal.
+
+
+``` r
+remotes::install_github("DarkEyes/BiCausality")
+```
+This requires a user to install the "remotes" package before installing BiCausality.
+
+
+Example: Inferred binary causal graph from simulation
+----------------------------------------------------------------------------------
+In the first step, we generate a simulation dataset as an input.
+``` r
+seedN<-2022
+
+n<-200 # 200 individuals
+d<-10 # 10 variables
+mat<-matrix(nrow=n,ncol=d) # the input of framework
+
+#Simulate binary data from binomial distribution where the probability of value being 1 is 0.5.
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.5)
+}
+
+mat[,1]<-mat[,2] | mat[,3]  # 1 causes by 2 and 3
+mat[,4] <-mat[,2] | mat[,5] # 4 causses by 2 and 5
+mat[,6] <- mat[,1] | mat[,4] # 6 causes by 1 and 4
+
+```
+
+We use the following function to infer whether X causes Y.
+``` r
+# Run the function
+resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50)
+```
+The result of the ajacency matrix of the directed causal graph is below:
+
+```r
+resC$CausalGRes$EValHat
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    0    0    0    0    0    1    0    0    0     0
+ [2,]    1    0    0    1    0    0    0    0    0     0
+ [3,]    1    0    0    0    0    0    0    0    0     0
+ [4,]    0    0    0    0    0    1    0    0    0     0
+ [5,]    0    0    0    1    0    0    0    0    0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0
+[10,]    0    0    0    0    0    0    0    0    0     0
+```
+The value in the element EValHat[i,j] represents that i causes j if the value is not zero. The closer the value to 1, the higher degree of causation between i and j. For example, EValHat[2,1] = 1 implies node 2 causes node 1, which is correct since node 1 have nodes 2 and 3 as causal nodes. 
+
+For the causal relation of variables 2 and 1, we can use the command below to see further information.
+
+```r
+resC$CausalGRes$causalInfo[['2,1']]
+```
+The results are below.
+
+```r
+$CDirConfValInv
+ 2.5% 97.5% 
+    1     1 
+
+$CDirConfInv
+     2.5%     97.5% 
+0.3217322 0.4534494 
+
+$CDirmean
+[1] 0.3787904
+
+$testRes2
+
+	Wilcoxon signed rank test with continuity correction
+
+data:  abs(bCausalDirDist)
+V = 1275, p-value = 3.893e-10
+alternative hypothesis: true location is greater than 0.1
+
+
+$testRes1
+
+	Wilcoxon signed rank test with continuity correction
+
+data:  abs(bSignDist)
+V = 1275, p-value = 3.894e-10
+alternative hypothesis: true location is greater than 0.05
+
+
+$sign
+[1] 1
+
+$SignConfInv
+      2.5%      97.5% 
+0.08670325 0.13693900 
+
+$Signmean
+[1] 0.1082242
+```
+TODO: explain
+
+
+Citation
+----------------------------------------------------------------------------------
+Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2022). Framework for inferring empirical causal graphs
+from binary variables to support multidimensional poverty analysis. **working on progress
+
+Contact
+----------------------------------------------------------------------------------
+- Developer: C. Amornbunchornvej<div itemscope itemtype="https://schema.org/Person"><a itemprop="sameAs" content="https://orcid.org/0000-0003-3131-0370" href="https://orcid.org/0000-0003-3131-0370" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon">https://orcid.org/0000-0003-3131-0370</a></div>
+- <a href="https://www.nectec.or.th">Strategic Analytics Networks with Machine Learning and AI (SAI)</a>, <a href="https://www.nectec.or.th/en/">NECTEC</a>, Thailand
+- Homepage: <a href="https://sites.google.com/view/amornbunchornvej/home">Link</a>
