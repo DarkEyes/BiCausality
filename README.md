@@ -90,7 +90,8 @@ $CDirmean
 [1] 0.3787904
 
 #The test that has the null hypothesis that |P(Y=1|X=1) - P(X=1|Y=1)| below
-#or equal the argument of parameter "CausalThs"" and the alternative hypothesis is that |P(Y=1|X=1) - P(X=1|Y=1)| is greater than "CausalThs".
+#or equal the argument of parameter "CausalThs" and the alternative hypothesis
+#is that |P(Y=1|X=1) - P(X=1|Y=1)| is greater than "CausalThs".
 $testRes2
 
 	Wilcoxon signed rank test with continuity correction
@@ -101,7 +102,8 @@ alternative hypothesis: true location is greater than 0.1
 
 
 #The test that has the null hypothesis that |oddDiff(X,Y)| below 
-#or equal the argument of parameter "IndpThs" and the alternative hypothesis is that |oddDiff(X,Y)| is greater than "IndpThs". 
+#or equal the argument of parameter "IndpThs" and the alternative hypothesis is
+#that |oddDiff(X,Y)| is greater than "IndpThs". 
 $testRes1
 
 	Wilcoxon signed rank test with continuity correction
