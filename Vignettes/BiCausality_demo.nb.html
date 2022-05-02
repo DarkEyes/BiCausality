@@ -1836,9 +1836,23 @@ causal nodes.</p>
 <p>The directed causal graph also can be plot using the code below.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShpZ3JhcGgpXG5uZXQgPC0gZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KHJlc0MkQ2F1c2FsR1JlcyRFaGF0ICx3ZWlnaHRlZCA9IE5VTEwpXG5wbG90KG5ldCwgZWRnZS5hcnJvdy5zaXplID0gMC4zLCB2ZXJ0ZXguc2l6ZSA9MjAgLCB2ZXJ0ZXguY29sb3IgPSAnI0Q0QzhFOScsbGF5b3V0PWxheW91dF93aXRoX2trKVxuYGBgIn0= -->
-<pre class="r"><code>library(igraph)
-net &lt;- graph_from_adjacency_matrix(resC$CausalGRes$Ehat ,weighted = NULL)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShpZ3JhcGgpXG5gYGAifQ== -->
+<pre class="r"><code>library(igraph)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYaWdyYXBo4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpzdGF0c+KAmTpcblxuICAgIGRlY29tcG9zZSwgc3BlY3RydW1cblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTpiYXNl4oCZOlxuXG4gICAgdW5pb25cbiJ9 -->
+<pre><code>
+Attaching package: ‘igraph’
+
+The following objects are masked from ‘package:stats’:
+
+    decompose, spectrum
+
+The following object is masked from ‘package:base’:
+
+    union</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmV0IDwtIGdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChyZXNDJENhdXNhbEdSZXMkRWhhdCAsd2VpZ2h0ZWQgPSBOVUxMKVxucGxvdChuZXQsIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuMywgdmVydGV4LnNpemUgPTIwICwgdmVydGV4LmNvbG9yID0gJyNENEM4RTknLGxheW91dD1sYXlvdXRfd2l0aF9raylcbmBgYCJ9 -->
+<pre class="r"><code>net &lt;- graph_from_adjacency_matrix(resC$CausalGRes$Ehat ,weighted = NULL)
 plot(net, edge.arrow.size = 0.3, vertex.size =20 , vertex.color = &#39;#D4C8E9&#39;,layout=layout_with_kk)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-plot-begin eyJoZWlnaHQiOjM4NS4wNDMzLCJ3aWR0aCI6NjIzLCJzaXplX2JlaGF2aW9yIjowLCJjb25kaXRpb25zIjpbXX0= -->
