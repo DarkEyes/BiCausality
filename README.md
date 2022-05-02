@@ -15,7 +15,7 @@ Installation
 For the newest version on github, please call the following command in R terminal.
 
 
-```{r}
+``` r
 remotes::install_github("DarkEyes/BiCausality")
 ```
 This requires a user to install the "remotes" package before installing BiCausality.
@@ -24,7 +24,7 @@ This requires a user to install the "remotes" package before installing BiCausal
 Example: Inferred binary causal graph from simulation
 ----------------------------------------------------------------------------------
 In the first step, we generate a simulation dataset as an input.
-```{r}
+``` r
 seedN<-2022
 
 n<-200 # 200 individuals
@@ -52,7 +52,7 @@ resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, 
 ```
 The result of the ajacency matrix of the directed causal graph is below:
 
-```{r}
+```r
 resC$CausalGRes$Ehat
      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
  [1,]    0    0    0    0    0    1    0    0    0     0
@@ -69,7 +69,7 @@ resC$CausalGRes$Ehat
 The value in the element EValHat[i,j] represents that i causes j if the value is not zero. For example, EValHat[2,1] = 1 implies node 2 causes node 1, which is correct since node 1 have nodes 2 and 3 as causal nodes.
 
 The directed causal graph also can be plot using the code below.
-```{r}
+```r
 library(igraph)
 net <- graph_from_adjacency_matrix(resC$CausalGRes$Ehat ,weighted = NULL)
 plot(net, edge.arrow.size = 0.2, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
@@ -84,12 +84,12 @@ For the causal relation of variables 2 and 1, we can use the command below to se
 **Note that the odd difference between X and Y denoted oddDiff(X,Y) is define as
 |P (X = 1, Y = 1) P (X = 0, Y = 0) −P (X = 0, Y = 1) P (X = 1, Y = 0)|.  If X is directly proportional to Y, then oddDiff(X,Y) is close to 1. If X is inverse of Y, then oddDiff(X,Y) is close to -1. If X and Y have no association, then oddDiff(X,Y) is close to zero.
 
-```{r}
+```r
 resC$CausalGRes$causalInfo[['2,1']]
 ```
 Suppose Y is variable 1 and X is variable 2, the results are below.
 
-```
+```r
 #This value represents the 95th percentile confidence interval of P(Y=1|X=1). 
 $CDirConfValInv
  2.5% 97.5% 
