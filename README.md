@@ -50,7 +50,7 @@ resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, 
 The result of the ajacency matrix of the directed causal graph is below:
 
 ```r
-resC$CausalGRes$EValHat
+resC$CausalGRes$Ehat
      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
  [1,]    0    0    0    0    0    1    0    0    0     0
  [2,]    1    0    0    1    0    0    0    0    0     0
@@ -63,7 +63,18 @@ resC$CausalGRes$EValHat
  [9,]    0    0    0    0    0    0    0    0    0     0
 [10,]    0    0    0    0    0    0    0    0    0     0
 ```
-The value in the element EValHat[i,j] represents that i causes j if the value is not zero. The closer the value to 1, the higher degree of causation between i and j. For example, EValHat[2,1] = 1 implies node 2 causes node 1, which is correct since node 1 have nodes 2 and 3 as causal nodes. 
+The value in the element EValHat[i,j] represents that i causes j if the value is not zero. For example, EValHat[2,1] = 1 implies node 2 causes node 1, which is correct since node 1 have nodes 2 and 3 as causal nodes.
+
+The directed causal graph also can be plot using the code below.
+```r
+library(igraph)
+net <- graph_from_adjacency_matrix(resC$CausalGRes$Ehat ,weighted = NULL)
+plot(net, edge.arrow.size = 0.2, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
+```
+The plot is below.
+
+<img src="https://github.com/DarkEyes/BiCausality/blob/master/man/FIG/causalGraph.png" width="550">
+
 
 For the causal relation of variables 2 and 1, we can use the command below to see further information.
 
