@@ -45,7 +45,7 @@ mat[,6] <- mat[,1] | mat[,4] # 6 causes by 1 and 4
 We use the following function to infer whether X causes Y.
 ``` r
 # Run the function
-resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50)
+resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, IndpThs=0.05)
 ```
 The result of the ajacency matrix of the directed causal graph is below:
 
@@ -67,23 +67,29 @@ The value in the element EValHat[i,j] represents that i causes j if the value is
 
 For the causal relation of variables 2 and 1, we can use the command below to see further information.
 
+**Note that the odd difference between X and Y denoted oddDiff(X,Y) is define as
+|P (X = 1, Y = 1) P (X = 0, Y = 0) −P (X = 0, Y = 1) P (X = 1, Y = 0)|.  If X is directly proportional to Y, then oddDiff(X,Y) is close to 1. If X is inverse of Y, then oddDiff(X,Y) is close to -1. If X and Y have no association, then oddDiff(X,Y) is close to zero.
+
 ```r
 resC$CausalGRes$causalInfo[['2,1']]
 ```
-The results are below.
+Suppose Y is variable 1 and X is variable 2, the results are below.
 
 ```r
+#This value represents the 95th percentile confidence interval of P(Y=1|X=1). 
 $CDirConfValInv
  2.5% 97.5% 
     1     1 
-
+#This value represents the 95th percentile confidence interval of |P(Y=1|X=1) - P(X=1|Y=1)|.
 $CDirConfInv
      2.5%     97.5% 
 0.3217322 0.4534494 
 
+#This value represents the mean of |P(Y=1|X=1) - P(X=1|Y=1)|.
 $CDirmean
 [1] 0.3787904
 
+#The test that has the null hypothesis that |P(Y=1|X=1) - P(X=1|Y=1)| below or equal the argument of parameter "CausalThs"" and the alternative hypothesis is that |P(Y=1|X=1) - P(X=1|Y=1)| is greater than "CausalThs".
 $testRes2
 
 	Wilcoxon signed rank test with continuity correction
@@ -93,6 +99,7 @@ V = 1275, p-value = 3.893e-10
 alternative hypothesis: true location is greater than 0.1
 
 
+#The test that has the null hypothesis that |oddDiff(X,Y)| below or equal the argument of parameter "IndpThs" and the alternative hypothesis is that |oddDiff(X,Y)| is greater than "IndpThs". 
 $testRes1
 
 	Wilcoxon signed rank test with continuity correction
@@ -101,18 +108,19 @@ data:  abs(bSignDist)
 V = 1275, p-value = 3.894e-10
 alternative hypothesis: true location is greater than 0.05
 
-
+#If the test above rejects the null hypothesis with the significance threshold alpha (default alpha=0.05), then the value "sign=1", otherwise, it is zero.
 $sign
 [1] 1
 
+#This value represents the 95th percentile confidence interval of oddDiff(X,Y)
 $SignConfInv
       2.5%      97.5% 
 0.08670325 0.13693900 
 
+#This value represents the mean of oddDiff(X,Y)
 $Signmean
 [1] 0.1082242
 ```
-TODO: explain
 
 
 Citation
