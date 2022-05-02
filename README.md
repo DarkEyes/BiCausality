@@ -72,7 +72,7 @@ The directed causal graph also can be plot using the code below.
 ```r
 library(igraph)
 net <- graph_from_adjacency_matrix(resC$CausalGRes$Ehat ,weighted = NULL)
-plot(net, edge.arrow.size = 0.2, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
+plot(net, edge.arrow.size = 0.3, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
 ```
 The plot is below.
 

@@ -27,7 +27,7 @@ mat[,6] <- mat[,1] | mat[,4] # 6 causes by 1 and 4
 ```
 
 We use the following function to infer whether X causes Y.
-``` r
+``` {r}
 # Run the function
 library(BiCausality)
 resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, IndpThs=0.05)
@@ -43,7 +43,7 @@ The directed causal graph also can be plot using the code below.
 ```{r}
 library(igraph)
 net <- graph_from_adjacency_matrix(resC$CausalGRes$Ehat ,weighted = NULL)
-plot(net, edge.arrow.size = 0.2, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
+plot(net, edge.arrow.size = 0.3, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
 ```
 
 
