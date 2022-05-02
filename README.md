@@ -89,7 +89,8 @@ $CDirConfInv
 $CDirmean
 [1] 0.3787904
 
-#The test that has the null hypothesis that |P(Y=1|X=1) - P(X=1|Y=1)| below or equal the argument of parameter "CausalThs"" and the alternative hypothesis is that |P(Y=1|X=1) - P(X=1|Y=1)| is greater than "CausalThs".
+#The test that has the null hypothesis that |P(Y=1|X=1) - P(X=1|Y=1)| below
+#or equal the argument of parameter "CausalThs"" and the alternative hypothesis is that |P(Y=1|X=1) - P(X=1|Y=1)| is greater than "CausalThs".
 $testRes2
 
 	Wilcoxon signed rank test with continuity correction
@@ -99,7 +100,8 @@ V = 1275, p-value = 3.893e-10
 alternative hypothesis: true location is greater than 0.1
 
 
-#The test that has the null hypothesis that |oddDiff(X,Y)| below or equal the argument of parameter "IndpThs" and the alternative hypothesis is that |oddDiff(X,Y)| is greater than "IndpThs". 
+#The test that has the null hypothesis that |oddDiff(X,Y)| below 
+#or equal the argument of parameter "IndpThs" and the alternative hypothesis is that |oddDiff(X,Y)| is greater than "IndpThs". 
 $testRes1
 
 	Wilcoxon signed rank test with continuity correction
@@ -108,7 +110,8 @@ data:  abs(bSignDist)
 V = 1275, p-value = 3.894e-10
 alternative hypothesis: true location is greater than 0.05
 
-#If the test above rejects the null hypothesis with the significance threshold alpha (default alpha=0.05), then the value "sign=1", otherwise, it is zero.
+#If the test above rejects the null hypothesis with the significance threshold
+#alpha (default alpha=0.05), then the value "sign=1", otherwise, it is zero.
 $sign
 [1] 1
 
