@@ -145,7 +145,7 @@ $Signmean
 Citation
 ----------------------------------------------------------------------------------
 Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2022). Framework for inferring empirical causal graphs
-from binary variables to support multidimensional poverty analysis. **working on progress
+from binary variables to support multidimensional poverty analysis. **work on progress
 
 Contact
 ----------------------------------------------------------------------------------
