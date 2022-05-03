@@ -6,6 +6,24 @@
 \usage{
 supp(X, values)
 }
+\arguments{
+\item{X}{is a matrix n by d where n is a number of transactions or samples
+and d is a number of dimensions for each sample.}
+
+\item{values}{is a d-dimensional vector
+we use to count how many of it within \code{X}.}
+}
+\value{
+This function returns the support of \code{values} in \code{X} by counting
+the ratio of how many samples in \code{X} are similar to \code{values}
+}
 \description{
-supp function
+This function computes a support value from a matrix \code{X} given a \code{values}.
+}
+\examples{
+x <- rbinom(n=100, size=1, prob=0.5)
+ny<-rbinom(n=100, size=1, prob=0.25)
+y <- x |  ny
+supp(X=cbind(x,y),values=c(1,1) )
+
 }

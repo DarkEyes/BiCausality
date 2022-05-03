@@ -1,5 +1,6 @@
 #'@title CondProb function
-#' serve as a confidence function in data mining conf(y|z)
+#' The function serves as a confidence function in data mining conf(y|z)
+#' Given a set of transaction D
 #'
 #'
 #'@export
