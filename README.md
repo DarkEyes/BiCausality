@@ -3,7 +3,7 @@ BiCausality: Binary Causality Inference Framework
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://spdx.org/licenses/MIT.html)
 
-A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before decide whether i causes j. 
+A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j. 
 
 Note: The causal relations inferred by this work is not the real causal relations; they are empirical causal relations that needed
 to be validated. Our main goal is to develop an exploratory data analysis tools to pinpoint possible causal relations to support
@@ -45,7 +45,7 @@ mat[,6] <- mat[,1] | mat[,4] # 6 causes by 1 and 4
 ```
 
 We use the following function to infer whether X causes Y.
-```{r}
+```r
 # Run the function
 library(BiCausality)
 resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, IndpThs=0.05)
@@ -145,7 +145,7 @@ $Signmean
 Citation
 ----------------------------------------------------------------------------------
 Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2022). Framework for inferring empirical causal graphs
-from binary variables to support multidimensional poverty analysis. **working on progress
+from binary variables to support multidimensional poverty analysis. **work on progress
 
 Contact
 ----------------------------------------------------------------------------------
