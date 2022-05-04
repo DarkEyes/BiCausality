@@ -1,9 +1,43 @@
 #'@title CondProb function
-#' The function serves as a confidence function in data mining conf(y|z)
-#' Given a set of transaction D
+#'
+#' @description
+#' This function computes a confidence value of \code{y} given \code{c}
+#' or \code{conf(y|z)} from an aligned list \code{D}.
+#' For any y[i],z[j], their values are -1 by default.
+#' The function computes the numbers of transactions
+#' that satisfy the following conditions.
+#'
+#' 1) All transactions must have values at any k position equal to z[k]
+#' for any z[k] that is not -1.
+#' Let \code{count} be the number of these transactions in \code{D}.
+#' 2) All transactions must have values at any k position equal to either z[k] or y[k]
+#' that is not -1. Let \code{countTotal} be the number of these transactions in \code{D}.
 #'
 #'
-#'@export
+#'
+#' @param D is an aligned list of transactions that was converted from any matrix n by d \code{mat} using
+#' \code{D<-VecAlignment(mat)} where n is a number of transactions or samples
+#' and d is a number of dimensions for each sample.
+#' @param  y is a d-dimensional vector.
+#' @param  z is a d-dimensional vector.
+#'
+#' @return This function returns the ratio \code{condP=count/countTotal}, which is the confidence of \code{y} given \code{z}.
+#' \item{condP}{Tthe confidence of \code{y} given \code{z} in \code{D}. }
+#' \item{nD}{ The subset of \code{D} such that all transactions
+#' have values at any position similar to \code{z[k]} when \code{z[k]} is not -1. }
+#' \item{count}{ A number of transactions that have values at any position similar
+#' to either \code{z[k]} or \code{y[k]} that is not -1. }
+#' \item{countTotal}{ A number of transactions in \code{nD} }
+#'
+#'@examples
+#'d=10 # dimensions of example vectors
+#'z<-numeric(d)-1
+#'y<-numeric(d)-1
+#'y[1]<-c(1)
+#'z[c(2,3)]<-c(1,1)
+#'CondProb(simData$D,y=y,z=z)$condP # conf(inx1 is 1 |inx 2,3 are 1 ) y|z
+#'
+#' @export
 #'
 CondProb<-function(D,y,z)
 {

@@ -1,0 +1,9 @@
+#' A simulation
+#'
+#' A dataset containing simulated data...
+#' @format ...
+#' \describe{
+#'   \item{simData$mat}{ It is a set of time series where \code{TS[i,t,d]} is a numeric value of \code{i}th time series at time \code{t} and dimension \code{d}.}
+#'   ...
+#' }
+"simData"
