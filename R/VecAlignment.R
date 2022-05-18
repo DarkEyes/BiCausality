@@ -37,7 +37,14 @@ VecAlignment<-function(mat)
 }
 #'@title bin2dec function
 #'
+#'@description
+#'This function convertes a binary vector into its decimal value.
+#'@param x is a binary vector where \code{X[i]} is the ith bit of vector.
 #'
+#'@return This function returns a decimal value of \code{X}.
+#'
+#'@examples
+#'bin2dec(x=c(1,1,1,0))
 #'
 #'@export
 #'
