@@ -12,10 +12,11 @@ Loading
 ```{r}
 TWIN_Y<-read.csv(file="../data/twin_pairs_Y_3years_samesex.csv")
 TWIN_W<-read.csv(file="../data/twin_pairs_T_3years_samesex.csv")
+TWIN_X<-read.csv(file="../data/twin_pairs_X_3years_samesex.csv")
 n<-dim(TWIN_Y)[1]
 ths<-1000
 #1:w<=ths both, 2:w<=ths one, 3: w<=ths none, 4:die both, 5: die one, 6: die none 
-TWINmat<-matrix(0,nrow=n,ncol=2)
+TWINmat<-matrix(0,nrow=n,ncol=15)
 ```
 Fill matrix
 ```{r}
@@ -26,16 +27,35 @@ for(i in seq(n))
     flag1<-1
   if(TWIN_W[i,3]<=ths)
     flag2<-1
-  #TWINmat[i,1]<- flag1 & flag2
-  #TWINmat[i,2]<- xor(flag1 , flag2)
-  #TWINmat[i,3]<- !flag1 & !flag2
+  TWINmat[i,1]<- flag1 | flag2 # weight of TWIN: None are below ths =0, ow =1
+  TWINmat[i,2]<- TWIN_Y[i,2] & TWIN_Y[i,3] # mortality of TWIN: Both are die ths =1, ow =0
   
-  #TWINmat[i,4]<- TWIN_Y[i,2] & TWIN_Y[i,3]
-  #TWINmat[i,5]<- xor(TWIN_Y[i,2] , TWIN_Y[i,3])
-  #TWINmat[i,6]<- !TWIN_Y[i,2] & !TWIN_Y[i,3]
-  
-  TWINmat[i,1]<- flag1 | flag2
-  TWINmat[i,2]<- TWIN_Y[i,2] & TWIN_Y[i,3]
+  w<-TWIN_X$alcohol[i]
+  TWINmat[i,3]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$anemia[i]
+  TWINmat[i,4]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$cardiac[i]
+  TWINmat[i,5]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$chyper[i]
+  TWINmat[i,6]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$incervix[i]
+  TWINmat[i,7]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$diabetes[i]
+  TWINmat[i,8]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$eclamp[i]
+  TWINmat[i,9]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$hemo[i]
+  TWINmat[i,10]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$herpes[i]
+  TWINmat[i,11]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$lung[i]
+  TWINmat[i,12]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$phyper[i]
+  TWINmat[i,13]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$tobacco[i]
+  TWINmat[i,14]<-ifelse(is.na(w),0,w)
+  w<-TWIN_X$uterine[i]
+  TWINmat[i,15]<-ifelse(is.na(w),0,w)
 }
 ```
 #save

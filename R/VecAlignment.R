@@ -1,24 +1,39 @@
 
 #'@title VecAlignment function
 #'
+#' @description
+#' This function rearranges the samples in the \code{mat} into
+#' an aligned list of transactions, which is mainly used by other functions in the package.
+#' Suppose mat[i,] is a binary vector  we are interested, we use  \code{A<-bin2dec(mat[i,])}
+#' to store the decimal value of \code{mat[i,]} in \code{A}. Then, we call \code{D[[A]]$count}
+#' to get number of samples in \code{mat} that are similar to \code{mat[i,]} and
+#' the \code{D[[A]]$name} is \code{mat[i,]}.
 #'
+#'
+#'
+#' @param mat is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.
+#'
+#' @return This function returns the list \code{D}, is an aligned list of transactions that was converted from any matrix n by d \code{mat}.
+#'
+#' @examples
+#' VecAlignment(mat=simData$mat)
 #'
 #'@export
 #'
 VecAlignment<-function(mat)
 {
   # mat must have the dimension n by d where n and d must be greater than 1.
-  newMat<-list()
+  D<-list()
   d<-dim(mat)[1]
   for(i in seq(d))
   {
-    newMat[[sprintf("%d",bin2dec(mat[i,]))]]$name<-mat[i,]
-    if(is.null(newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count)==TRUE )
-      newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count<-1
+    D[[sprintf("%d",bin2dec(mat[i,]))]]$name<-mat[i,]
+    if(is.null(D[[sprintf("%d",bin2dec(mat[i,]))]]$count)==TRUE )
+      D[[sprintf("%d",bin2dec(mat[i,]))]]$count<-1
     else
-      newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count<-newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count+1
+      D[[sprintf("%d",bin2dec(mat[i,]))]]$count<-newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count+1
   }
-  return(newMat)
+  return(D)
 }
 #'@title bin2dec function
 #'

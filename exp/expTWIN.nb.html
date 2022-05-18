@@ -1783,20 +1783,21 @@ pre code {
 <p>Loading</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVFdJTl9ZPC1yZWFkLmNzdihmaWxlPVwiLi4vZGF0YS90d2luX3BhaXJzX1lfM3llYXJzX3NhbWVzZXguY3N2XCIpXG5UV0lOX1c8LXJlYWQuY3N2KGZpbGU9XCIuLi9kYXRhL3R3aW5fcGFpcnNfVF8zeWVhcnNfc2FtZXNleC5jc3ZcIilcbm48LWRpbShUV0lOX1kpWzFdXG50aHM8LTEwMDBcbiMxOnc8PXRocyBib3RoLCAyOnc8PXRocyBvbmUsIDM6IHc8PXRocyBub25lLCA0OmRpZSBib3RoLCA1OiBkaWUgb25lLCA2OiBkaWUgbm9uZSBcblRXSU5tYXQ8LW1hdHJpeCgwLG5yb3c9bixuY29sPTIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVFdJTl9ZPC1yZWFkLmNzdihmaWxlPVwiLi4vZGF0YS90d2luX3BhaXJzX1lfM3llYXJzX3NhbWVzZXguY3N2XCIpXG5UV0lOX1c8LXJlYWQuY3N2KGZpbGU9XCIuLi9kYXRhL3R3aW5fcGFpcnNfVF8zeWVhcnNfc2FtZXNleC5jc3ZcIilcblRXSU5fWDwtcmVhZC5jc3YoZmlsZT1cIi4uL2RhdGEvdHdpbl9wYWlyc19YXzN5ZWFyc19zYW1lc2V4LmNzdlwiKVxubjwtZGltKFRXSU5fWSlbMV1cbnRoczwtMTAwMFxuIzE6dzw9dGhzIGJvdGgsIDI6dzw9dGhzIG9uZSwgMzogdzw9dGhzIG5vbmUsIDQ6ZGllIGJvdGgsIDU6IGRpZSBvbmUsIDY6IGRpZSBub25lIFxuVFdJTm1hdDwtbWF0cml4KDAsbnJvdz1uLG5jb2w9MTUpXG5gYGAifQ== -->
 <pre class="r"><code>TWIN_Y&lt;-read.csv(file=&quot;../data/twin_pairs_Y_3years_samesex.csv&quot;)
 TWIN_W&lt;-read.csv(file=&quot;../data/twin_pairs_T_3years_samesex.csv&quot;)
+TWIN_X&lt;-read.csv(file=&quot;../data/twin_pairs_X_3years_samesex.csv&quot;)
 n&lt;-dim(TWIN_Y)[1]
 ths&lt;-1000
 #1:w&lt;=ths both, 2:w&lt;=ths one, 3: w&lt;=ths none, 4:die both, 5: die one, 6: die none 
-TWINmat&lt;-matrix(0,nrow=n,ncol=2)</code></pre>
+TWINmat&lt;-matrix(0,nrow=n,ncol=15)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Fill matrix</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBmbGFnMT1mbGFnMj0wXG4gIGlmKFRXSU5fV1tpLDJdPD10aHMpXG4gICAgZmxhZzE8LTFcbiAgaWYoVFdJTl9XW2ksM108PXRocylcbiAgICBmbGFnMjwtMVxuICAjVFdJTm1hdFtpLDFdPC0gZmxhZzEgJiBmbGFnMlxuICAjVFdJTm1hdFtpLDJdPC0geG9yKGZsYWcxICwgZmxhZzIpXG4gICNUV0lObWF0W2ksM108LSAhZmxhZzEgJiAhZmxhZzJcbiAgXG4gICNUV0lObWF0W2ksNF08LSBUV0lOX1lbaSwyXSAmIFRXSU5fWVtpLDNdXG4gICNUV0lObWF0W2ksNV08LSB4b3IoVFdJTl9ZW2ksMl0gLCBUV0lOX1lbaSwzXSlcbiAgI1RXSU5tYXRbaSw2XTwtICFUV0lOX1lbaSwyXSAmICFUV0lOX1lbaSwzXVxuICBcbiAgVFdJTm1hdFtpLDFdPC0gZmxhZzEgfCBmbGFnMlxuICBUV0lObWF0W2ksMl08LSBUV0lOX1lbaSwyXSAmIFRXSU5fWVtpLDNdXG59XG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGkgaW4gc2VxKG4pKVxue1xuICBmbGFnMT1mbGFnMj0wXG4gIGlmKFRXSU5fV1tpLDJdPD10aHMpXG4gICAgZmxhZzE8LTFcbiAgaWYoVFdJTl9XW2ksM108PXRocylcbiAgICBmbGFnMjwtMVxuICBUV0lObWF0W2ksMV08LSBmbGFnMSB8IGZsYWcyICMgd2VpZ2h0IG9mIFRXSU46IE5vbmUgYXJlIGJlbG93IHRocyA9MCwgb3cgPTFcbiAgVFdJTm1hdFtpLDJdPC0gVFdJTl9ZW2ksMl0gJiBUV0lOX1lbaSwzXSAjIG1vcnRhbGl0eSBvZiBUV0lOOiBCb3RoIGFyZSBkaWUgdGhzID0xLCBvdyA9MFxuICBcbiAgdzwtVFdJTl9YJGFsY29ob2xbaV1cbiAgVFdJTm1hdFtpLDNdPC1pZmVsc2UoaXMubmEodyksMCx3KVxuICB3PC1UV0lOX1gkYW5lbWlhW2ldXG4gIFRXSU5tYXRbaSw0XTwtaWZlbHNlKGlzLm5hKHcpLDAsdylcbiAgdzwtVFdJTl9YJGNhcmRpYWNbaV1cbiAgVFdJTm1hdFtpLDVdPC1pZmVsc2UoaXMubmEodyksMCx3KVxuICB3PC1UV0lOX1gkY2h5cGVyW2ldXG4gIFRXSU5tYXRbaSw2XTwtaWZlbHNlKGlzLm5hKHcpLDAsdylcbiAgdzwtVFdJTl9YJGluY2Vydml4W2ldXG4gIFRXSU5tYXRbaSw3XTwtaWZlbHNlKGlzLm5hKHcpLDAsdylcbiAgdzwtVFdJTl9YJGRpYWJldGVzW2ldXG4gIFRXSU5tYXRbaSw4XTwtaWZlbHNlKGlzLm5hKHcpLDAsdylcbiAgdzwtVFdJTl9YJGVjbGFtcFtpXVxuICBUV0lObWF0W2ksOV08LWlmZWxzZShpcy5uYSh3KSwwLHcpXG4gIHc8LVRXSU5fWCRoZW1vW2ldXG4gIFRXSU5tYXRbaSwxMF08LWlmZWxzZShpcy5uYSh3KSwwLHcpXG4gIHc8LVRXSU5fWCRoZXJwZXNbaV1cbiAgVFdJTm1hdFtpLDExXTwtaWZlbHNlKGlzLm5hKHcpLDAsdylcbiAgdzwtVFdJTl9YJGx1bmdbaV1cbiAgVFdJTm1hdFtpLDEyXTwtaWZlbHNlKGlzLm5hKHcpLDAsdylcbiAgdzwtVFdJTl9YJHBoeXBlcltpXVxuICBUV0lObWF0W2ksMTNdPC1pZmVsc2UoaXMubmEodyksMCx3KVxuICB3PC1UV0lOX1gkdG9iYWNjb1tpXVxuICBUV0lObWF0W2ksMTRdPC1pZmVsc2UoaXMubmEodyksMCx3KVxuICB3PC1UV0lOX1gkdXRlcmluZVtpXVxuICBUV0lObWF0W2ksMTVdPC1pZmVsc2UoaXMubmEodyksMCx3KVxufVxuYGBgIn0= -->
 <pre class="r"><code>for(i in seq(n))
 {
   flag1=flag2=0
@@ -1804,16 +1805,35 @@ TWINmat&lt;-matrix(0,nrow=n,ncol=2)</code></pre>
     flag1&lt;-1
   if(TWIN_W[i,3]&lt;=ths)
     flag2&lt;-1
-  #TWINmat[i,1]&lt;- flag1 &amp; flag2
-  #TWINmat[i,2]&lt;- xor(flag1 , flag2)
-  #TWINmat[i,3]&lt;- !flag1 &amp; !flag2
+  TWINmat[i,1]&lt;- flag1 | flag2 # weight of TWIN: None are below ths =0, ow =1
+  TWINmat[i,2]&lt;- TWIN_Y[i,2] &amp; TWIN_Y[i,3] # mortality of TWIN: Both are die ths =1, ow =0
   
-  #TWINmat[i,4]&lt;- TWIN_Y[i,2] &amp; TWIN_Y[i,3]
-  #TWINmat[i,5]&lt;- xor(TWIN_Y[i,2] , TWIN_Y[i,3])
-  #TWINmat[i,6]&lt;- !TWIN_Y[i,2] &amp; !TWIN_Y[i,3]
-  
-  TWINmat[i,1]&lt;- flag1 | flag2
-  TWINmat[i,2]&lt;- TWIN_Y[i,2] &amp; TWIN_Y[i,3]
+  w&lt;-TWIN_X$alcohol[i]
+  TWINmat[i,3]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$anemia[i]
+  TWINmat[i,4]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$cardiac[i]
+  TWINmat[i,5]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$chyper[i]
+  TWINmat[i,6]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$incervix[i]
+  TWINmat[i,7]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$diabetes[i]
+  TWINmat[i,8]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$eclamp[i]
+  TWINmat[i,9]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$hemo[i]
+  TWINmat[i,10]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$herpes[i]
+  TWINmat[i,11]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$lung[i]
+  TWINmat[i,12]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$phyper[i]
+  TWINmat[i,13]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$tobacco[i]
+  TWINmat[i,14]&lt;-ifelse(is.na(w),0,w)
+  w&lt;-TWIN_X$uterine[i]
+  TWINmat[i,15]&lt;-ifelse(is.na(w),0,w)
 }</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -1831,19 +1851,13 @@ TWINmat&lt;-matrix(0,nrow=n,ncol=2)</code></pre>
 <h1>analyze</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkZXZ0b29scylcbmBgYCJ9 -->
-<pre class="r"><code>library(devtools)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkZXZ0b29scylcbmRldnRvb2xzOjpkb2N1bWVudCgpXG5gYGAifQ== -->
+<pre class="r"><code>library(devtools)
+devtools::document()</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiB1c2V0aGlzXG4ifQ== -->
-<pre><code>Loading required package: usethis</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGV2dG9vbHM6OmRvY3VtZW50KClcbmBgYCJ9 -->
-<pre class="r"><code>devtools::document()</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4oS5IFVwZGF0aW5nIEJpQ2F1c2FsaXR5IGRvY3VtZW50YXRpb25cbuKEuSBMb2FkaW5nIEJpQ2F1c2FsaXR5XG5Mb2FkaW5nIHJlcXVpcmVkIHBhY2thZ2U6IHBzeWNoXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoi4oS5IFVwZGF0aW5nIEJpQ2F1c2FsaXR5IGRvY3VtZW50YXRpb25cbuKEuSBMb2FkaW5nIEJpQ2F1c2FsaXR5XG4ifQ== -->
 <pre><code>ℹ Updating BiCausality documentation
-ℹ Loading BiCausality
-Loading required package: psych</code></pre>
+ℹ Loading BiCausality</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiV3JpdGluZyBOQU1FU1BBQ0VcbldyaXRpbmcgTkFNRVNQQUNFXG4ifQ== -->
 <pre><code>Writing NAMESPACE
@@ -1889,10 +1903,39 @@ resC&lt;-BiCausality::CausalGraphInferMainFunc(mat = TWINmat,CausalThs=0.1,IndpT
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzQyRDYXVzYWxHUmVzJEVoYXQgIyBwcm9wb3NlZCBtZXRob2RcbmBgYCJ9 -->
 <pre class="r"><code>resC$CausalGRes$Ehat # proposed method</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl1cblsxLF0gICAgMCAgICAwXG5bMixdICAgIDEgICAgMFxuIn0= -->
-<pre><code>     [,1] [,2]
-[1,]    0    0
-[2,]    1    0</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgWywxXSBbLDJdIFssM10gWyw0XSBbLDVdIFssNl0gWyw3XSBbLDhdIFssOV0gWywxMF0gWywxMV0gWywxMl1cbiBbMSxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwXG4gWzIsXSAgICAxICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFszLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwXG4gWzUsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs2LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiBbNyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwXG4gWzgsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuIFs5LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMCxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwXG5bMTEsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzEyLF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDBcblsxMyxdICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgICAwICAgICAwICAgICAwXG5bMTQsXSAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAgMCAgICAgMCAgICAgMFxuWzE1LF0gICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgMCAgICAwICAgIDAgICAgIDAgICAgIDAgICAgIDBcbiAgICAgIFssMTNdIFssMTRdIFssMTVdXG4gWzEsXSAgICAgMCAgICAgMCAgICAgMFxuIFsyLF0gICAgIDAgICAgIDAgICAgIDBcbiBbMyxdICAgICAwICAgICAwICAgICAwXG4gWzQsXSAgICAgMCAgICAgMCAgICAgMFxuIFs1LF0gICAgIDAgICAgIDAgICAgIDBcbiBbNixdICAgICAwICAgICAwICAgICAwXG4gWzcsXSAgICAgMCAgICAgMCAgICAgMFxuIFs4LF0gICAgIDAgICAgIDAgICAgIDBcbiBbOSxdICAgICAwICAgICAwICAgICAwXG5bMTAsXSAgICAgMCAgICAgMCAgICAgMFxuWzExLF0gICAgIDAgICAgIDAgICAgIDBcblsxMixdICAgICAwICAgICAwICAgICAwXG5bMTMsXSAgICAgMCAgICAgMCAgICAgMFxuWzE0LF0gICAgIDAgICAgIDAgICAgIDBcblsxNSxdICAgICAwICAgICAwICAgICAwXG4ifQ== -->
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
+ [1,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [2,]    1    0    0    0    0    0    0    0    0     0     0     0
+ [3,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [4,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [5,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [6,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [7,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [8,]    0    0    0    0    0    0    0    0    0     0     0     0
+ [9,]    0    0    0    0    0    0    0    0    0     0     0     0
+[10,]    0    0    0    0    0    0    0    0    0     0     0     0
+[11,]    0    0    0    0    0    0    0    0    0     0     0     0
+[12,]    0    0    0    0    0    0    0    0    0     0     0     0
+[13,]    0    0    0    0    0    0    0    0    0     0     0     0
+[14,]    0    0    0    0    0    0    0    0    0     0     0     0
+[15,]    0    0    0    0    0    0    0    0    0     0     0     0
+      [,13] [,14] [,15]
+ [1,]     0     0     0
+ [2,]     0     0     0
+ [3,]     0     0     0
+ [4,]     0     0     0
+ [5,]     0     0     0
+ [6,]     0     0     0
+ [7,]     0     0     0
+ [8,]     0     0     0
+ [9,]     0     0     0
+[10,]     0     0     0
+[11,]     0     0     0
+[12,]     0     0     0
+[13,]     0     0     0
+[14,]     0     0     0
+[15,]     0     0     0</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzPC1jb25mTmV0RnVuYyhUV0lObWF0KVxuYGBgIn0= -->
 <pre class="r"><code>res&lt;-confNetFunc(TWINmat)</code></pre>
@@ -1968,7 +2011,7 @@ if(c1&lt;c2)
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVFdJTiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQojIFJlZjogCiMgaHR0cHM6Ly93d3cuY2RjLmdvdi9ncm93dGhjaGFydHMvaHRtbF9jaGFydHMvd3RhZ2VpbmYuaHRtCiMgaHR0cHM6Ly9hY2FkZW1pYy5vdXAuY29tL3FqZS9hcnRpY2xlLWFic3RyYWN0LzEyMC8zLzEwMzEvMTg0MTQ2MgojIGh0dHBzOi8vZ2l0aHViLmNvbS9BTUxhYi1BbXN0ZXJkYW0vQ0VWQUUvYmxvYi9tYXN0ZXIvZGF0YXNldHMvVFdJTlMvUmVhZG1lVHdpbnMKIyBodHRwczovL2dpdGh1Yi5jb20vcmd1bzEyL2F3ZXNvbWUtY2F1c2FsaXR5LWRhdGEKTG9hZGluZwoKYGBge3J9ClRXSU5fWTwtcmVhZC5jc3YoZmlsZT0iLi4vZGF0YS90d2luX3BhaXJzX1lfM3llYXJzX3NhbWVzZXguY3N2IikKVFdJTl9XPC1yZWFkLmNzdihmaWxlPSIuLi9kYXRhL3R3aW5fcGFpcnNfVF8zeWVhcnNfc2FtZXNleC5jc3YiKQpuPC1kaW0oVFdJTl9ZKVsxXQp0aHM8LTEwMDAKIzE6dzw9dGhzIGJvdGgsIDI6dzw9dGhzIG9uZSwgMzogdzw9dGhzIG5vbmUsIDQ6ZGllIGJvdGgsIDU6IGRpZSBvbmUsIDY6IGRpZSBub25lIApUV0lObWF0PC1tYXRyaXgoMCxucm93PW4sbmNvbD0yKQpgYGAKRmlsbCBtYXRyaXgKYGBge3J9CmZvcihpIGluIHNlcShuKSkKewogIGZsYWcxPWZsYWcyPTAKICBpZihUV0lOX1dbaSwyXTw9dGhzKQogICAgZmxhZzE8LTEKICBpZihUV0lOX1dbaSwzXTw9dGhzKQogICAgZmxhZzI8LTEKICAjVFdJTm1hdFtpLDFdPC0gZmxhZzEgJiBmbGFnMgogICNUV0lObWF0W2ksMl08LSB4b3IoZmxhZzEgLCBmbGFnMikKICAjVFdJTm1hdFtpLDNdPC0gIWZsYWcxICYgIWZsYWcyCiAgCiAgI1RXSU5tYXRbaSw0XTwtIFRXSU5fWVtpLDJdICYgVFdJTl9ZW2ksM10KICAjVFdJTm1hdFtpLDVdPC0geG9yKFRXSU5fWVtpLDJdICwgVFdJTl9ZW2ksM10pCiAgI1RXSU5tYXRbaSw2XTwtICFUV0lOX1lbaSwyXSAmICFUV0lOX1lbaSwzXQogIAogIFRXSU5tYXRbaSwxXTwtIGZsYWcxIHwgZmxhZzIKICBUV0lObWF0W2ksMl08LSBUV0lOX1lbaSwyXSAmIFRXSU5fWVtpLDNdCn0KYGBgCiNzYXZlCmBgYHtyfQpzYXZlKFRXSU5tYXQscmVzLHJlc0MsZmlsZT0iLi4vZGF0YS9UV0lOcmVzLlJkYXRhIikKYGBgCiMgYW5hbHl6ZQpgYGB7cn0KbGlicmFyeShkZXZ0b29scykKZGV2dG9vbHM6OmRvY3VtZW50KCkKbGlicmFyeShCaUNhdXNhbGl0eSkKY29uZk5ldEZ1bmM8LWZ1bmN0aW9uKG1hdCxJbmRwVGhzPTAuMSkKewogIGQ8LWRpbShtYXQpWzJdCiAgY29uZk5ldDwtbWF0cml4KDAsbnJvdz1kLG5jb2w9ZCkKICBEPC1WZWNBbGlnbm1lbnQobWF0KQogIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpCiAgIz09PQogIGZvcihpIGluIHNlcShkLTEpKQogICAgZm9yKGogaW4gc2VxKGkrMSxkKSkKICAgIHsKICAgICAgejwtbnVtZXJpYyhkKS0xCiAgICAgIHk8LW51bWVyaWMoZCktMQogICAgICB5W2pdPC1jKDEpCiAgICAgIHpbaV08LWMoMSkKICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eikKICAgICAgYjE8LUNvbmRQcm9iKEQseT16LHo9eSkkY29uZFAgIyBjb25mKHp8eSkgCiAgICAgIGNvbmZWYWxNYXRbaSxqXTwtYTEKICAgICAgY29uZlZhbE1hdFtqLGldPC1iMQogICAgICBpZigoYTEtYjEpPjAgJiYgYTE+PUluZHBUaHMpCiAgICAgICAgY29uZk5ldFtpLGpdPC0xCiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocykKICAgICAgICBjb25mTmV0W2osaV08LTEKICAgICAgZWxzZQogICAgICAgIGNvbmZOZXRbaSxqXTwtMAogICAgfQogIHJldHVybihsaXN0KGNvbmZOZXQ9Y29uZk5ldCxjb25mVmFsTWF0PWNvbmZWYWxNYXQpICkKfQoKcmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBUV0lObWF0LENhdXNhbFRocz0wLjEsSW5kcFRocz0uMDEpCnJlc0MkQ2F1c2FsR1JlcyRFaGF0ICMgcHJvcG9zZWQgbWV0aG9kCgpyZXM8LWNvbmZOZXRGdW5jKFRXSU5tYXQpCmBgYAo9PT09PT09PT09IEVpZ2h0aC1HcmFkZSBQdXBpbHMgaW4gdGhlIE5ldGhlcmxhbmRzCmBgYHtyfQpsaWJyYXJ5KE1BU1MpCmRhdGEoIm5sc2Nob29scyIpCnRoczwtMC4yNQpuPC1kaW0obmxzY2hvb2xzKVsxXQpkPC1kaW0obmxzY2hvb2xzKVsyXQptYXRTaG9vbDwtbWF0cml4KDAsbmNvbD1kLTEsbnJvdz1uKSAjIHJlbW92ZSBDbGFzcyBJRAoKbWF0U2hvb2xbLDFdPC1ubHNjaG9vbHMkbGFuZzxxdWFudGlsZShubHNjaG9vbHMkbGFuZyxjKHRocykpICMgbGFuZ3VhZ2UgdGVzdCBzY29yZS4KbWF0U2hvb2xbLDJdPC1ubHNjaG9vbHMkSVE8cXVhbnRpbGUobmxzY2hvb2xzJElRLGModGhzKSkKbWF0U2hvb2xbLDNdPC1ubHNjaG9vbHMkR1M8cXVhbnRpbGUobmxzY2hvb2xzJEdTLGModGhzKSkgIyBjbGFzcyBzaXplCm1hdFNob29sWyw0XTwtbmxzY2hvb2xzJFNFUzxxdWFudGlsZShubHNjaG9vbHMkU0VTLGModGhzKSkgIyBzb2NpYWwtZWNvbm9taWMgc3RhdHVzIG9mIHB1cGlsJ3MgZmFtaWx5LgptYXRTaG9vbFssNV08LW5sc2Nob29scyRDT01CID09MSAjd2VyZSB0aGUgcHVwaWxzIHRhdWdodCBpbiBhIG11bHRpLWdyYWRlIGNsYXNzICgwLzEpPyAKCgpgYGAKI3J1biBzY2hvb2wKYGBge3J9CmxpYnJhcnkoZGV2dG9vbHMpCmRldnRvb2xzOjpkb2N1bWVudCgpCmxpYnJhcnkoQmlDYXVzYWxpdHkpCnJlc0M8LUJpQ2F1c2FsaXR5OjpDYXVzYWxHcmFwaEluZmVyTWFpbkZ1bmMobWF0ID0gbWF0U2hvb2wsQ2F1c2FsVGhzPTAuMSxJbmRwVGhzPS4wMSkKcmVzPC1jb25mTmV0RnVuYyhtYXRTaG9vbCkKYGBgClRlc3QKYGBge3J9CmxpYnJhcnkoZGV2dG9vbHMpCmRldnRvb2xzOjpkb2N1bWVudCgpCmxpYnJhcnkoQmlDYXVzYWxpdHkpCnBhdGgxPC0icGFpcnMvcGFpcjAwNTcudHh0IgpkYXQ8LXJlYWQuY3N2KGZpbGU9cGF0aDEsc2VwID0gIiIsaGVhZGVyID0gRkFMU0UpClg8LWRhdFtbMV1dClk8LWRhdFtbMl1dCmYxPC1kYXRhLmZyYW1lKFg9WCxZPVkpCmZ4PC1kYXRhLmZyYW1lKFg9WCkKZnk8LWRhdGEuZnJhbWUoWT1ZKQptMTwtbG0oWX5YLGRhdGE9ZjEpCm0yPC1sbShYflksZGF0YT1mMSkKeXByZWQ8LXByZWRpY3QobTEsZngpCnhwcmVkPC1wcmVkaWN0KG0yLGZ5KQojIEE8LWgoQikrbm9pc2Ugd2hlcmUgaChCKSBpbmQuIHdpdGggbm9pc2UKeG5vaXNlPC1ZLXlwcmVkICMgWT1mKFgpK3hub2lzZSAmIFlwcmVkPC1mKFgpIEhlbmNlLCB4bm9pc2U8LVktWXByZWQKeW5vaXNlPC1YLXhwcmVkICMgWD1nKFkpK3lub2lzZSAmIFhwcmVkPC1nKFkpIEhlbmNlLCB5bm9pc2U8LVgtWHByZWQKYzE8LWNvcihYLHhub2lzZSkKI3NwcmludGYoImNvcnIgWCwgeG5vaXNlIHAudmFsPSVmIixjMSRwLnZhbHVlKQpjMjwtY29yKFkseW5vaXNlKQojc3ByaW50ZigiY29yciBZLCB5bm9pc2UgcC52YWw9JWYiLGMyJHAudmFsdWUpCmlmKGMxPGMyKQp7CiAgcHJpbnQoIlgtPlkiKQp9ZWxzZXsKICBwcmludCgiWS0+WCIpCn0KYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVFdJTiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQojIFJlZjogCiMgaHR0cHM6Ly93d3cuY2RjLmdvdi9ncm93dGhjaGFydHMvaHRtbF9jaGFydHMvd3RhZ2VpbmYuaHRtCiMgaHR0cHM6Ly9hY2FkZW1pYy5vdXAuY29tL3FqZS9hcnRpY2xlLWFic3RyYWN0LzEyMC8zLzEwMzEvMTg0MTQ2MgojIGh0dHBzOi8vZ2l0aHViLmNvbS9BTUxhYi1BbXN0ZXJkYW0vQ0VWQUUvYmxvYi9tYXN0ZXIvZGF0YXNldHMvVFdJTlMvUmVhZG1lVHdpbnMKIyBodHRwczovL2dpdGh1Yi5jb20vcmd1bzEyL2F3ZXNvbWUtY2F1c2FsaXR5LWRhdGEKTG9hZGluZwoKYGBge3J9ClRXSU5fWTwtcmVhZC5jc3YoZmlsZT0iLi4vZGF0YS90d2luX3BhaXJzX1lfM3llYXJzX3NhbWVzZXguY3N2IikKVFdJTl9XPC1yZWFkLmNzdihmaWxlPSIuLi9kYXRhL3R3aW5fcGFpcnNfVF8zeWVhcnNfc2FtZXNleC5jc3YiKQpUV0lOX1g8LXJlYWQuY3N2KGZpbGU9Ii4uL2RhdGEvdHdpbl9wYWlyc19YXzN5ZWFyc19zYW1lc2V4LmNzdiIpCm48LWRpbShUV0lOX1kpWzFdCnRoczwtMTAwMAojMTp3PD10aHMgYm90aCwgMjp3PD10aHMgb25lLCAzOiB3PD10aHMgbm9uZSwgNDpkaWUgYm90aCwgNTogZGllIG9uZSwgNjogZGllIG5vbmUgClRXSU5tYXQ8LW1hdHJpeCgwLG5yb3c9bixuY29sPTE1KQpgYGAKRmlsbCBtYXRyaXgKYGBge3J9CmZvcihpIGluIHNlcShuKSkKewogIGZsYWcxPWZsYWcyPTAKICBpZihUV0lOX1dbaSwyXTw9dGhzKQogICAgZmxhZzE8LTEKICBpZihUV0lOX1dbaSwzXTw9dGhzKQogICAgZmxhZzI8LTEKICBUV0lObWF0W2ksMV08LSBmbGFnMSB8IGZsYWcyICMgd2VpZ2h0IG9mIFRXSU46IE5vbmUgYXJlIGJlbG93IHRocyA9MCwgb3cgPTEKICBUV0lObWF0W2ksMl08LSBUV0lOX1lbaSwyXSAmIFRXSU5fWVtpLDNdICMgbW9ydGFsaXR5IG9mIFRXSU46IEJvdGggYXJlIGRpZSB0aHMgPTEsIG93ID0wCiAgCiAgdzwtVFdJTl9YJGFsY29ob2xbaV0KICBUV0lObWF0W2ksM108LWlmZWxzZShpcy5uYSh3KSwwLHcpCiAgdzwtVFdJTl9YJGFuZW1pYVtpXQogIFRXSU5tYXRbaSw0XTwtaWZlbHNlKGlzLm5hKHcpLDAsdykKICB3PC1UV0lOX1gkY2FyZGlhY1tpXQogIFRXSU5tYXRbaSw1XTwtaWZlbHNlKGlzLm5hKHcpLDAsdykKICB3PC1UV0lOX1gkY2h5cGVyW2ldCiAgVFdJTm1hdFtpLDZdPC1pZmVsc2UoaXMubmEodyksMCx3KQogIHc8LVRXSU5fWCRpbmNlcnZpeFtpXQogIFRXSU5tYXRbaSw3XTwtaWZlbHNlKGlzLm5hKHcpLDAsdykKICB3PC1UV0lOX1gkZGlhYmV0ZXNbaV0KICBUV0lObWF0W2ksOF08LWlmZWxzZShpcy5uYSh3KSwwLHcpCiAgdzwtVFdJTl9YJGVjbGFtcFtpXQogIFRXSU5tYXRbaSw5XTwtaWZlbHNlKGlzLm5hKHcpLDAsdykKICB3PC1UV0lOX1gkaGVtb1tpXQogIFRXSU5tYXRbaSwxMF08LWlmZWxzZShpcy5uYSh3KSwwLHcpCiAgdzwtVFdJTl9YJGhlcnBlc1tpXQogIFRXSU5tYXRbaSwxMV08LWlmZWxzZShpcy5uYSh3KSwwLHcpCiAgdzwtVFdJTl9YJGx1bmdbaV0KICBUV0lObWF0W2ksMTJdPC1pZmVsc2UoaXMubmEodyksMCx3KQogIHc8LVRXSU5fWCRwaHlwZXJbaV0KICBUV0lObWF0W2ksMTNdPC1pZmVsc2UoaXMubmEodyksMCx3KQogIHc8LVRXSU5fWCR0b2JhY2NvW2ldCiAgVFdJTm1hdFtpLDE0XTwtaWZlbHNlKGlzLm5hKHcpLDAsdykKICB3PC1UV0lOX1gkdXRlcmluZVtpXQogIFRXSU5tYXRbaSwxNV08LWlmZWxzZShpcy5uYSh3KSwwLHcpCn0KYGBgCiNzYXZlCmBgYHtyfQpzYXZlKFRXSU5tYXQscmVzLHJlc0MsZmlsZT0iLi4vZGF0YS9UV0lOcmVzLlJkYXRhIikKYGBgCiMgYW5hbHl6ZQpgYGB7cn0KbGlicmFyeShkZXZ0b29scykKZGV2dG9vbHM6OmRvY3VtZW50KCkKbGlicmFyeShCaUNhdXNhbGl0eSkKY29uZk5ldEZ1bmM8LWZ1bmN0aW9uKG1hdCxJbmRwVGhzPTAuMSkKewogIGQ8LWRpbShtYXQpWzJdCiAgY29uZk5ldDwtbWF0cml4KDAsbnJvdz1kLG5jb2w9ZCkKICBEPC1WZWNBbGlnbm1lbnQobWF0KQogIGNvbmZWYWxNYXQ8LW1hdHJpeCgwLG5yb3c9ZCxuY29sPWQpCiAgIz09PQogIGZvcihpIGluIHNlcShkLTEpKQogICAgZm9yKGogaW4gc2VxKGkrMSxkKSkKICAgIHsKICAgICAgejwtbnVtZXJpYyhkKS0xCiAgICAgIHk8LW51bWVyaWMoZCktMQogICAgICB5W2pdPC1jKDEpCiAgICAgIHpbaV08LWMoMSkKICAgICAgYTE8LUNvbmRQcm9iKEQseT15LHo9eikkY29uZFAgIyBjb25mKHl8eikKICAgICAgYjE8LUNvbmRQcm9iKEQseT16LHo9eSkkY29uZFAgIyBjb25mKHp8eSkgCiAgICAgIGNvbmZWYWxNYXRbaSxqXTwtYTEKICAgICAgY29uZlZhbE1hdFtqLGldPC1iMQogICAgICBpZigoYTEtYjEpPjAgJiYgYTE+PUluZHBUaHMpCiAgICAgICAgY29uZk5ldFtpLGpdPC0xCiAgICAgIGVsc2UgaWYoKGIxLWExKT4wICYmIGIxPj0gSW5kcFRocykKICAgICAgICBjb25mTmV0W2osaV08LTEKICAgICAgZWxzZQogICAgICAgIGNvbmZOZXRbaSxqXTwtMAogICAgfQogIHJldHVybihsaXN0KGNvbmZOZXQ9Y29uZk5ldCxjb25mVmFsTWF0PWNvbmZWYWxNYXQpICkKfQoKcmVzQzwtQmlDYXVzYWxpdHk6OkNhdXNhbEdyYXBoSW5mZXJNYWluRnVuYyhtYXQgPSBUV0lObWF0LENhdXNhbFRocz0wLjEsSW5kcFRocz0uMDEpCnJlc0MkQ2F1c2FsR1JlcyRFaGF0ICMgcHJvcG9zZWQgbWV0aG9kCgpyZXM8LWNvbmZOZXRGdW5jKFRXSU5tYXQpCmBgYAo9PT09PT09PT09IEVpZ2h0aC1HcmFkZSBQdXBpbHMgaW4gdGhlIE5ldGhlcmxhbmRzCmBgYHtyfQpsaWJyYXJ5KE1BU1MpCmRhdGEoIm5sc2Nob29scyIpCnRoczwtMC4yNQpuPC1kaW0obmxzY2hvb2xzKVsxXQpkPC1kaW0obmxzY2hvb2xzKVsyXQptYXRTaG9vbDwtbWF0cml4KDAsbmNvbD1kLTEsbnJvdz1uKSAjIHJlbW92ZSBDbGFzcyBJRAoKbWF0U2hvb2xbLDFdPC1ubHNjaG9vbHMkbGFuZzxxdWFudGlsZShubHNjaG9vbHMkbGFuZyxjKHRocykpICMgbGFuZ3VhZ2UgdGVzdCBzY29yZS4KbWF0U2hvb2xbLDJdPC1ubHNjaG9vbHMkSVE8cXVhbnRpbGUobmxzY2hvb2xzJElRLGModGhzKSkKbWF0U2hvb2xbLDNdPC1ubHNjaG9vbHMkR1M8cXVhbnRpbGUobmxzY2hvb2xzJEdTLGModGhzKSkgIyBjbGFzcyBzaXplCm1hdFNob29sWyw0XTwtbmxzY2hvb2xzJFNFUzxxdWFudGlsZShubHNjaG9vbHMkU0VTLGModGhzKSkgIyBzb2NpYWwtZWNvbm9taWMgc3RhdHVzIG9mIHB1cGlsJ3MgZmFtaWx5LgptYXRTaG9vbFssNV08LW5sc2Nob29scyRDT01CID09MSAjd2VyZSB0aGUgcHVwaWxzIHRhdWdodCBpbiBhIG11bHRpLWdyYWRlIGNsYXNzICgwLzEpPyAKCgpgYGAKI3J1biBzY2hvb2wKYGBge3J9CmxpYnJhcnkoZGV2dG9vbHMpCmRldnRvb2xzOjpkb2N1bWVudCgpCmxpYnJhcnkoQmlDYXVzYWxpdHkpCnJlc0M8LUJpQ2F1c2FsaXR5OjpDYXVzYWxHcmFwaEluZmVyTWFpbkZ1bmMobWF0ID0gbWF0U2hvb2wsQ2F1c2FsVGhzPTAuMSxJbmRwVGhzPS4wMSkKcmVzPC1jb25mTmV0RnVuYyhtYXRTaG9vbCkKYGBgClRlc3QKYGBge3J9CmxpYnJhcnkoZGV2dG9vbHMpCmRldnRvb2xzOjpkb2N1bWVudCgpCmxpYnJhcnkoQmlDYXVzYWxpdHkpCnBhdGgxPC0icGFpcnMvcGFpcjAwNTcudHh0IgpkYXQ8LXJlYWQuY3N2KGZpbGU9cGF0aDEsc2VwID0gIiIsaGVhZGVyID0gRkFMU0UpClg8LWRhdFtbMV1dClk8LWRhdFtbMl1dCmYxPC1kYXRhLmZyYW1lKFg9WCxZPVkpCmZ4PC1kYXRhLmZyYW1lKFg9WCkKZnk8LWRhdGEuZnJhbWUoWT1ZKQptMTwtbG0oWX5YLGRhdGE9ZjEpCm0yPC1sbShYflksZGF0YT1mMSkKeXByZWQ8LXByZWRpY3QobTEsZngpCnhwcmVkPC1wcmVkaWN0KG0yLGZ5KQojIEE8LWgoQikrbm9pc2Ugd2hlcmUgaChCKSBpbmQuIHdpdGggbm9pc2UKeG5vaXNlPC1ZLXlwcmVkICMgWT1mKFgpK3hub2lzZSAmIFlwcmVkPC1mKFgpIEhlbmNlLCB4bm9pc2U8LVktWXByZWQKeW5vaXNlPC1YLXhwcmVkICMgWD1nKFkpK3lub2lzZSAmIFhwcmVkPC1nKFkpIEhlbmNlLCB5bm9pc2U8LVgtWHByZWQKYzE8LWNvcihYLHhub2lzZSkKI3NwcmludGYoImNvcnIgWCwgeG5vaXNlIHAudmFsPSVmIixjMSRwLnZhbHVlKQpjMjwtY29yKFkseW5vaXNlKQojc3ByaW50ZigiY29yciBZLCB5bm9pc2UgcC52YWw9JWYiLGMyJHAudmFsdWUpCmlmKGMxPGMyKQp7CiAgcHJpbnQoIlgtPlkiKQp9ZWxzZXsKICBwcmludCgiWS0+WCIpCn0KYGBgCgo=</div>
 
 
 

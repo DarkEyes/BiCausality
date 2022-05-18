@@ -128,7 +128,7 @@ print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransi
 print("proposed method directed mat")
 print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
 ```
-# Third exp on sim -> down prob of being 1 in sim to 0.08
+# Third exp on sim -> down prob of being 1 in sim to 0.3
 ```{r}
 # set.seed(2022)
 seedN<-2022
@@ -140,7 +140,7 @@ mat<-matrix(nrow=n,ncol=d)
 for(i in seq(n))
 {
   set.seed(seedN+i)
-  mat[i,] <- rbinom(n=d, size=1, prob=0.08)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.3)
 }
 mat[,1]<-mat[,2] | mat[,3] 
 mat[,4] <-mat[,2] | mat[,5]
@@ -152,7 +152,7 @@ trueMat[c(2,5),4]<-1
 trueMat[c(1,4),6]<-1
 trsTrueMat<-getTransitiveClosureMat(trueMat)
 
-res<-confNetFunc(mat=mat,IndpThs=0.9)
+res<-confNetFunc(mat=mat,ths = 0.9)
 res$confNet
 res$confValMat # baseline
 print("baseline trs mat")
@@ -215,14 +215,14 @@ print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
 # set.seed(2022)
 seedN<-2022
 
-n<-300
+n<-75
 d<-10
 mat<-matrix(nrow=n,ncol=d)
 
 for(i in seq(n))
 {
   set.seed(seedN+i)
-  mat[i,] <- rbinom(n=d, size=1, prob=0.08)
+  mat[i,] <- rbinom(n=d, size=1, prob=0.3)
 }
 mat[,1]<-mat[,2] | mat[,3] 
 mat[,4] <-mat[,2] | mat[,5]
@@ -234,9 +234,9 @@ trueMat[c(2,5),4]<-1
 trueMat[c(1,4),6]<-1
 trsTrueMat<-getTransitiveClosureMat(trueMat)
 
-res<-confNetFunc(mat=mat,IndpThs=0.9)
-res$confNet
-res$confValMat # baseline
+res<-confNetFunc(mat=mat,ths=0.9)
+#res$confNet
+#res$confValMat # baseline
 print("baseline trs mat")
 print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(res$confNet) ) )
 print("baseline directed mat")
@@ -318,9 +318,9 @@ causalRuleFunc<-function(mat,oddThs=0.1,slack=0.001)
 ```{r}
 # set.seed(2022)
 seedN<-2022
-probTHS<-0.05
+probTHS<-0.3
 
-n<-500
+n<-100
 d<-10
 mat<-matrix(nrow=n,ncol=d)
 
@@ -356,9 +356,63 @@ print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = res$confNet 
 # print("proposed method directed mat")
 # print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
 ```
+#run Bayesian Network
+```{r}
+library(bnlearn)
+library(devtools)
+#document()
+library(BiCausality)
+# set.seed(2022)
+seedN<-2022
+probTHS<-0.3
+
+n<-75
+d<-10
+mat<-matrix(nrow=n,ncol=d)
+
+for(i in seq(n))
+{
+  set.seed(seedN+i)
+  mat[i,] <- rbinom(n=d, size=1, prob=probTHS)
+}
+mat[,1]<-mat[,2] | mat[,3] 
+mat[,4] <-mat[,2] | mat[,5]
+mat[,6] <- mat[,1] | mat[,4]
+
+trueMat<-matrix(nrow=d,ncol=d,0)
+trueMat[c(2,3),1]<-1
+trueMat[c(2,5),4]<-1
+trueMat[c(1,4),6]<-1
+trsTrueMat<-getTransitiveClosureMat(trueMat)
+
+mat2<-mat
+for(i in seq(d))
+  mat2[,i]<-as.numeric(mat[,i])
+
+res<-pc.stable(x=data.frame(mat2))
+bayeNet<-amat(res)
+
+print("baseline trs mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(bayeNet) ) )
+print("baseline directed mat")
+print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = bayeNet ) )
+
+
+# resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1)
+# resC$CausalGRes$Ehat # proposed method
+# 
+# cMat<- resC$CausalGRes$Ehat
+# print("proposed method trs mat")
+# print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trsTrueMat, adjMat = getTransitiveClosureMat(cMat) ) )
+# print("proposed method directed mat")
+# print( comparePredAdjMatrix2TrueAdjMat(trueAdjMat=trueMat, adjMat = cMat) )
+```
+
+
 # run causal graph plot?
 ```{r}
 library(BiCausality)
+library(bnlearn)
 
 # set.seed(2022)
 seedN<-2022
@@ -384,6 +438,13 @@ trueMat[c(2,5),4]<-1
 trueMat[c(1,4),6]<-1
 trsTrueMat<-getTransitiveClosureMat(trueMat)
 
+mat2<-mat
+for(i in seq(d))
+  mat2[,i]<-as.numeric(mat[,i])
+
+res<-pc.stable(x=data.frame(mat2))
+bayeNet<-amat(res)
+
 res<-confNetFunc(mat=mat,ths =0.9)
 res$confNet
 res$confValMat # baseline
@@ -405,10 +466,13 @@ library(igraph)
 net <- graph_from_adjacency_matrix(res$confNet ,weighted = NULL)
 net2 <- graph_from_adjacency_matrix(resC$CausalGRes$Ehat, weighted = NULL)
 net3 <- graph_from_adjacency_matrix(res2$confNet, weighted = NULL)
+rownames(bayeNet)<-NULL
+colnames(bayeNet)<-NULL
+net4 <- graph_from_adjacency_matrix(bayeNet, weighted = NULL)
 
 #par(mfrow=c(1,2))
-plot(net, edge.width=res$confNet*3 ,vertex.size =20 , edge.arrow.size = 0.5, layout=layout_with_kk, vertex.color = '#ffc2dc')
-plot(net2, edge.width=resC$CausalGRes$Ehat*3, edge.arrow.size = 0.5, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
-plot(net3, edge.width=res2$confNet*3, edge.arrow.size = 0.5, vertex.size =20 , vertex.color = '#33c4b1',layout=layout_with_kk)
+plot(net ,vertex.size =20 , edge.arrow.size = 0.5, layout=layout_with_kk, vertex.color = '#ffc2dc')
+plot(net2, edge.arrow.size = 0.5, vertex.size =20 , vertex.color = '#D4C8E9',layout=layout_with_kk)
+plot(net3, edge.arrow.size = 0.5, vertex.size =20 , vertex.color = '#33c4b1',layout=layout_with_kk)
+plot(net4, edge.arrow.size = 0.5, vertex.size =20 , vertex.color = '#F2C79D',layout=layout_with_kk)
 ```
-

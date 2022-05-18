@@ -57,6 +57,12 @@ CondProb<-function(D,y,z)
       }
     }
   }
+
+  if(length(nD)==0) # for the case when there is no transaction for z.
+  {
+    return(list("condP"=NA, nD=nD,countTotal=0,count=0 ))
+  }
+
   filterY<- y!= -1
   count<-0
   countTotal<-0

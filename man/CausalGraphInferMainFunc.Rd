@@ -9,7 +9,7 @@ CausalGraphInferMainFunc(
   alpha = 0.05,
   nboot = 100,
   IndpThs = 0.05,
-  CausalThs = 0.25,
+  CausalThs = 0.1,
   slack = 0.001
 )
 }

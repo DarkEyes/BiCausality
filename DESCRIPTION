@@ -1,5 +1,5 @@
 Package: BiCausality
-Title: What the Package Does (One Line, Title Case)
+Title: Binary Causality Inference Framework
 Version: 0.1.0
 Authors@R: 
     person(given = "Chainarong",
@@ -8,7 +8,7 @@ Authors@R:
            email = "grandca@gmail.com",
            comment = c(ORCID = "0000-0003-3131-0370"))
 Maintainer: Chainarong Amornbunchornvej <grandca@gmail.com>
-Description: What the package does (one paragraph).
+Description: A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j.  The publication of this package is at <arXiv:2205.06131>.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.5.0)

@@ -4,7 +4,7 @@
 #'
 #'@export
 #'
-CausalGraphInferMainFunc<-function(mat,alpha=0.05,nboot=100,IndpThs=0.05,CausalThs = 0.25,slack=0.001)
+CausalGraphInferMainFunc<-function(mat,alpha=0.05,nboot=100,IndpThs=0.05,CausalThs = 0.1,slack=0.001)
 {
   print("Inferring dependent graph")
   res<-bSCMDepndentGraphFunc(mat,nboot=nboot,alpha=alpha,IndpThs=IndpThs)
