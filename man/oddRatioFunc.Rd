@@ -6,6 +6,27 @@
 \usage{
 oddRatioFunc(D, i, j, z = c(), slack = 0.001)
 }
+\arguments{
+\item{D}{is an aligned list of transactions that was converted from \code{mat}.}
+
+\item{i}{is an ith dimension in \code{mat} for computing the odd ratio with.}
+
+\item{j}{is an jth dimension in \code{mat} for computing compute the odd ratio with.}
+
+\item{z}{is a conditioning d-dimensional vector on \code{D}.
+Given k non-negative-bit positions of \code{z}, all k bit positions of samples in the subset of \code{D} must have similar values with these bits.}
+
+\item{slack}{is a parameter to prevent the issue of division by zero.}
+}
+\value{
+This function returns an odd ratio value of variables of ith and jth dimensions from \code{D}.
+}
 \description{
-oddRatioFunc function
+Given the samples in the n by d matrix \code{mat} where n is a number of samples and d is a number of dimensions.
+This function computes an odd ratio value of variables of ith and jth dimensions from
+a given an aligned list of transactions \code{D} (compute by \code{D<-VecAlignment(mat)}).
+}
+\examples{
+oddRatioFunc(simData$D,i=1,j=2)
+
 }

@@ -4,10 +4,10 @@
 \alias{bin2dec}
 \title{bin2dec function}
 \usage{
-bin2dec(x)
+bin2dec(X)
 }
 \arguments{
-\item{x}{is a binary vector where \code{X[i]} is the ith bit of vector.}
+\item{X}{is a binary vector where \code{X[i]} is the ith bit of vector.}
 }
 \value{
 This function returns a decimal value of \code{X}.
@@ -16,6 +16,6 @@ This function returns a decimal value of \code{X}.
 This function convertes a binary vector into its decimal value.
 }
 \examples{
-bin2dec(x=c(1,1,1,0))
+bin2dec(X=c(1,1,1,0))
 
 }

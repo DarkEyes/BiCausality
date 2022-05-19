@@ -10,7 +10,7 @@ VecAlignment(mat)
 \item{mat}{is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.}
 }
 \value{
-This function returns the list \code{D}, is an aligned list of transactions that was converted from any matrix n by d \code{mat}.
+This function returns  an aligned list of transactions \code{D}, is an aligned list of transactions that was converted from any matrix n by d \code{mat}.
 }
 \description{
 This function rearranges the samples in the \code{mat} into

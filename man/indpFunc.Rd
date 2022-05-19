@@ -2,12 +2,29 @@
 % Please edit documentation in R/indpFunc.R
 \name{indpFunc}
 \alias{indpFunc}
-\title{indpFunc function
-|p(i,j) -p(i)*p(j)| should be zero if i and j are independent}
+\title{indpFunc function}
 \usage{
 indpFunc(D, i, j, z = c())
 }
+\arguments{
+\item{D}{is an aligned list of transactions that was converted from \code{mat}.}
+
+\item{i}{is an ith dimension in \code{mat}.}
+
+\item{j}{is an jth dimension in \code{mat}.}
+}
+\value{
+This function returns the degree of dependency between variables:
+zero implies both variables are independent, and non-zero value implies the degree of dependency (higher implies more dependent degree).
+}
 \description{
-indpFunc function
-|p(i,j) -p(i)*p(j)| should be zero if i and j are independent
+This function computes the degree of dependency between variables.
+Let i and j be variables, if they are independent, then |p(i,j) -p(i)*p(j)| should be zero.
+Given the samples in the n by d matrix \code{mat} where n is a number of samples and d is a number of dimensions,
+an aligned list of transactions \code{D} is computed by
+\code{D<-VecAlignment(mat)}.
+}
+\examples{
+indpFunc(simData$D,i=1,j=2)
+
 }

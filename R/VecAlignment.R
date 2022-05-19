@@ -13,7 +13,7 @@
 #'
 #' @param mat is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.
 #'
-#' @return This function returns the list \code{D}, is an aligned list of transactions that was converted from any matrix n by d \code{mat}.
+#' @return This function returns  an aligned list of transactions \code{D}, is an aligned list of transactions that was converted from any matrix n by d \code{mat}.
 #'
 #' @examples
 #' VecAlignment(mat=simData$mat)
@@ -39,22 +39,22 @@ VecAlignment<-function(mat)
 #'
 #'@description
 #'This function convertes a binary vector into its decimal value.
-#'@param x is a binary vector where \code{X[i]} is the ith bit of vector.
+#'@param X is a binary vector where \code{X[i]} is the ith bit of vector.
 #'
 #'@return This function returns a decimal value of \code{X}.
 #'
 #'@examples
-#'bin2dec(x=c(1,1,1,0))
+#'bin2dec(X=c(1,1,1,0))
 #'
 #'@export
 #'
-bin2dec<-function(x)
+bin2dec<-function(X)
 {
   newx<-0
-  d<-length(x)
+  d<-length(X)
   for(i in seq(d))
   {
-    newx <- newx+x[i]*2^(d-i)
+    newx <- newx+X[i]*2^(d-i)
   }
   return(newx)
 }
