@@ -4,14 +4,7 @@
 \alias{bSCMCausalGraphFunc}
 \title{bSCMCausalGraphFunc function}
 \usage{
-bSCMCausalGraphFunc(
-  E1,
-  Dboot,
-  alpha = 0.05,
-  SignThs = 0.05,
-  CausalThs = 0.25,
-  slack = 0.001
-)
+bSCMCausalGraphFunc(E1, Dboot, alpha = 0.05, SignThs = 0.05, CausalThs = 0.25)
 }
 \description{
 bSCMCausalGraphFunc function

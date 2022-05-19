@@ -13,6 +13,25 @@ CausalGraphInferMainFunc(
   slack = 0.001
 )
 }
+\arguments{
+\item{mat}{is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.}
+
+\item{alpha}{is a significance threshold for hypothesis tests (Mann Whitney)
+that deploys for testing degrees of dependency, association direction, and causal direction.}
+
+\item{nboot}{is a number of bootstrap replicates for bootstrapping deployed to infer confidence intervals and distributions for hypothesis tests.}
+
+\item{IndpThs}{is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the degree of dependency must greater than this value significantly.}
+
+\item{CausalThs}{is a threshold for the degree of causal direction In the causal-direction test, to claim that any variables have causal relations, the degree of causal direction must greater than this value significantly.}
+}
+\value{
+This function returns causal inference results. #TODO: provide list of results
+}
 \description{
-CausalGraphInferMainFunc function
+A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j.
+}
+\examples{
+#resC<-BiCausality::CausalGraphInferMainFunc(mat = simData$mat,CausalThs=0.1, nboot =50, IndpThs=0.05)
+
 }

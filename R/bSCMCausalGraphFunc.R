@@ -4,7 +4,7 @@
 #'
 #'@export
 #'
-bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,slack=0.001)
+bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25)
 {
   d<-dim(E1)[1]
   Ehat<-matrix(0,d,d)
@@ -36,7 +36,7 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25,
     #print(str)
     for(k in seq(nboot))
     {
-      bSignDist[k]<-oddDiffFunc(D=Dboot[[k]],i=inx[1],j=inx[2],slack=slack)
+      bSignDist[k]<-oddDiffFunc(D=Dboot[[k]],i=inx[1],j=inx[2])
     }
     testRes1<-wilcox.test(x=abs(bSignDist), mu = SignThs, alternative = "greater")
     if(testRes1$p.value<=alpha)

@@ -1,7 +1,19 @@
 #'@title confNetFunc function
-#' Computing a confidence network in data mining
-#' where  there is a weight of edge from i to j as conf(j|i)
+#' @description
+#' This function Computes a confidence network in data mining.
+#' Given a set of n transactions or samples in \code{mat} s.t. each transaction has d binary items.
+#' The  conf(mat[,j]=1|mat[,i]=1) is a ratio of a number of samples in jth and ith dimensions that have values equal to
+#' one divided by a number of samples in the ith dimension that has a value equal to one.
+#' The confNetFunc computes the network where the nodes are dimensions and the edge weights are conf(mat[,j]=1|mat[,i]=1) for any directed edge from i to j.
 #'
+#' @param mat is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.
+#' @param ths is a threshold parameter for cutting of the edge weights. There exists the directed edge from i to j if its edge weight if above or equal \code{ths}.
+#' @return This function returns  a binary adjacency matrix \code{confNet} and the weighted adjacency matrix \code{confValMat}.
+#' \item{confNet}{A binary adjacency matrix that has \code{confNet[i,j]=1} if \code{confValMat[i,j]>=ths}. Otherwise, it is zero.}
+#' \item{confValMat}{A weighted adjacency matrix where \code{confValMat[i,j]} is conf(mat[,j]=1|mat[,i]=1).}
+#'
+#' @examples
+#' res<-confNetFunc(SimData$mat)
 #'
 #'@export
 #'

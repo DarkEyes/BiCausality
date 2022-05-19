@@ -31,7 +31,7 @@ VecAlignment<-function(mat)
     if(is.null(D[[sprintf("%d",bin2dec(mat[i,]))]]$count)==TRUE )
       D[[sprintf("%d",bin2dec(mat[i,]))]]$count<-1
     else
-      D[[sprintf("%d",bin2dec(mat[i,]))]]$count<-newMat[[sprintf("%d",bin2dec(mat[i,]))]]$count+1
+      D[[sprintf("%d",bin2dec(mat[i,]))]]$count<-D[[sprintf("%d",bin2dec(mat[i,]))]]$count+1
   }
   return(D)
 }
