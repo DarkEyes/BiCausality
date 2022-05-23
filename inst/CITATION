@@ -1,0 +1,13 @@
+citHeader("To cite the 'BiCausality' package in publications use:")
+
+citEntry(entry       = "Misc",
+         title       = "Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis.",
+         author      = personList(as.person("Chainarong Amornbunchornvej"),
+                        as.person("Navaporn Surasvadi"),
+                        as.person("Anon Plangprasopchok"),
+                        as.person("Suttipong Thajchayapong")
+                        ),
+         year        = "2022",
+         url         = "https://arxiv.org/abs/2205.06131",
+         textVersion = "Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2022). Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis. arXiv:2205.06131. arXiv."
+         )
