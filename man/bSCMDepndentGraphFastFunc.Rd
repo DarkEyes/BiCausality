@@ -2,10 +2,25 @@
 % Please edit documentation in R/bSCMDepndentGraphFastFunc.R
 \name{bSCMDepndentGraphFastFunc}
 \alias{bSCMDepndentGraphFastFunc}
-\title{bSCMDepndentGraphFunc function}
+\title{bSCMDepndentGraphFastFunc function}
 \usage{
 bSCMDepndentGraphFastFunc(mat, IndpThs = 0.05)
 }
+\arguments{
+\item{mat}{is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.}
+
+\item{IndpThs}{is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.}
+}
+\value{
+This function returns results of dependency inference among variables.
+\item{E0}{An adjacency matrix of undirected graph where there is an edge between any pair of variables if they are dependent.}
+\item{E0raw}{A matrix of the degree of dependency of variable pairs.}
+}
 \description{
-bSCMDepndentGraphFunc function
+This function infers dependencies for all pairs of variables without bootstrapping.
+}
+\examples{
+#bSCMDepndentGraphFastFunc(simData$mat)
+
+
 }

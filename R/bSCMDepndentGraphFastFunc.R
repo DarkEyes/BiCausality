@@ -1,5 +1,18 @@
-#'@title bSCMDepndentGraphFunc function
+#'@title bSCMDepndentGraphFastFunc function
 #'
+#'
+#' @description
+#' This function infers dependencies for all pairs of variables without bootstrapping.
+#'
+#' @param mat is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.
+#' @param IndpThs is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.
+#'
+#' @return This function returns results of dependency inference among variables.
+#' \item{E0}{An adjacency matrix of undirected graph where there is an edge between any pair of variables if they are dependent.}
+#' \item{E0raw}{A matrix of the degree of dependency of variable pairs.}
+
+#' @examples
+#' #bSCMDepndentGraphFastFunc(simData$mat)
 #'
 #'
 #'@export

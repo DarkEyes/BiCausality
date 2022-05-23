@@ -6,6 +6,31 @@
 \usage{
 bSCMCausalGraphFunc(E1, Dboot, alpha = 0.05, SignThs = 0.05, CausalThs = 0.25)
 }
+\arguments{
+\item{E1}{is an adjacency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
+
+\item{Dboot}{is a list of \code{D}s (aligned list of transactions) that are generated from sampling with replacement on input samples (\code{mat}) \code{nboot} times.}
+
+\item{alpha}{is a significance threshold for hypothesis tests (Mann Whitney)
+that deploys for testing degrees of dependency, association direction, and causal direction. The default is 0.5.}
+
+\item{SignThs}{is a threshold for the degree of dependency for association direction inference. In the independence test of sign direction, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.}
+
+\item{CausalThs}{is a threshold for the degree of causal direction In the causal-direction test, to claim that any variables have causal relations, the degree of causal direction must greater than this value significantly. The default is 0.1.}
+}
+\value{
+This function returns causal inference results from E1 matrix that is an output of \code{bSCMdeConfoundingGraphFunc}.
+\item{Ehat}{An adjacency matrix of directed causal graph where \code{CausalGRes$Ehat[i,j]=1} implies i causes j.}
+\item{EValHat}{An adjacency matrix of weighted directed causal graph where edge weights are estimated means of probabilites of effect being 1 given cause being either 1 for positive association or 0 for negative association using CondProb() and bootsttraping to estimate}
+\item{causalInfo[\link{'i,j'}]$CDirConfValInv}{An \code{alpha}*100th percentile confidence interval of estimated conditional probability of effect j being 1/0 given cause i's value being either the same (positive association) or opposite (negative association).}
+\item{causalInfo[\link{'i,j'}]$CDirConfInv}{An \code{alpha}*100th percentile confidence interval of estimated causal direction degree of i cause j. }
+\item{causalInfo[\link{'i,j'}]$CDirmean}{A mean-esitamted-causal-direction degree of i cause j.}
+\item{causalInfo[\link{'i,j'}]$testRes2}{A Mann-Whitney hypothesis test result for existence of causal direction. The null hypothesis is that the distributions of causal-direction degrees of i,j differ by a location shift of \code{CausalThs} and the alternative is  that distributions of causal-direction degrees of i,j is shifted greater than \code{CausalThs}.}
+\item{causalInfo[\link{'i,j'}]$testRes1}{A Mann-Whitney hypothesis test result for existence of association by odd differences from \code{oddDiffFunc()}. The null hypothesis is that the distributions of absolute odd difference of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of absolute odd difference of i,j is shifted greater than \code{IndpThs}.}
+\item{causalInfo[\link{'i,j'}]$sign}{A direction of i,j association: 1 for positive, 0 for negative, and -1 for no association.}
+\item{causalInfo[\link{'i,j'}]$SignConfInv}{An \code{alpha}*100th percentile confidence interval of i,j odd difference from bootstraping. }
+\item{causalInfo[\link{'i,j'}]$Signmean}{A mean of i,j odd difference from bootstraping.}
+}
 \description{
-bSCMCausalGraphFunc function
+This function infers a causal graph from a result of confounding factor filtering by \code{bSCMdeConfoundingGraphFunc()}.
 }

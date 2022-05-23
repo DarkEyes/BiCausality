@@ -1,6 +1,19 @@
 #'@title bSCMdeConfoundingGraphFunc function
 #'
+#' @description
+#' This function removes any association/dependency of variables i,j that have any confounding factor k s.t. given k, i and j are independent.
 #'
+#' @param dat is the result of inferring dependencies between all pairs of variables from \code{bSCMDepndentGraphFunc()}.
+#' @param alpha is a significance threshold for hypothesis tests (Mann Whitney)
+#'  that deploys for testing degrees of dependency, association direction, and causal direction. The default is 0.5.
+#' @param IndpThs is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.
+#'
+#' @return This function returns an adjacency matrix of dependencies that have no confounding factors.
+#' \item{E1}{An adjCausalGRes$causalInfo[['i,j']]acency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
+#' \item{E2}{A matrix of associations that have confounding factors where \code{E2[i,j]=0} if no confounding factor and \code{E2[i,j]=k} if k is a confounding factor of i and j.}
+#'
+#' @examples
+#' #bSCMdeConfoundingGraphFunc(simData$resC$depRes)
 #'
 #'@export
 #'

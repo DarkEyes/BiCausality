@@ -23,8 +23,9 @@
 #' \item{depRes$depInfo[['i,j']]$confInv}{An \code{alpha}*100th percentile confidence interval of dependency degrees between variables i and j.}
 #' \item{depRes$depInfo[['i,j']]$testRes}{A Mann-Whitney hypothesis test result for an independence test between variables i and j. The null hypothesis is that the distributions of dependency degrees of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of dependency degrees of i,j is shifted greater than \code{IndpThs}. }
 #' \item{depRes$depInfo[['i,j']]$indices}{A pair of indices of i and j in a numeric vector.}
-#' \item{ConfoundRes$E1}{An adjCausalGRes$causalInfo[['2,1']]acency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
-#' \item{ConfoundRes$E2}{An adjacency matrix of undirected graph of associations that have confounding factors.}
+#' \item{depRes$Dboot}{A list of \code{D}s (aligned list of transactions) that are generated from sampling with replacement on input samples (\code{mat}) \code{nboot} times. }
+#' \item{ConfoundRes$E1}{An adjacency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
+#' \item{ConfoundRes$E2}{A matrix of associations that have confounding factors where \code{E2[i,j]=0} if no confounding factor and \code{E2[i,j]=k} if k is a confounding factor of i and j.}
 #' \item{CausalGRes$Ehat}{An adjacency matrix of directed causal graph where \code{CausalGRes$Ehat[i,j]=1} implies i causes j.}
 #' \item{CausalGRes$EValHat}{An adjacency matrix of weighted directed causal graph where edge weights are estimated means of probabilites of effect being 1 given cause being either 1 for positive association or 0 for negative association using CondProb() and bootsttraping to estimate}
 #' \item{CausalGRes$causalInfo[['i,j']]$CDirConfValInv}{An \code{alpha}*100th percentile confidence interval of estimated conditional probability of effect j being 1/0 given cause i's value being either the same (positive association) or opposite (negative association).}

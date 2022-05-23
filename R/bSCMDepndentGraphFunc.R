@@ -1,6 +1,29 @@
 #'@title bSCMDepndentGraphFunc function
 #'
+#' @description
+#' This function infers dependencies for all pairs of variables with bootstrapping.
 #'
+#' @param mat is a matrix n by d where n is a number of transactions or samples and d is a number of dimensions.
+#' @param alpha is a significance threshold for hypothesis tests (Mann Whitney)
+#'  that deploys for testing degrees of dependency, association direction, and causal direction. The default is 0.5.
+#' @param nboot is a number of bootstrap replicates for bootstrapping deployed to infer confidence intervals and distributions for hypothesis tests. The default is 100.
+#' @param IndpThs is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.
+#' @param pflag is a flag for printing progress message (TRUE). The default is FALSE (no priting).
+#'
+#'
+#' @return This function returns results of dependency inference among variables.
+#' \item{E0}{An adjacency matrix of undirected graph where there is an edge between any pair of variables if they are dependent.}
+#' \item{E0pval}{A matrix of p-values from independence test of pairs of variables.}
+#' \item{E0mean}{A matrix of means of dependency degrees between variables.}
+#' \item{E0lowbound}{A matrix of lower bounds of dependency-degree confidence intervals between variables.}
+#' \item{depInfo[['i,j']]$bmean}{A mean of dependency degrees between variables i and j.}
+#' \item{depInfo[['i,j']]$confInv}{An \code{alpha}*100th percentile confidence interval of dependency degrees between variables i and j.}
+#' \item{depInfo[['i,j']]$testRes}{A Mann-Whitney hypothesis test result for an independence test between variables i and j. The null hypothesis is that the distributions of dependency degrees of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of dependency degrees of i,j is shifted greater than \code{IndpThs}. }
+#' \item{depInfo[['i,j']]$indices}{A pair of indices of i and j in a numeric vector.}
+#' \item{Dboot}{A list of \code{D}s (aligned list of transactions) that are generated from sampling with replacement on input samples (\code{mat}) \code{nboot} times. }
+#'
+#' @examples
+#' #bSCMDepndentGraphFunc(simData$mat, nboot=50)
 #'
 #'@export
 #'
