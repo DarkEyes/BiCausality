@@ -9,12 +9,14 @@
 #'@param D is an aligned list of transactions that was converted from \code{mat}.
 #'@param i is an ith dimension in \code{mat}.
 #'@param j is an jth dimension in \code{mat}.
+#'@param z is a conditioning d-dimensional vector on \code{D}.
+#' Given k non-negative-bit positions of \code{z}, all k bit positions of samples in the subset of \code{D} must have similar values with these bits.
 #'
 #'@return This function returns the degree of dependency between variables:
 #' zero implies both variables are independent, and non-zero value implies the degree of dependency (higher implies more dependent degree).
 #'
 #' @examples
-#' indpFunc(simData$D,i=1,j=2)
+#' indpFunc(D,i=1,j=2)
 #'
 #'@export
 #'

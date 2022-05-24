@@ -9,12 +9,13 @@
 #' @param IndpThs is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.
 #'
 #' @return This function returns an adjacency matrix of dependencies that have no confounding factors.
-#' \item{E1}{An adjCausalGRes$causalInfo[['i,j']]acency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
+#' \item{E1}{An adjacency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
 #' \item{E2}{A matrix of associations that have confounding factors where \code{E2[i,j]=0} if no confounding factor and \code{E2[i,j]=k} if k is a confounding factor of i and j.}
 #'
 #' @examples
 #' #bSCMdeConfoundingGraphFunc(simData$resC$depRes)
 #'
+#' @importFrom stats quantile wilcox.test
 #'@export
 #'
 bSCMdeConfoundingGraphFunc<-function(dat,IndpThs=0.05,alpha=0.05)

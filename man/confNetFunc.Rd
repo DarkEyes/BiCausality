@@ -14,16 +14,16 @@ confNetFunc(mat, ths = 0.1)
 \value{
 This function returns  a binary adjacency matrix \code{confNet} and the weighted adjacency matrix \code{confValMat}.
 \item{confNet}{A binary adjacency matrix that has \code{confNet[i,j]=1} if \code{confValMat[i,j]>=ths}. Otherwise, it is zero.}
-\item{confValMat}{A weighted adjacency matrix where \code{confValMat[i,j]} is conf(mat\link{,j}=1|mat\link{,i}=1).}
+\item{confValMat}{A weighted adjacency matrix where \code{confValMat[i,j]} is \code{conf(mat[,j]=1|mat[,i]=1)}.}
 }
 \description{
 This function Computes a confidence network in data mining.
 Given a set of n transactions or samples in \code{mat} s.t. each transaction has d binary items.
-The  conf(mat\link{,j}=1|mat\link{,i}=1) is a ratio of a number of samples in jth and ith dimensions that have values equal to
+The  \code{conf(mat[,j]=1|mat[,i]=1)} is a ratio of a number of samples in jth and ith dimensions that have values equal to
 one divided by a number of samples in the ith dimension that has a value equal to one.
-The confNetFunc computes the network where the nodes are dimensions and the edge weights are conf(mat\link{,j}=1|mat\link{,i}=1) for any directed edge from i to j.
+The confNetFunc computes the network where the nodes are dimensions and the edge weights are \code{conf(mat[,j]=1|mat[,i]=1)} for any directed edge from i to j.
 }
 \examples{
-res<-confNetFunc(SimData$mat)
+res<-confNetFunc(mat)
 
 }

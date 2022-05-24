@@ -1,6 +1,11 @@
----
-title: "R Notebook"
-output: html_notebook
+title: "BiCausality: Binary Causality Inference Framework"
+author: " C. Amornbunchornvej"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BiCausality_demo} 
+  %\VignetteEngine{knitr::knitr}
+  \usepackage[utf8]{inputenc}
 ---
 
 Example: Inferred binary causal graph from simulation

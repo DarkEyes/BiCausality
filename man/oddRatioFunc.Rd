@@ -27,6 +27,6 @@ This function computes an odd ratio value of variables of ith and jth dimensions
 a given an aligned list of transactions \code{D} (compute by \code{D<-VecAlignment(mat)}).
 }
 \examples{
-oddRatioFunc(simData$D,i=1,j=2)
+oddRatioFunc(D,i=1,j=2)
 
 }

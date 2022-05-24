@@ -27,14 +27,14 @@ to either \code{z[k]} or \code{y[k]} that is not -1. }
 \description{
 This function computes a confidence value of \code{y} given \code{c}
 or \code{conf(y|z)} from an aligned list \code{D}.
-For any y\link{i},z\link{j}, their values are -1 by default.
+For any\code{y[i],z[j]}, their values are -1 by default.
 The function computes the numbers of transactions
 that satisfy the following conditions.
 \enumerate{
-\item All transactions must have values at any k position equal to z\link{k}
-for any z\link{k} that is not -1.
+\item All transactions must have values at any k position equal to \code{z[k]}
+for any \code{z[k]} that is not -1.
 Let \code{count} be the number of these transactions in \code{D}.
-\item All transactions must have values at any k position equal to either z\link{k} or y\link{k}
+\item All transactions must have values at any k position equal to either \code{z[k]} or \code{y[k]}
 that is not -1. Let \code{countTotal} be the number of these transactions in \code{D}.
 }
 }
@@ -44,6 +44,6 @@ z<-numeric(d)-1
 y<-numeric(d)-1
 y[1]<-c(1)
 z[c(2,3)]<-c(1,1)
-CondProb(simData$D,y=y,z=z)$condP # conf(inx1 is 1 |inx 2,3 are 1 ) y|z
+CondProb(BiCausality::D,y=y,z=z)$condP # conf(inx1 is 1 |inx 2,3 are 1 ) y|z
 
 }

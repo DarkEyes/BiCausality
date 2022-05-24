@@ -26,14 +26,36 @@
 #'
 #'\code{mat[,6] <- mat[,1] | mat[,4] } # 6 causes by 1 and 4
 #'
+#' @format A matrix with 200 samples and 10 dimensions generated from Bernoulli distribution.
+#' \describe{
+#'   \item{mat}{ It is a 200 by 10 matrix where n is a number of transactions or samples and d is a number of dimensions.}
+#'     ...
+#' }
+"mat"
+
+#' An example of aligned list of transactions
+#'
+#'@description
+#' A dataset containing simulated data that is used for examples in the package.
+#'
 #' The \code{D} is an aligned list of transactions that was converted by using \code{D<-VecAlignment(simData$mat)}.
 #'
-#' @format A matrix with 200 samples and 10 dimensions generated from Bernoulli distribution with its aligned list.
+#' @format An aligned list of a matrix with 200 samples and 10 dimensions generated from Bernoulli distribution.
 #' \describe{
-#'   \item{simData$mat}{ It is a 200 by 10 matrix where n is a number of transactions or samples and d is a number of dimensions.}
-#'   \item{simData$D}{It is an aligned list of transactions that was converted from \code{mat}.}
-#'   \item{simData$resC}{It is a result of causal inference using simData$mat as an input by running
-#'    \code{resC<-BiCausality::CausalGraphInferMainFunc(mat = simData$mat,CausalThs=0.1, nboot =50, IndpThs=0.05)}. }.
-#'   ...
+#'   \item{D}{It is an aligned list of transactions that was converted from \code{mat}.}
 #' }
-"simData"
+#'
+"D"
+
+#' An example of causal inference result
+#'
+#'@description
+#' A dataset containing a result of causal inference from simulated data that is used for examples in the package.
+#'
+#' @format A result of causal inference using \code{mat} as an input.
+#' \describe{
+#'   \item{resC}{It is a result of causal inference using simData$mat as an input by running
+#'    \code{resC<-BiCausality::CausalGraphInferMainFunc(mat = mat,CausalThs=0.1, nboot =50, IndpThs=0.05)}. }.
+#'    }
+#'
+"resC"

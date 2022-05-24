@@ -16,7 +16,7 @@ that deploys for testing degrees of dependency, association direction, and causa
 }
 \value{
 This function returns an adjacency matrix of dependencies that have no confounding factors.
-\item{E1}{An adjCausalGRes$causalInfo[\link{'i,j'}]acency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
+\item{E1}{An adjacency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
 \item{E2}{A matrix of associations that have confounding factors where \code{E2[i,j]=0} if no confounding factor and \code{E2[i,j]=k} if k is a confounding factor of i and j.}
 }
 \description{

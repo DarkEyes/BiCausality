@@ -15,7 +15,7 @@
 #'@return This function returns an odd ratio value of variables of ith and jth dimensions from \code{D}.
 #'
 #' @examples
-#' oddRatioFunc(simData$D,i=1,j=2)
+#' oddRatioFunc(D,i=1,j=2)
 #'
 #'@export
 #'
@@ -62,11 +62,11 @@ oddRatioFunc<-function(D,i,j,z=c(),slack=0.001)
 #'@return This function returns an odd difference value of variables of ith and jth dimensions from \code{D}.
 #'
 #' @examples
-#' oddDiffFunc(simData$D,i=1,j=2)
+#' oddDiffFunc(D,i=1,j=2)
 #'
 #'@export
 #'
-oddDiffFunc<-function(D,i,j,z=c(),slack=0.001)
+oddDiffFunc<-function(D,i,j,z=c())
 {
   d<-length(D[[1]]$name)
   if(is.null(z))

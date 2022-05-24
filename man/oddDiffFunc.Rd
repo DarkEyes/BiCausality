@@ -4,7 +4,7 @@
 \alias{oddDiffFunc}
 \title{oddDiffFunc function}
 \usage{
-oddDiffFunc(D, i, j, z = c(), slack = 0.001)
+oddDiffFunc(D, i, j, z = c())
 }
 \arguments{
 \item{D}{is an aligned list of transactions that was converted from \code{mat}.}
@@ -25,6 +25,6 @@ This function computes an odd difference value of variables of ith and jth dimen
 a given an aligned list of transactions \code{D} (compute by \code{D<-VecAlignment(mat)}).
 }
 \examples{
-oddDiffFunc(simData$D,i=1,j=2)
+oddDiffFunc(D,i=1,j=2)
 
 }

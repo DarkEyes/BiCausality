@@ -3,14 +3,14 @@
 #' @description
 #' This function computes a confidence value of \code{y} given \code{c}
 #' or \code{conf(y|z)} from an aligned list \code{D}.
-#' For any y[i],z[j], their values are -1 by default.
+#' For any\code{y[i],z[j]}, their values are -1 by default.
 #' The function computes the numbers of transactions
 #' that satisfy the following conditions.
 #'
-#' 1) All transactions must have values at any k position equal to z[k]
-#' for any z[k] that is not -1.
+#' 1) All transactions must have values at any k position equal to \code{z[k]}
+#' for any \code{z[k]} that is not -1.
 #' Let \code{count} be the number of these transactions in \code{D}.
-#' 2) All transactions must have values at any k position equal to either z[k] or y[k]
+#' 2) All transactions must have values at any k position equal to either \code{z[k]} or \code{y[k]}
 #' that is not -1. Let \code{countTotal} be the number of these transactions in \code{D}.
 #'
 #'
@@ -35,7 +35,7 @@
 #'y<-numeric(d)-1
 #'y[1]<-c(1)
 #'z[c(2,3)]<-c(1,1)
-#'CondProb(simData$D,y=y,z=z)$condP # conf(inx1 is 1 |inx 2,3 are 1 ) y|z
+#'CondProb(BiCausality::D,y=y,z=z)$condP # conf(inx1 is 1 |inx 2,3 are 1 ) y|z
 #'
 #' @export
 #'

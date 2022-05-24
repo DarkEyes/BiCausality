@@ -1,6 +1,8 @@
 BiCausality: Binary Causality Inference Framework
 ===========================================================
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
+[![CRAN Status Badge](https://www.r-pkg.org/badges/version-last-release/BiCausality)](https://cran.r-project.org/package=BiCausality)
+[![Download](https://cranlogs.r-pkg.org/badges/grand-total/BiCausality)](https://cran.r-project.org/package=BiCausality)
 [![arXiv](https://img.shields.io/badge/stat.ME-arXiv%3A2205.06131-B31B1B.svg)](https://arxiv.org/abs/2205.06131)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://spdx.org/licenses/MIT.html)
 

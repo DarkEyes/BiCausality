@@ -4,7 +4,7 @@
 #' @description
 #' This function rearranges the samples in the \code{mat} into
 #' an aligned list of transactions, which is mainly used by other functions in the package.
-#' Suppose mat[i,] is a binary vector  we are interested, we use  \code{A<-bin2dec(mat[i,])}
+#' Suppose \code{mat[i,]} is a binary vector  we are interested, we use  \code{A<-bin2dec(mat[i,])}
 #' to store the decimal value of \code{mat[i,]} in \code{A}. Then, we call \code{D[[A]]$count}
 #' to get number of samples in \code{mat} that are similar to \code{mat[i,]} and
 #' the \code{D[[A]]$name} is \code{mat[i,]}.
@@ -16,7 +16,7 @@
 #' @return This function returns  an aligned list of transactions \code{D}, is an aligned list of transactions that was converted from any matrix n by d \code{mat}.
 #'
 #' @examples
-#' VecAlignment(mat=simData$mat)
+#' VecAlignment(mat=mat)
 #'
 #'@export
 #'

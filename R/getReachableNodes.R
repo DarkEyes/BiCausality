@@ -70,7 +70,7 @@ getReachableNodes<-function(adjMat,targetNode)
 #' @export
 getTransitiveClosureMat<-function(adjMat)
 {
-
+  d<-dim(adjMat)[2]
   clsMat<-matrix(0,d,d)
   for(i in seq(1,d))
   {

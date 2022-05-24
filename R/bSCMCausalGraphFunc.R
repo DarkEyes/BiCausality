@@ -13,14 +13,16 @@
 #' @return This function returns causal inference results from E1 matrix that is an output of \code{bSCMdeConfoundingGraphFunc}.
 #' \item{Ehat}{An adjacency matrix of directed causal graph where \code{CausalGRes$Ehat[i,j]=1} implies i causes j.}
 #' \item{EValHat}{An adjacency matrix of weighted directed causal graph where edge weights are estimated means of probabilites of effect being 1 given cause being either 1 for positive association or 0 for negative association using CondProb() and bootsttraping to estimate}
-#' \item{causalInfo[['i,j']]$CDirConfValInv}{An \code{alpha}*100th percentile confidence interval of estimated conditional probability of effect j being 1/0 given cause i's value being either the same (positive association) or opposite (negative association).}
-#' \item{causalInfo[['i,j']]$CDirConfInv}{An \code{alpha}*100th percentile confidence interval of estimated causal direction degree of i cause j. }
-#' \item{causalInfo[['i,j']]$CDirmean}{A mean-esitamted-causal-direction degree of i cause j.}
-#' \item{causalInfo[['i,j']]$testRes2}{A Mann-Whitney hypothesis test result for existence of causal direction. The null hypothesis is that the distributions of causal-direction degrees of i,j differ by a location shift of \code{CausalThs} and the alternative is  that distributions of causal-direction degrees of i,j is shifted greater than \code{CausalThs}.}
-#' \item{causalInfo[['i,j']]$testRes1}{A Mann-Whitney hypothesis test result for existence of association by odd differences from \code{oddDiffFunc()}. The null hypothesis is that the distributions of absolute odd difference of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of absolute odd difference of i,j is shifted greater than \code{IndpThs}.}
-#' \item{causalInfo[['i,j']]$sign}{A direction of i,j association: 1 for positive, 0 for negative, and -1 for no association.}
-#' \item{causalInfo[['i,j']]$SignConfInv}{An \code{alpha}*100th percentile confidence interval of i,j odd difference from bootstraping. }
-#' \item{causalInfo[['i,j']]$Signmean}{A mean of i,j odd difference from bootstraping.}
+#' \item{i}{An index}
+#' \item{j}{An index}
+#' \item{causalInfo\code{[['i,j']]}$CDirConfValInv}{An \code{alpha}*100th percentile confidence interval of estimated conditional probability of effect j being 1/0 given cause i's value being either the same (positive association) or opposite (negative association).}
+#' \item{causalInfo\code{[['i,j']]}$CDirConfInv}{An \code{alpha}*100th percentile confidence interval of estimated causal direction degree of i cause j. }
+#' \item{causalInfo\code{[['i,j']]}$CDirmean}{A mean-esitamted-causal-direction degree of i cause j.}
+#' \item{causalInfo\code{[['i,j']]}$testRes2}{A Mann-Whitney hypothesis test result for existence of causal direction. The null hypothesis is that the distributions of causal-direction degrees of i,j differ by a location shift of \code{CausalThs} and the alternative is  that distributions of causal-direction degrees of i,j is shifted greater than \code{CausalThs}.}
+#' \item{causalInfo\code{[['i,j']]}$testRes1}{A Mann-Whitney hypothesis test result for existence of association by odd differences from \code{oddDiffFunc()}. The null hypothesis is that the distributions of absolute odd difference of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of absolute odd difference of i,j is shifted greater than \code{IndpThs}.}
+#' \item{causalInfo\code{[['i,j']]}$sign}{A direction of i,j association: 1 for positive, 0 for negative, and -1 for no association.}
+#' \item{causalInfo\code{[['i,j']]}$SignConfInv}{An \code{alpha}*100th percentile confidence interval of i,j odd difference from bootstraping. }
+#' \item{causalInfo\code{[['i,j']]}$Signmean}{A mean of i,j odd difference from bootstraping.}
 #'
 #'@export
 #'
