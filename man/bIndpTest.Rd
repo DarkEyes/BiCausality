@@ -32,7 +32,7 @@ that deploys for testing degrees of dependency, association direction, and causa
 
 \item{nboot}{is a number of bootstrap replicates for bootstrapping deployed to infer confidence intervals and distributions for hypothesis tests. The default is 100.}
 
-\item{pflag}{is a flag for printing progress message (TRUE). The default is FALSE (no priting).}
+\item{pflag}{is a flag for printing progress message (TRUE). The default is FALSE (no printing).}
 }
 \value{
 This function returns results of dependency inference between i and j.

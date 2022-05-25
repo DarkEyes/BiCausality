@@ -22,7 +22,7 @@ that deploys for testing degrees of dependency, association direction, and causa
 
 \item{IndpThs}{is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.}
 
-\item{pflag}{is a flag for printing progress message (TRUE). The default is FALSE (no priting).}
+\item{pflag}{is a flag for printing progress message (TRUE). The default is FALSE (no printing).}
 }
 \value{
 This function returns results of dependency inference among variables.

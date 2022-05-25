@@ -16,6 +16,6 @@ D
 \description{
 A dataset containing simulated data that is used for examples in the package.
 
-The \code{D} is an aligned list of transactions that was converted by using \code{D<-VecAlignment(simData$mat)}.
+The \code{D} is an aligned list of transactions that was converted by using \code{D<-VecAlignment(mat)}.
 }
 \keyword{datasets}

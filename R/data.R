@@ -22,7 +22,7 @@
 #'
 #'\code{mat[,1]<-mat[,2] | mat[,3] } # 1 causes by 2 and 3
 #'
-#'\code{mat[,4] <-mat[,2] | mat[,5] }# 4 causses by 2 and 5
+#'\code{mat[,4] <-mat[,2] | mat[,5] }# 4 causes by 2 and 5
 #'
 #'\code{mat[,6] <- mat[,1] | mat[,4] } # 6 causes by 1 and 4
 #'
@@ -38,7 +38,7 @@
 #'@description
 #' A dataset containing simulated data that is used for examples in the package.
 #'
-#' The \code{D} is an aligned list of transactions that was converted by using \code{D<-VecAlignment(simData$mat)}.
+#' The \code{D} is an aligned list of transactions that was converted by using \code{D<-VecAlignment(mat)}.
 #'
 #' @format An aligned list of a matrix with 200 samples and 10 dimensions generated from Bernoulli distribution.
 #' \describe{

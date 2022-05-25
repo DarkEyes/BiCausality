@@ -41,15 +41,15 @@ This function returns causal inference results. #TODO: provide list of results.
 \item{ConfoundRes$E1}{An adjacency matrix of undirected graph after filtering associations without true causal directions from any confounding factor.}
 \item{ConfoundRes$E2}{A matrix of associations that have confounding factors where \code{E2[i,j]=0} if no confounding factor and \code{E2[i,j]=k} if k is a confounding factor of i and j.}
 \item{CausalGRes$Ehat}{An adjacency matrix of directed causal graph where \code{CausalGRes$Ehat[i,j]=1} implies i causes j.}
-\item{CausalGRes$EValHat}{An adjacency matrix of weighted directed causal graph where edge weights are estimated means of probabilites of effect being 1 given cause being either 1 for positive association or 0 for negative association using CondProb() and bootsttraping to estimate}
+\item{CausalGRes$EValHat}{An adjacency matrix of weighted directed causal graph where edge weights are estimated means of probabilities of effect being 1 given cause being either 1 for positive association or 0 for negative association using CondProb() and bootstrapping to estimate}
 \item{CausalGRes$causalInfo\code{[['i,j']]}$CDirConfValInv}{An \code{alpha}*100th percentile confidence interval of estimated conditional probability of effect j being 1/0 given cause i's value being either the same (positive association) or opposite (negative association).}
 \item{CausalGRes$causalInfo\code{[['i,j']]}$CDirConfInv}{An \code{alpha}*100th percentile confidence interval of estimated causal direction degree of i cause j. }
-\item{CausalGRes$causalInfo\code{[['i,j']]}$CDirmean}{A mean-esitamted-causal-direction degree of i cause j.}
+\item{CausalGRes$causalInfo\code{[['i,j']]}$CDirmean}{A mean-estimated-causal-direction degree of i cause j.}
 \item{CausalGRes$causalInfo\code{[['i,j']]}$testRes2}{A Mann-Whitney hypothesis test result for existence of causal direction. The null hypothesis is that the distributions of causal-direction degrees of i,j differ by a location shift of \code{CausalThs} and the alternative is  that distributions of causal-direction degrees of i,j is shifted greater than \code{CausalThs}.}
 \item{CausalGRes$causalInfo\code{[['i,j']]}$testRes1}{A Mann-Whitney hypothesis test result for existence of association by odd differences from \code{oddDiffFunc()}. The null hypothesis is that the distributions of absolute odd difference of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of absolute odd difference of i,j is shifted greater than \code{IndpThs}.}
 \item{CausalGRes$causalInfo\code{[['i,j']]}$sign}{A direction of i,j association: 1 for positive, 0 for negative, and -1 for no association.}
-\item{CausalGRes$causalInfo\code{[['i,j']]}$SignConfInv}{An \code{alpha}*100th percentile confidence interval of i,j odd difference from bootstraping. }
-\item{CausalGRes$causalInfo\code{[['i,j']]}$Signmean}{A mean of i,j odd difference from bootstraping.}
+\item{CausalGRes$causalInfo\code{[['i,j']]}$SignConfInv}{An \code{alpha}*100th percentile confidence interval of i,j odd difference from bootstrapping. }
+\item{CausalGRes$causalInfo\code{[['i,j']]}$Signmean}{A mean of i,j odd difference from bootstrapping.}
 }
 \description{
 A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j.

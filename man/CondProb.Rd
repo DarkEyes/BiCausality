@@ -17,7 +17,7 @@ and d is a number of dimensions for each sample.}
 }
 \value{
 This function returns the ratio \code{condP=count/countTotal}, which is the confidence of \code{y} given \code{z}.
-\item{condP}{Tthe confidence of \code{y} given \code{z} in \code{D}. }
+\item{condP}{The confidence of \code{y} given \code{z} in \code{D}. }
 \item{nD}{ The subset of \code{D} such that all transactions
 have values at any position similar to \code{z[k]} when \code{z[k]} is not -1. }
 \item{count}{ A number of transactions that have values at any position similar

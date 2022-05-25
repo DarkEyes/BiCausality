@@ -12,7 +12,7 @@
 #'  that deploys for testing degrees of dependency, association direction, and causal direction. The default is 0.5.
 #' @param nboot is a number of bootstrap replicates for bootstrapping deployed to infer confidence intervals and distributions for hypothesis tests. The default is 100.
 #' @param IndpThs is a threshold for the degree of dependency. In the independence test, to claim that any variables are dependent, the dependency degree must greater than this value significantly. The default is 0.05.
-#' @param pflag is a flag for printing progress message (TRUE). The default is FALSE (no priting).
+#' @param pflag is a flag for printing progress message (TRUE). The default is FALSE (no printing).
 #'
 #' @return This function returns results of dependency inference between i and j.
 #' \item{bmean}{A mean of dependency degrees between variables i and j.}
