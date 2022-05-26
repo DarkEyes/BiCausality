@@ -38,17 +38,17 @@
 #' \item{CausalGRes$causalInfo\code{[['i,j']]}$Signmean}{A mean of i,j odd difference from bootstrapping.}
 #'
 #' @examples
-#' #resC<-CausalGraphInferMainFunc(mat = simData$mat, nboot =50)
+#' \donttest{resC<-CausalGraphInferMainFunc(mat = mat, nboot =50)}
 #'
 #'@export
 #'
 CausalGraphInferMainFunc<-function(mat,alpha=0.05,nboot=100,IndpThs=0.05,CausalThs = 0.1)
 {
-  print("Inferring dependent graph")
+  message("Inferring dependent graph")
   res<-bSCMDepndentGraphFunc(mat,nboot=nboot,alpha=alpha,IndpThs=IndpThs)
-  print("Removing confounder(s)")
+  message("Removing confounder(s)")
   res2<-bSCMdeConfoundingGraphFunc(res,IndpThs=IndpThs,alpha=alpha)
-  print("Inferring causal graph")
+  message("Inferring causal graph")
   res3<-bSCMCausalGraphFunc(res2$E1,res$Dboot ,alpha=alpha,SignThs=IndpThs,CausalThs = CausalThs)
   return(list(depRes = res, ConfoundRes= res2, CausalGRes= res3))
 }

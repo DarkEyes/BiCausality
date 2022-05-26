@@ -38,9 +38,9 @@ bIndpTest<-function(mat,i,j,z=c(),alpha=0.05,IndpThs = 0.05,nboot=100,pflag=FALS
   for(k in seq(nboot))
   {
     if(pflag==TRUE)
-      print(sprintf("bIndpTest-boot#%d",k))
+      message(sprintf("bIndpTest-boot#%d",k))
     bDx[k,]<-sample(1:n,length(1:n),replace = TRUE) #sampling index vector
-    nMat<-mat[bDx[k,],] #samplimng from mat and save to nMat
+    nMat<-mat[bDx[k,],] #sampling from mat and save to nMat
     D<-VecAlignment(nMat) # align
     bIndpDist[k]<-indpFunc(D,i,j,z=z)
   }

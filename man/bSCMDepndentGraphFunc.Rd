@@ -40,6 +40,6 @@ This function returns results of dependency inference among variables.
 This function infers dependencies for all pairs of variables with bootstrapping.
 }
 \examples{
-#bSCMDepndentGraphFunc(simData$mat, nboot=50)
+\donttest{bSCMDepndentGraphFunc(mat, nboot=50)}
 
 }

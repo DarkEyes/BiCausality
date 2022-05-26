@@ -57,6 +57,6 @@ A framework to infer causality on binary data using techniques in frequent patte
 Note that all statistics (e.g. means) and confidence intervals as well as hypothesis testing are inferred by bootstrapping.
 }
 \examples{
-#resC<-CausalGraphInferMainFunc(mat = simData$mat, nboot =50)
+\donttest{resC<-CausalGraphInferMainFunc(mat = mat, nboot =50)}
 
 }

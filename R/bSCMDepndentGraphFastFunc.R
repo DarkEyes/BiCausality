@@ -12,7 +12,7 @@
 #' \item{E0raw}{A matrix of the degree of dependency of variable pairs.}
 
 #' @examples
-#' #bSCMDepndentGraphFastFunc(simData$mat)
+#' bSCMDepndentGraphFastFunc(mat)
 #'
 #'
 #'@export

@@ -23,7 +23,7 @@
 #' \item{Dboot}{A list of \code{D}s (aligned list of transactions) that are generated from sampling with replacement on input samples (\code{mat}) \code{nboot} times. }
 #'
 #' @examples
-#' #bSCMDepndentGraphFunc(simData$mat, nboot=50)
+#' \donttest{bSCMDepndentGraphFunc(mat, nboot=50)}
 #'
 #'@export
 #'

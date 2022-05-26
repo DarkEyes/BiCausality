@@ -46,7 +46,7 @@ adjustmentProb<-function(EValHat,mat,yflag=1,xflag=1)
             z1<-numeric(d)-1
             z1[filter1]<-vec1
             pZi<-CondProb(D,z1,z=numeric(d)-1)$condP #  P(Z=b1)
-            print(sprintf("P(Z=%d)=%.2f",b1,pZi))
+            message(sprintf("P(Z=%d)=%.2f",b1,pZi))
 
             y1<-numeric(d)-1
             y1[j]<-c(yflag)
@@ -56,7 +56,7 @@ adjustmentProb<-function(EValHat,mat,yflag=1,xflag=1)
             # P(Xj=yflag|Xi=xflag,Z=b1)*P(Z=b1)
             a1<-CondProb(D,y=y1,z=z2)$condP
             a1<-ifelse(is.na(a1),0,a1)
-            print(sprintf("P(X%d =%d|X%d = %d,z%d)=%.2f",j,yflag,i,xflag,b1,a1))
+            message(sprintf("P(X%d =%d|X%d = %d,z%d)=%.2f",j,yflag,i,xflag,b1,a1))
             adjEValHat[i,j]<-adjEValHat[i,j]+a1*pZi
           }
         }

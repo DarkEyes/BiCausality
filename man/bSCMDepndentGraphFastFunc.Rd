@@ -20,7 +20,7 @@ This function returns results of dependency inference among variables.
 This function infers dependencies for all pairs of variables without bootstrapping.
 }
 \examples{
-#bSCMDepndentGraphFastFunc(simData$mat)
+bSCMDepndentGraphFastFunc(mat)
 
 
 }

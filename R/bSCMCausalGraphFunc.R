@@ -24,6 +24,8 @@
 #' \item{causalInfo\code{[['i,j']]}$SignConfInv}{An \code{alpha}*100th percentile confidence interval of i,j odd difference from bootstrapping. }
 #' \item{causalInfo\code{[['i,j']]}$Signmean}{A mean of i,j odd difference from bootstrapping.}
 #'
+#' @examples
+#' bSCMCausalGraphFunc(resC$ConfoundRes$E1,resC$depRes$Dboot)
 #'@export
 #'
 bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25)
@@ -70,7 +72,7 @@ bSCMCausalGraphFunc<-function(E1,Dboot,alpha=0.05,SignThs=0.05,CausalThs = 0.25)
     }
 
     if(signFlag[itr] != -1){
-      #=========TODO dir inference
+      #========= dir inference
       bCausalDirDist<-numeric(nboot)
 
       bCausalDirValDistA<-numeric(nboot) # Y given Z

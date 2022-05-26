@@ -13,7 +13,7 @@
 #' \item{E2}{A matrix of associations that have confounding factors where \code{E2[i,j]=0} if no confounding factor and \code{E2[i,j]=k} if k is a confounding factor of i and j.}
 #'
 #' @examples
-#' #bSCMdeConfoundingGraphFunc(simData$resC$depRes)
+#' bSCMdeConfoundingGraphFunc(resC$depRes)
 #'
 #' @importFrom stats quantile wilcox.test
 #'@export

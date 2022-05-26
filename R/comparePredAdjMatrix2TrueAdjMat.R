@@ -10,12 +10,12 @@
 #' @return This function returns a list of precision \code{prec}, recall \code{rec}, and F1 score \code{F1} of inferred vs. groundtruth matrices.
 #'
 #' @examples
-#' ## Generate simulation data
-#' #G<-matrix(FALSE,10,10) # groundtruth
-#' #G[1,c(4,7,8,10)]<-TRUE
-#' #G[2,c(5,7,9,10)]<-TRUE
-#' #G[3,c(6,8,9,10)]<-TRUE
-#' #comparePredAdjMatrix2TrueAdjMat(trueAdjMat=G,adjMat=G)
+#' # Generate simulation data
+#' G<-matrix(FALSE,10,10) # groundtruth
+#' G[1,c(4,7,8,10)]<-TRUE
+#' G[2,c(5,7,9,10)]<-TRUE
+#' G[3,c(6,8,9,10)]<-TRUE
+#' comparePredAdjMatrix2TrueAdjMat(trueAdjMat=G,adjMat=G)
 #'
 #'@export
 comparePredAdjMatrix2TrueAdjMat<-function(trueAdjMat,adjMat)

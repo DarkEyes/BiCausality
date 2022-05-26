@@ -23,6 +23,6 @@ This function returns an adjacency matrix of dependencies that have no confoundi
 This function removes any association/dependency of variables i,j that have any confounding factor k s.t. given k, i and j are independent.
 }
 \examples{
-#bSCMdeConfoundingGraphFunc(simData$resC$depRes)
+bSCMdeConfoundingGraphFunc(resC$depRes)
 
 }

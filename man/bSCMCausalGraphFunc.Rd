@@ -36,3 +36,6 @@ This function returns causal inference results from E1 matrix that is an output 
 \description{
 This function infers a causal graph from a result of confounding factor filtering by \code{bSCMdeConfoundingGraphFunc()}.
 }
+\examples{
+bSCMCausalGraphFunc(resC$ConfoundRes$E1,resC$depRes$Dboot)
+}
