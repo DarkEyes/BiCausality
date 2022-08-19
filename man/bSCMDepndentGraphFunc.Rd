@@ -30,10 +30,10 @@ This function returns results of dependency inference among variables.
 \item{E0pval}{A matrix of p-values from independence test of pairs of variables.}
 \item{E0mean}{A matrix of means of dependency degrees between variables.}
 \item{E0lowbound}{A matrix of lower bounds of dependency-degree confidence intervals between variables.}
-\item{depInfo\code{[['i,j']]}$bmean}{A mean of dependency degrees between variables i and j.}
-\item{depInfo\code{[['i,j']]}$confInv}{An \code{alpha}*100th percentile confidence interval of dependency degrees between variables i and j.}
-\item{depInfo\code{[['i,j']]}$testRes}{A Mann-Whitney hypothesis test result for an independence test between variables i and j. The null hypothesis is that the distributions of dependency degrees of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of dependency degrees of i,j is shifted greater than \code{IndpThs}. }
-\item{depInfo\code{[['i,j']]}$indices}{A pair of indices of i and j in a numeric vector.}
+\item{depInfo$'i,j'$bmean}{A mean of dependency degrees between variables i and j.}
+\item{depInfo$'i,j'$confInv}{An \code{alpha}*100th percentile confidence interval of dependency degrees between variables i and j.}
+\item{depInfo$'i,j'$testRes}{A Mann-Whitney hypothesis test result for an independence test between variables i and j. The null hypothesis is that the distributions of dependency degrees of i,j differ by a location shift of \code{IndpThs} and the alternative is  that distributions of dependency degrees of i,j is shifted greater than \code{IndpThs}. }
+\item{depInfo$'i,j'$indices}{A pair of indices of i and j in a numeric vector.}
 \item{Dboot}{A list of \code{D}s (aligned list of transactions) that are generated from sampling with replacement on input samples (\code{mat}) \code{nboot} times. }
 }
 \description{
