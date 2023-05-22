@@ -1,8 +1,8 @@
 citHeader("To cite the 'BiCausality' package in publications use:")
 
-citEntry(entry       = "article",
+bibentry(bibtype       = "article",
          title       = "Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis.",
-         author      = personList(as.person("Chainarong Amornbunchornvej"),
+         author      = c(as.person("Chainarong Amornbunchornvej"),
                         as.person("Navaporn Surasvadi"),
                         as.person("Anon Plangprasopchok"),
                         as.person("Suttipong Thajchayapong")
@@ -15,5 +15,5 @@ citEntry(entry       = "article",
          pages       = "e15947",
          doi         = "10.1016/j.heliyon.2023.e15947",
          url         = "https://doi.org/10.1016/j.heliyon.2023.e15947",
-         textVersion = "Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2023). Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis. Heliyon, 9(5), e05435."
+         textVersion = "Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2023). Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis. Heliyon, 9(5), e15947."
          )
