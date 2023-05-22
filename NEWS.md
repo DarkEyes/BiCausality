@@ -1,5 +1,9 @@
+# BiCausality v0.1.3
+* Updated DOI for the publication
+
 # BiCausality v0.1.2
 * Fix function documentation to comply HTML5 for documentation pages
+
 # BiCausality v0.1.1
 * Revise message in functions
 * Revise examples

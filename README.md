@@ -4,6 +4,7 @@ BiCausality: Binary Causality Inference Framework
 [![CRAN Status Badge](https://www.r-pkg.org/badges/version-last-release/BiCausality)](https://cran.r-project.org/package=BiCausality)
 [![Download](https://cranlogs.r-pkg.org/badges/grand-total/BiCausality)](https://cran.r-project.org/package=BiCausality)
 [![arXiv](https://img.shields.io/badge/stat.ME-arXiv%3A2205.06131-B31B1B.svg)](https://arxiv.org/abs/2205.06131)
+[![](https://img.shields.io/badge/doi-10.1016%2Fj.heliyon.2023.e15947-yellow)](https://doi.org/10.1016/j.heliyon.2023.e15947)
 [![License](https://img.shields.io/badge/License-MIT-orange.svg)](https://spdx.org/licenses/MIT.html)
 
 A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j. 
@@ -147,7 +148,7 @@ $Signmean
 
 Citation
 ----------------------------------------------------------------------------------
-Chainarong Amornbunchornvej, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong (2022). Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis. arXiv:2205.06131. <a href="https://arxiv.org/abs/2205.06131">arXiv</a>.  
+Amornbunchornvej, Chainarong, Navaporn Surasvadi, Anon Plangprasopchok, and Suttipong Thajchayapong. "Framework for inferring empirical causal graphs from binary data to support multidimensional poverty analysis."  Heliyon 9, no. 5 (2023): e15947.  <a href=https://doi.org/10.1016/j.heliyon.2023.e15947>https://doi.org/10.1016/j.heliyon.2023.e15947</a>   <a href="https://arxiv.org/abs/2205.06131">arXiv</a>.  
 
 Contact
 ----------------------------------------------------------------------------------
