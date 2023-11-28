@@ -1,3 +1,6 @@
+# BiCausality v0.1.4
+* Fix '\' in the description text
+
 # BiCausality v0.1.3
 * Updated DOI for the publication
 
@@ -9,4 +12,4 @@
 * Revise examples
 
 # BiCausality v0.1.0
-* The first release version of VLTimeCausality
+* The first release version of BiCausality

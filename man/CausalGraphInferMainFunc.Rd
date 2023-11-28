@@ -52,7 +52,7 @@ This function returns causal inference results. #TODO: provide list of results.
 \item{CausalGRes$causalInfo$'i,j'$Signmean}{A mean of i,j odd difference from bootstrapping.}
 }
 \description{
-A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S={x} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j.
+A framework to infer causality on binary data using techniques in frequent pattern mining and estimation statistics. Given a set of individual vectors S=\{x\} where x(i) is a realization value of binary variable i, the framework infers empirical causal relations of binary variables i,j from S in a form of causal graph G=(V,E) where V is a set of nodes representing binary variables and there is an edge from i to j in E if the variable i causes j. The framework determines dependency among variables as well as analyzing confounding factors before deciding whether i causes j.
 
 Note that all statistics (e.g. means) and confidence intervals as well as hypothesis testing are inferred by bootstrapping.
 }

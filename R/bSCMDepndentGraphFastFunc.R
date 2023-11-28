@@ -1,6 +1,4 @@
 #'@title bSCMDepndentGraphFastFunc function
-#'
-#'
 #' @description
 #' This function infers dependencies for all pairs of variables without bootstrapping.
 #'
